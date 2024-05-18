@@ -12,13 +12,14 @@ const Projects = forwardRef(({ visible }, ref) => {
         sectionRef={ref?.[0]}
         visible={visible}
         index={1}
-        title="Project Tracker For Agencies"
-        description="A project management tool for agencies to track their projects timeline, budget, and resources."
+        title="Servcy"
+        caption="Project Tracker For Agencies"
+        description="Gain visibility over your project deliverables, costs and timeline."
         buttonText="View project"
         buttonLink="https://servcy.com"
         model={{
           type: "laptop",
-          alt: "Servcy: Project Tracker For Agencies",
+          alt: "Servcy",
           textures: [
             {
               srcSet: "/images/servcy.png 1280w",
