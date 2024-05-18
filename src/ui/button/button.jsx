@@ -34,7 +34,6 @@ const ButtonContent = forwardRef(
       secondary,
       loading,
       loadingText = "loading",
-      iconHoverShift,
       iconOnly,
       children,
       rel,
