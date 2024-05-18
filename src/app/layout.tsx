@@ -5,6 +5,7 @@ import "@/assets/css/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://meghamgarg.com"),
   title: "Megham's Portfolio",
   description: "Portfolio of software projects by Megham Garg",
   applicationName: "Portfolio",
