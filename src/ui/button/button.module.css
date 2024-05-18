@@ -27,7 +27,10 @@
     transition-property: opacity, color, background;
     transition-duration: 400ms;
     transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
-    background: rgb(230, 55, 24);
+    --tw-gradient-to: #fbbf24 var(--tw-gradient-to-position);
+    --tw-gradient-from: #d97706 var(--tw-gradient-from-position);
+    -tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
     position: absolute;
     inset: 0;
     z-index: -1;

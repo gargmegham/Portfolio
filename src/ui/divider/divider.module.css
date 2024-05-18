@@ -1,5 +1,8 @@
 .notch {
-    background-color: #E94B30;
+    --tw-gradient-to: #fbbf24 var(--tw-gradient-to-position);
+    --tw-gradient-from: #d97706 var(--tw-gradient-from-position);
+    -tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
     position: absolute;
     transition-property: opacity;
     transition-duration: 600ms;
@@ -21,7 +24,10 @@
 .line {
     width: 100%;
     height: 100%;
-    background-color: #E94B30;
+    --tw-gradient-to: #fbbf24 var(--tw-gradient-to-position);
+    --tw-gradient-from: #d97706 var(--tw-gradient-from-position);
+    -tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    background: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
     opacity: 1;
     transition-property: opacity;
     transition-duration: 600ms;

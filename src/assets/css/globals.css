@@ -23,6 +23,12 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   scroll-behavior: smooth;
+  cursor: url('../cursor/cursor-scroll.svg') 10 10, auto !important;
+}
+
+button,
+a {
+  cursor: url('../cursor/cursor-visit.svg') 10 10, auto !important;
 }
 
 body::-webkit-scrollbar {

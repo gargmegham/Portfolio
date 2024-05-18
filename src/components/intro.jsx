@@ -40,7 +40,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               alt="Me"
               className="p-2 bg-secondary-200 rounded-xl custom-shadow-200"
             />
-            <div className="self-end space-y-1">
+            <div className="self-end space-y-1 cursor-pointer">
               <DecoderText text="Megham Garg" delay={500} />
               <div className="font-sans text-base flex gap-x-1 items-center">
                 <IconMapPin className="size-4" />
@@ -86,15 +86,17 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
           </div>
         </div>
         {!scrollIndicatorHidden && (
-          <RiScrollToBottomLine
-            className="absolute bottom-10 left-[50%] cursor-pointer animate-pulse opacity-30 text-teritiary-400 size-8 hidden md:block"
+          <button
             onClick={() => {
               window.scrollTo({
                 top: window.innerHeight,
                 behavior: "smooth",
               });
             }}
-          />
+            className="absolute bottom-10 left-[50%] hidden md:block"
+          >
+            <RiScrollToBottomLine className="animate-pulse opacity-30 text-teritiary-400 size-8" />
+          </button>
         )}
       </motion.section>
     </AnimatePresence>
