@@ -6,6 +6,7 @@ import { Divider } from "@/ui/divider";
 import { deviceModels } from "@/ui/model/device-models";
 import { Transition } from "@/ui/transition";
 import { Loader } from "@/ui/loader";
+import { motion, AnimatePresence } from "framer-motion";
 import { useWindowSize } from "@/hooks";
 import { Suspense, lazy, useState } from "react";
 import { cssProps, media } from "@/utils/style";
@@ -61,16 +62,37 @@ const ProjectSummary = forwardRef(
 
     function renderDetails(visible) {
       return (
-        <div className="space-y-4">
-          <div className="font-gotham-bold text-2xl text-teritiary-400">
-            {title}
-          </div>
-          <Divider collapsed={!visible} collapseDelay={1000} />
-          <p className="font-sans text-lg text-teritiary-300">{description}</p>
-          <div>
-            <Button href={buttonLink}>{buttonText}</Button>
-          </div>
-        </div>
+        isHydrated &&
+        visible && (
+          <AnimatePresence mode="wait">
+            <motion.div
+              className="space-y-4"
+              id="servcy-details"
+              initial={{
+                opacity: 0,
+                x: -100,
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+            >
+              <div className="font-gotham-bold text-2xl text-teritiary-400">
+                {title}
+              </div>
+              <Divider collapsed={!visible} collapseDelay={1000} />
+              <p className="font-sans text-lg text-teritiary-300">
+                {description}
+              </p>
+              <div>
+                <Button href={buttonLink}>{buttonText}</Button>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        )
       );
     }
 

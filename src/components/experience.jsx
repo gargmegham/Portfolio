@@ -1,6 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const experienceData = [
   {
@@ -63,46 +64,86 @@ const Experience = forwardRef(({ visible }, ref) => {
           </svg>
           <div>Work Timeline</div>
         </div>
-        <div className="custom-shadow-t border-secondary-300 border-1 bg-secondary-100 rounded-b-[24px] relative px-5 py-2 overflow-y-scroll space-y-6">
+        <div className="custom-shadow-t min-h-60 border-secondary-300 border-1 bg-secondary-100 rounded-b-[24px] relative px-5 py-2 overflow-y-scroll space-y-6">
           <div className="flex absolute justify-end inset-0">
             <div className="relative">
               <div className="journey-line absolute overflow-hidden z-0 top-0 bottom-0"></div>
             </div>
             <div className="overflow-hidden relative w-[50%]"></div>
           </div>
-          {experienceData.map((exp, index) => (
-            <div
-              key={index}
-              className="journey-stop grid grid-cols-5 items-center justify-center"
-            >
-              <div className="bg-secondary-300 rounded-xl custom-shadow-200 col-span-2">
-                <div className="font-semibold text-teritiary-600 custom-shadow-b px-6 py-3">
-                  {exp.title}
-                  <div className="text-xs text-teritiary-400">
-                    {exp.duration}
-                  </div>
+          {visible &&
+            experienceData.map((exp, index) => (
+              <AnimatePresence mode="wait" key={index}>
+                <div className="journey-stop grid grid-cols-5 items-center justify-center">
+                  <motion.div
+                    id={`exp-left-${index}`}
+                    initial={{
+                      opacity: 0,
+                      x: -100,
+                    }}
+                    animate={{
+                      x: 0,
+                      opacity: 1,
+                    }}
+                    transition={{
+                      duration: 1 * index,
+                    }}
+                    className="bg-secondary-300 rounded-xl custom-shadow-200 col-span-2"
+                  >
+                    <div className="font-semibold text-teritiary-600 custom-shadow-b px-6 py-3">
+                      {exp.title}
+                      <div className="text-xs text-teritiary-400">
+                        {exp.duration}
+                      </div>
+                    </div>
+                    <div className="text-sm text-teritiary-300 font-gotham-book custom-shadow-t px-6 py-3">
+                      {exp.description}
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    id={`exp-center-${index}`}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                    }}
+                    transition={{
+                      duration: 1 * index,
+                    }}
+                    className="col-span-1"
+                  >
+                    <div className="flex justify-center items-center">
+                      <div className="bg-secondary-700 p-2 rounded-full">
+                        <div className="size-4 bg-teritiary-800 rounded-full relative shadow-lg shadow-orange-400 drop-shadow-lg"></div>
+                      </div>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    id={`exp-right-${index}`}
+                    initial={{
+                      opacity: 0,
+                      x: 100,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    transition={{
+                      duration: 1 * index,
+                    }}
+                    className="bg-secondary-300 py-3 px-6 rounded-xl custom-shadow-200 col-span-2"
+                  >
+                    <div className="text-lg font-semibold text-teritiary-600">
+                      {exp.company}
+                    </div>
+                    <div className="text-sm text-teritiary-300 font-gotham-book">
+                      {exp.companyUrl}
+                    </div>
+                  </motion.div>
                 </div>
-                <div className="text-sm text-teritiary-300 font-gotham-book custom-shadow-t px-6 py-3">
-                  {exp.description}
-                </div>
-              </div>
-              <div className="col-span-1">
-                <div className="flex justify-center items-center">
-                  <div className="bg-secondary-700 p-2 rounded-full">
-                    <div className="size-4 bg-teritiary-800 rounded-full relative shadow-lg shadow-orange-400 drop-shadow-lg"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-secondary-300 py-3 px-6 rounded-xl custom-shadow-200 col-span-2">
-                <div className="text-lg font-semibold text-teritiary-600">
-                  {exp.company}
-                </div>
-                <div className="text-sm text-teritiary-300 font-gotham-book">
-                  {exp.companyUrl}
-                </div>
-              </div>
-            </div>
-          ))}
+              </AnimatePresence>
+            ))}
         </div>
       </div>
     </section>
