@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useRef } from "react";
-import { ProjectSummary } from "@/ui/three/project-summary";
+import React, { forwardRef } from "react";
+import ProjectSummary from "@/ui/three/project-summary";
 
-export default function Projects() {
-  const projectOne = useRef();
+const Projects = forwardRef(({ ref, visible }) => {
   return (
     <div id="projects" className="max-lg:px-[10%] relative lg:pt-16 w-full">
       <ProjectSummary
         alternate={false}
-        sectionRef={projectOne}
-        visible={true}
+        sectionRef={ref}
+        visible={visible}
         index={1}
         title="Project Tracker For Agencies"
         description="A project management tool for agencies to track their projects timeline, budget, and resources."
@@ -29,4 +28,6 @@ export default function Projects() {
       />
     </div>
   );
-}
+});
+
+export default Projects;

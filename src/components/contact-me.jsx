@@ -1,6 +1,14 @@
-export default function ContactMe() {
+"use client";
+
+import React, { forwardRef } from "react";
+
+const ContactMe = forwardRef(({ ref }) => {
   return (
-    <section className="relative py-16 w-full max-lg:px-[10%]" id="contact">
+    <section
+      className="relative py-16 w-full max-lg:px-[10%]"
+      id="contact"
+      ref={ref}
+    >
       <div className="custom-shadow-50 rounded-[24px]">
         <div className="flex overflow-hidden bg-secondary-100 border-1 custom-shadow-b border-secondary-300 relative w-full rounded-t-[24px]">
           <img
@@ -72,4 +80,6 @@ export default function ContactMe() {
       </div>
     </section>
   );
-}
+});
+
+export default ContactMe;

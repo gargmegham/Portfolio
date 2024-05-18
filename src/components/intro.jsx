@@ -1,3 +1,6 @@
+"use client";
+
+import { forwardRef } from "react";
 import { DecoderText } from "@/ui/decoder-text";
 import {
   IconMapPin,
@@ -10,10 +13,11 @@ import { RiScrollToBottomLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
 
-export default function Intro() {
+const Intro = forwardRef(({ ref, scrollIndicatorHidden }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.section
+        ref={ref}
         id="about"
         initial={{
           opacity: 0,
@@ -81,16 +85,20 @@ export default function Intro() {
             </Highlight>
           </div>
         </div>
-        <RiScrollToBottomLine
-          className="absolute bottom-10 left-[50%] cursor-pointer animate-pulse opacity-30 text-teritiary-400 size-8 hidden md:block"
-          onClick={() => {
-            window.scrollTo({
-              top: window.innerHeight,
-              behavior: "smooth",
-            });
-          }}
-        />
+        {!scrollIndicatorHidden && (
+          <RiScrollToBottomLine
+            className="absolute bottom-10 left-[50%] cursor-pointer animate-pulse opacity-30 text-teritiary-400 size-8 hidden md:block"
+            onClick={() => {
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "smooth",
+              });
+            }}
+          />
+        )}
       </motion.section>
     </AnimatePresence>
   );
-}
+});
+
+export default Intro;

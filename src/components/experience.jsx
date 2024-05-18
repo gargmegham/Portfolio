@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { forwardRef } from "react";
 
 const experienceData = [
   {
@@ -29,9 +29,13 @@ const experienceData = [
   },
 ];
 
-export default function Experience() {
+const Experience = forwardRef(({ ref }) => {
   return (
-    <section id="experience" className="max-lg:px-[10%] relative pt-16 w-full">
+    <section
+      ref={ref}
+      id="experience"
+      className="max-lg:px-[10%] relative pt-16 w-full"
+    >
       <div className="custom-shadow-50 rounded-[24px]">
         <div className="flex items-center custom-shadow-b border-secondary-300 border-1 justify-center gap-x-2 py-3 bg-secondary-100 rounded-t-[24px]">
           <svg
@@ -102,4 +106,6 @@ export default function Experience() {
       </div>
     </section>
   );
-}
+});
+
+export default Experience;
