@@ -5,17 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
 
-export const FloatingNav = ({
-  navItems,
-  className,
-}: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
-  className?: string;
-}) => {
+export const FloatingNav = ({ navItems, className }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -35,7 +25,7 @@ export const FloatingNav = ({
           className
         )}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem, idx) => (
           <button
             key={`link=${idx}`}
             onClick={() => {

@@ -3,8 +3,14 @@ export default function ContactMe() {
     <section className="relative py-16 w-full max-lg:px-[10%]" id="contact">
       <div className="custom-shadow-50 rounded-[24px]">
         <div className="flex overflow-hidden bg-secondary-100 border-1 custom-shadow-b border-secondary-300 relative w-full rounded-t-[24px]">
-          <img src="/svgs/contact-me-cover.svg" height="100%" width="100%" />
           <img
+            src="/svgs/contact-me-cover.svg"
+            height="100%"
+            width="100%"
+            alt="contact me cover"
+          />
+          <img
+            alt="contact me floater"
             src="/svgs/contact-me-floater.svg"
             className="absolute animate-bounce top-3/4 left-2/3"
           />

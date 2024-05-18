@@ -6,7 +6,7 @@ export function useScrollToHash() {
   const reduceMotion = useReducedMotion();
 
   const scrollToHash = useCallback(
-    (hash, onDone) => {
+    (hash) => {
       const id = hash.split("#")[1];
       const targetElement = document.getElementById(id);
 

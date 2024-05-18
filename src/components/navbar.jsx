@@ -1,12 +1,8 @@
 "use client";
+
 import React from "react";
 import { FloatingNav } from "@/ui/aceternity/floating-navbar";
-import {
-  IconHome,
-  IconMessage,
-  IconTie,
-  IconComponents,
-} from "@tabler/icons-react";
+import { IconHome, IconTie, IconComponents } from "@tabler/icons-react";
 
 export default function FloatingNavBar() {
   const navItems = [

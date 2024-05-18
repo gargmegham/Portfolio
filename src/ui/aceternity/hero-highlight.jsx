@@ -4,23 +4,11 @@ import { cn } from "@/utils/cn";
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
 import React from "react";
 
-export const HeroHighlight = ({
-  children,
-  className,
-  containerClassName,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
-}) => {
+export const HeroHighlight = ({ children, className, containerClassName }) => {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
 
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: React.MouseEvent<HTMLDivElement>) {
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
     if (!currentTarget) return;
     let { left, top } = currentTarget.getBoundingClientRect();
 
@@ -61,13 +49,7 @@ export const HeroHighlight = ({
   );
 };
 
-export const Highlight = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export const Highlight = ({ children, className }) => {
   return (
     <motion.span
       initial={{
