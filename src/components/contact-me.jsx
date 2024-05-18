@@ -2,7 +2,8 @@
 
 import React, { forwardRef } from "react";
 
-const ContactMe = forwardRef(({ ref }) => {
+const ContactMe = forwardRef(({ visible }, ref) => {
+  console.info("ContactMe component loaded", visible, ref);
   return (
     <section
       className="relative py-16 w-full max-lg:px-[10%]"

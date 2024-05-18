@@ -13,7 +13,7 @@ import { RiScrollToBottomLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
 
-const Intro = forwardRef(({ ref, scrollIndicatorHidden }) => {
+const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
   return (
     <AnimatePresence mode="wait">
       <motion.section

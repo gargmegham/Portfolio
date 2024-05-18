@@ -3,12 +3,13 @@
 import React, { forwardRef } from "react";
 import ProjectSummary from "@/ui/three/project-summary";
 
-const Projects = forwardRef(({ ref, visible }) => {
+const Projects = forwardRef(({ visible }, ref) => {
+  console.info("Projects component loaded", visible, ref);
   return (
     <div id="projects" className="max-lg:px-[10%] relative lg:pt-16 w-full">
       <ProjectSummary
         alternate={false}
-        sectionRef={ref}
+        sectionRef={ref?.[0]}
         visible={visible}
         index={1}
         title="Project Tracker For Agencies"

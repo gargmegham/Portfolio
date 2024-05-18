@@ -13,15 +13,16 @@ export default function Home() {
   const [visibleSections, setVisibleSections] = useState([]);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
   const intro = useRef(null);
-  const projects = useRef(null);
+  const servcy = useRef(null);
   const experience = useRef(null);
   const contactMe = useRef(null);
 
   useEffect(() => {
-    const sections = [intro, projects, experience, contactMe];
+    const sections = [intro, servcy, experience, contactMe];
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
+          // if section is intersecting, and not already in visibleSections, add it to visibleSections
           if (entry.isIntersecting) {
             const section = entry.target;
             observer.unobserve(section);
@@ -39,17 +40,16 @@ export default function Home() {
       },
       { rootMargin: "-100% 0px 0px 0px" }
     );
-
     sections.forEach((section) => {
+      // if section is visible, add it to the visibleSections
       if (section.current) {
         sectionObserver.observe(section.current);
       }
     });
-
     if (intro.current) {
+      // if intro is visible, hide the scroll indicator
       indicatorObserver.observe(intro.current);
     }
-
     return () => {
       sectionObserver.disconnect();
       indicatorObserver.disconnect();
@@ -62,9 +62,18 @@ export default function Home() {
       <NavBar />
       <TracingBeam>
         <Intro ref={intro} scrollIndicatorHidden={scrollIndicatorHidden} />
-        <Projects ref={projects} />
-        <Experience ref={experience} />
-        <ContactMe ref={contactMe} />
+        <Projects
+          ref={[servcy]}
+          visible={visibleSections.includes(servcy.current)}
+        />
+        <Experience
+          ref={experience}
+          visible={visibleSections.includes(experience.current)}
+        />
+        <ContactMe
+          ref={contactMe}
+          visible={visibleSections.includes(contactMe.current)}
+        />
       </TracingBeam>
     </main>
   );

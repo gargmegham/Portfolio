@@ -29,7 +29,8 @@ const experienceData = [
   },
 ];
 
-const Experience = forwardRef(({ ref }) => {
+const Experience = forwardRef(({ visible }, ref) => {
+  console.info("Experience component loaded", visible, ref);
   return (
     <section
       ref={ref}
