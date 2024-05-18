@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   webpack: (config, options) => {
     config.module.rules.push({
-      test: /\.glsl/,
+      test: /\.(glsl|woff2|glb)/,
       loader: "raw-loader",
     });
     return config;

@@ -4,7 +4,7 @@
 export const media = {
   desktop: 2080,
   laptop: 1680,
-  tablet: 1040,
+  tablet: 1023,
   mobile: 696,
   mobileS: 400,
 };
