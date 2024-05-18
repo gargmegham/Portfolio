@@ -8,8 +8,8 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module",
     ecmaFeatures: {
       jsx: true,
     },
@@ -22,38 +22,38 @@ module.exports = {
   },
 
   // Base config
-  extends: ['eslint:recommended', 'plugin:storybook/recommended'],
+  extends: ["eslint:recommended"],
 
   rules: {
-    semi: 'error',
-    'no-unused-vars': 'warn',
+    semi: "error",
+    "no-unused-vars": "warn",
   },
 
   overrides: [
     // React
     {
-      files: ['**/*.{js,jsx,ts,tsx}'],
-      plugins: ['react', 'jsx-a11y'],
+      files: ["**/*.{js,jsx,ts,tsx}"],
+      plugins: ["react", "jsx-a11y"],
       extends: [
-        'plugin:react/recommended',
-        'plugin:react/jsx-runtime',
-        'plugin:react-hooks/recommended',
-        'plugin:jsx-a11y/recommended',
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended",
       ],
       rules: {
-        'react/prop-types': 'off',
-        'react/display-name': 'off',
+        "react/prop-types": "off",
+        "react/display-name": "off",
       },
       settings: {
         react: {
-          version: 'detect',
+          version: "detect",
         },
-        formComponents: ['Form'],
+        formComponents: ["Form"],
         linkComponents: [
-          { name: 'Link', linkAttribute: 'to' },
-          { name: 'NavLink', linkAttribute: 'to' },
+          { name: "Link", linkAttribute: "to" },
+          { name: "NavLink", linkAttribute: "to" },
         ],
-        'import/resolver': {
+        "import/resolver": {
           typescript: {},
         },
       },
