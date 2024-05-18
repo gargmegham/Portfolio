@@ -1,8 +1,8 @@
 import { classes, cssProps, numToMs } from "@/utils/style";
 import styles from "./divider.module.css";
 
-export const Divider = ({ collapseDelay, collapsed, className, ...rest }) => (
-  <div className={classes(styles.divider, className)} {...rest}>
+export const Divider = ({ collapseDelay, collapsed }) => (
+  <div className={classes(styles.divider)}>
     <div className={styles.line} data-collapsed={collapsed} />
     <div
       className={styles.notch}
@@ -10,8 +10,3 @@ export const Divider = ({ collapseDelay, collapsed, className, ...rest }) => (
     />
   </div>
 );
-
-Divider.defaultProps = {
-  collapsed: false,
-  collapseDelay: 0,
-};
