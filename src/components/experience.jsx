@@ -92,11 +92,11 @@ const Experience = forwardRef(({ visible }, ref) => {
                   >
                     <div className="font-semibold text-teritiary-600 custom-shadow-b px-6 py-3">
                       {exp.title}
-                      <div className="text-xs text-teritiary-400">
+                      <div className="text-xs text-teritiary-400 truncate">
                         {exp.duration}
                       </div>
                     </div>
-                    <div className="text-sm text-teritiary-300 font-gotham-book custom-shadow-t px-6 py-3">
+                    <div className="text-sm text-teritiary-300 font-gotham-book custom-shadow-t px-6 py-3 max-sm:hidden">
                       {exp.description}
                     </div>
                   </motion.div>
@@ -137,7 +137,7 @@ const Experience = forwardRef(({ visible }, ref) => {
                     <div className="text-lg font-semibold text-teritiary-600">
                       {exp.company}
                     </div>
-                    <div className="text-sm text-teritiary-300 font-gotham-book">
+                    <div className="text-sm text-teritiary-300 font-gotham-book max-sm:tex-txs max-sm:truncate">
                       {exp.companyUrl}
                     </div>
                   </motion.div>

@@ -57,7 +57,7 @@ export default function Home() {
   }, [visibleSections]);
 
   return (
-    <main className="dark:bg-black bg-slate-50 relative overflow-y-hidden">
+    <main className="dark:bg-black bg-slate-50 relative overflow-hidden">
       <Background />
       <NavBar />
       <TracingBeam>
