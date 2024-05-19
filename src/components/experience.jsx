@@ -134,7 +134,7 @@ const Experience = forwardRef(({ visible }, ref) => {
                     }}
                     className="bg-secondary-300 py-3 px-6 rounded-xl custom-shadow-200 col-span-2"
                   >
-                    <div className="text-lg font-semibold text-teritiary-600">
+                    <div className="text-lg font-semibold text-teritiary-600 max-sm:text-base">
                       {exp.company}
                     </div>
                     <div className="text-sm text-teritiary-300 font-gotham-book max-sm:tex-txs max-sm:truncate">
