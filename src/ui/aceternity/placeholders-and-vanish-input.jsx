@@ -8,15 +8,11 @@ export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
   onSubmit,
-}: {
-  placeholders: string[];
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
   useEffect(() => {
-    let interval: any;
+    let interval;
     const startAnimation = () => {
       interval = setInterval(() => {
         setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
@@ -26,9 +22,9 @@ export function PlaceholdersAndVanishInput({
     return () => clearInterval(interval);
   }, [placeholders.length]);
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const newDataRef = useRef<any[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const canvasRef = useRef < HTMLCanvasElement > null;
+  const newDataRef = useRef([]);
+  const inputRef = useRef < HTMLInputElement > null;
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
 
@@ -51,7 +47,7 @@ export function PlaceholdersAndVanishInput({
 
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
-    const newData: any[] = [];
+    const newData = [];
 
     for (let t = 0; t < 800; t++) {
       let i = 4 * t * 800;
@@ -88,8 +84,8 @@ export function PlaceholdersAndVanishInput({
     draw();
   }, [value, draw]);
 
-  const animate = (start: number) => {
-    const animateFrame = (pos: number = 0) => {
+  const animate = (start) => {
+    const animateFrame = (pos = 0) => {
       requestAnimationFrame(() => {
         const newArr = [];
         for (let i = 0; i < newDataRef.current.length; i++) {
@@ -133,7 +129,7 @@ export function PlaceholdersAndVanishInput({
     animateFrame(start);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter" && !animating) {
       vanishAndSubmit();
     }
@@ -153,7 +149,7 @@ export function PlaceholdersAndVanishInput({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     vanishAndSubmit();
     onSubmit && onSubmit(e);
