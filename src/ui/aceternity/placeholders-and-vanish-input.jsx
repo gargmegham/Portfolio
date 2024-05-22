@@ -22,9 +22,9 @@ export function PlaceholdersAndVanishInput({
     return () => clearInterval(interval);
   }, [placeholders.length]);
 
-  const canvasRef = useRef < HTMLCanvasElement > null;
+  const canvasRef = useRef(null);
   const newDataRef = useRef([]);
-  const inputRef = useRef < HTMLInputElement > null;
+  const inputRef = useRef(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
 
