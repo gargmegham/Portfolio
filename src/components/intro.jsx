@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { DecoderText } from "@/ui/decoder-text";
 import {
   IconMapPin,
@@ -11,9 +11,15 @@ import {
 } from "@tabler/icons-react";
 import { RiScrollToBottomLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
+import { PlaceholdersAndVanishInput } from "@/ui/aceternity/placeholders-and-vanish-input";
 
 const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
+  const [email, setEmail] = useState("");
+  const validateEmail = (email) => {
+    return email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+  };
   return (
     <AnimatePresence mode="wait">
       <motion.section
@@ -36,11 +42,11 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
           <div className="flex gap-x-4 font-gotham-bold">
             <img
               src="/svgs/logo.svg"
-              width={160}
+              width={150}
               alt="Me"
               className="p-2 bg-secondary-200 rounded-xl custom-shadow-200"
             />
-            <div className="self-end space-y-1 cursor-pointer">
+            <div className="self-end space-y-1 cursor-pointer p-2 h-full w-full">
               <DecoderText text="Megham Garg" delay={500} />
               <div className="font-sans text-base flex gap-x-1 items-center">
                 <IconMapPin className="size-4" />
@@ -76,10 +82,23 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                   <IconBrandYoutube className="size-4 hover:text-teritiary-700 cursor-pointer" />
                 </a>
               </div>
+              <div className="!mt-4 flex max-w-sm">
+                <PlaceholdersAndVanishInput
+                  placeholders={["Join my newsletter..."]}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onSubmit={() => {
+                    if (!validateEmail(email)) {
+                      toast.error("Invalid email address!");
+                      return;
+                    }
+                    toast.success("Subscribed to newsletter!");
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className="text-teritiary-800 text-5xl font-gotham-book">
-            Building software{" "}
+            Building software <br className="md:hidden" />
             <Highlight className="text-black dark:text-white">
               one line at a time
             </Highlight>

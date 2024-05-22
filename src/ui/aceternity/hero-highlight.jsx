@@ -67,6 +67,7 @@ export const Highlight = ({ children, className }) => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "left center",
         display: "inline",
+        lineHeight: "normal",
       }}
       className={cn(
         `relative inline-block pb-1 px-1 rounded-lg bg-gradient-to-r from-amber-400 to-amber-200 dark:from-amber-600 dark:to-amber-400`,

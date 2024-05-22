@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "@/assets/css/globals.css";
-import Script from 'next/script';
+import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,8 +37,24 @@ export default function RootLayout({ children }) {
       <Script id="google-script" strategy="afterInteractive">
         {`window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${process.env.NEXT_PUBLIC_GA4}');`}
       </Script>
-      <Script strategy="afterInteractive" async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4}`}></Script>
-      <body className={inter.className}>{children}</body>
+      <Script
+        strategy="afterInteractive"
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4}`}
+      ></Script>
+      <body className={inter.className}>
+        {children}
+        <Toaster
+          toastOptions={{
+            position: "bottom-right",
+            style: {
+              borderRadius: "10px",
+              background: "#111",
+              color: "#fff",
+            },
+          }}
+        />
+      </body>
     </html>
   );
 }
