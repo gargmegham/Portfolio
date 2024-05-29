@@ -26,9 +26,30 @@ body {
   cursor: url('../cursor/cursor-scroll.svg') 10 10, auto !important;
 }
 
+main {
+  height: 100vh !important;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+main section {
+  scroll-snap-align: start;
+}
+
 button,
 a {
   cursor: url('../cursor/cursor-visit.svg') 10 10, auto !important;
+}
+
+section {
+  padding-left: 10%;
+  padding-right: 10%;
+  min-height: 100vh;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
 
 canvas {

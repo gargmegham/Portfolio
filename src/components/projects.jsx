@@ -6,7 +6,10 @@ import ProjectSummary from "@/ui/three/project-summary";
 const Projects = forwardRef(({ visible }, ref) => {
   console.info("Projects component loaded", visible, ref);
   return (
-    <div id="projects" className="max-lg:px-[10%] relative lg:pt-16 w-full">
+    <section
+      id="projects"
+      className="relative bg-grid-white/[0.2] lg:pt-16 flex items-center"
+    >
       <ProjectSummary
         alternate={false}
         sectionRef={ref?.[0]}
@@ -28,7 +31,7 @@ const Projects = forwardRef(({ visible }, ref) => {
           ],
         }}
       />
-    </div>
+    </section>
   );
 });
 

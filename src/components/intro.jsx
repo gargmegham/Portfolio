@@ -38,7 +38,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
         transition={{
           duration: 0.5,
         }}
-        className="max-lg:px-[10%] py-20 md:text-4xl text-2xl relative font-bold h-screen flex items-center text-teritiary-300"
+        className="md:text-4xl text-2xl bg-dot-white/[0.2] relative font-bold flex items-center text-teritiary-300 justify-center"
       >
         <div className="space-y-4">
           <div className="flex gap-x-4 font-gotham-bold">

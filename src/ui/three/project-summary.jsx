@@ -188,7 +188,7 @@ const ProjectSummary = forwardRef(
     }
 
     return (
-      <section
+      <div
         className={styles.summary}
         data-alternate={alternate}
         data-first={index === 1}
@@ -218,7 +218,7 @@ const ProjectSummary = forwardRef(
             )}
           </Transition>
         </div>
-      </section>
+      </div>
     );
   }
 );

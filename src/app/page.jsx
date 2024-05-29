@@ -5,7 +5,6 @@ import Background from "@/components/background";
 import NavBar from "@/components/navbar";
 import Intro from "@/components/intro";
 import ContactMe from "@/components/contact-me";
-import { TracingBeam } from "@/ui/aceternity/tracing-beam";
 import Experience from "@/components/experience";
 import Projects from "@/components/projects";
 
@@ -57,24 +56,22 @@ export default function Home() {
   }, [visibleSections]);
 
   return (
-    <main className="dark:bg-black bg-slate-50 relative overflow-hidden">
+    <main className="dark:bg-black bg-slate-50 relative overflow-x-hidden">
       <Background />
       <NavBar />
-      <TracingBeam>
-        <Intro ref={intro} scrollIndicatorHidden={scrollIndicatorHidden} />
-        <Projects
-          ref={[servcy]}
-          visible={visibleSections.includes(servcy.current)}
-        />
-        <Experience
-          ref={experience}
-          visible={visibleSections.includes(experience.current)}
-        />
-        <ContactMe
-          ref={contactMe}
-          visible={visibleSections.includes(contactMe.current)}
-        />
-      </TracingBeam>
+      <Intro ref={intro} scrollIndicatorHidden={scrollIndicatorHidden} />
+      <Projects
+        ref={[servcy]}
+        visible={visibleSections.includes(servcy.current)}
+      />
+      <Experience
+        ref={experience}
+        visible={visibleSections.includes(experience.current)}
+      />
+      <ContactMe
+        ref={contactMe}
+        visible={visibleSections.includes(contactMe.current)}
+      />
     </main>
   );
 }

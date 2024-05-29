@@ -36,9 +36,9 @@ const Experience = forwardRef(({ visible }, ref) => {
     <section
       ref={ref}
       id="experience"
-      className="max-lg:px-[10%] relative pt-16 w-full"
+      className="relative bg-grid-white/[0.2] flex items-center justify-center"
     >
-      <div className="custom-shadow-50 rounded-[24px]">
+      <div className="custom-shadow-50 rounded-[24px] max-w-[1200px]">
         <div className="flex items-center custom-shadow-b border-secondary-300 border-1 justify-center gap-x-2 py-3 bg-secondary-100 rounded-t-[24px]">
           <svg
             width="30"

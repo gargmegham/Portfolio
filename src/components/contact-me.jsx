@@ -1,16 +1,18 @@
 "use client";
 
+import { BackgroundBeams } from "@/ui/aceternity/background-beams";
 import React, { forwardRef } from "react";
 
 const ContactMe = forwardRef(({ visible }, ref) => {
   console.info("ContactMe component loaded", visible, ref);
   return (
     <section
-      className="relative py-16 w-full max-lg:px-[10%]"
+      className="relative flex bg-dot-white/[0.2] items-center h-screen justify-center"
       id="contact"
       ref={ref}
     >
-      <div className="custom-shadow-50 rounded-[24px]">
+      <BackgroundBeams />
+      <div className="custom-shadow-50 rounded-[24px] min-w-[70%] z-10">
         <div className="flex overflow-hidden bg-secondary-100 border-1 custom-shadow-b border-secondary-300 relative w-full rounded-t-[24px]">
           <img
             src="/svgs/contact-me-cover.svg"
