@@ -11,6 +11,7 @@ const Projects = forwardRef(({ visible }, ref) => {
       className="relative bg-grid-white/[0.2] flex items-center justify-center"
     >
       <ProjectSummary
+        tags={["Next.js", "Nuxt.js", "Django", "PostgreSQL", "AWS"]}
         alternate={false}
         sectionRef={ref?.[0]}
         visible={visible}
