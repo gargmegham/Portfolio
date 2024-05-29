@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
 import { PlaceholdersAndVanishInput } from "@/ui/aceternity/placeholders-and-vanish-input";
+import Image from "next/image";
 
 const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
   const [email, setEmail] = useState("");
@@ -42,9 +43,10 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
       >
         <div className="space-y-4">
           <div className="flex gap-x-4 font-gotham-bold">
-            <img
+            <Image
               src="/svgs/logo.svg"
               width={150}
+              height={175}
               alt="Me"
               className="p-2 bg-secondary-200 rounded-xl custom-shadow-200"
             />
