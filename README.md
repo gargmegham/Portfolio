@@ -5,7 +5,10 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0ac14488-7759-4c6a-b5e5-56c2cdce12cf/deploy-status)](https://app.netlify.com/sites/meghamgarg/deploys)
 
-[![Site preview](/src/app/opengraph-image.png)](https://hamishw.com)
+![Intro](https://github.com/gargmegham/Portfolio/assets/95271253/168388e1-c187-401f-ace9-a4ee00e5ccb3)
+![Projects](https://github.com/gargmegham/Portfolio/assets/95271253/d14e3160-8d84-4a6a-ace9-b30139bb2642)
+![Experience](https://github.com/gargmegham/Portfolio/assets/95271253/9fc78144-d8fb-420c-a305-c47bcc732142)
+![Contact Info](https://github.com/gargmegham/Portfolio/assets/95271253/2d8b4806-1c0c-4a55-9728-44f2b905b52a)
 
 Portfolio showcasing professional past, present & future. Built with:
 - [Remix](https://remix.run/)
