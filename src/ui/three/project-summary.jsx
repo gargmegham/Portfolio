@@ -68,7 +68,7 @@ const ProjectSummary = forwardRef(
         visible && (
           <AnimatePresence mode="wait">
             <motion.div
-              className="space-y-4"
+              className=" flex items-center"
               id="servcy-details"
               initial={{
                 opacity: 0,
@@ -82,20 +82,22 @@ const ProjectSummary = forwardRef(
                 duration: 0.5,
               }}
             >
-              <div className="flex">
-                <Highlight className="font-gotham-bold text-teritiary-800 text-4xl mr-2">
-                  {title}
-                </Highlight>
-                <span className="font-gotham-book text-2xl text-teritiary-400 self-end">
-                  {caption}
-                </span>
-              </div>
-              <Divider collapsed={!visible} collapseDelay={1000} />
-              <p className="font-sans text-lg text-teritiary-300">
-                {description}
-              </p>
-              <div>
-                <Button href={buttonLink}>{buttonText}</Button>
+              <div className="space-y-4">
+                <div className="flex">
+                  <Highlight className="font-gotham-bold text-teritiary-800 text-4xl mr-2">
+                    {title}
+                  </Highlight>
+                  <span className="font-gotham-book text-2xl text-teritiary-400 self-end">
+                    {caption}
+                  </span>
+                </div>
+                <Divider collapsed={!visible} collapseDelay={1000} />
+                <p className="font-sans text-lg text-teritiary-300">
+                  {description}
+                </p>
+                <div>
+                  <Button href={buttonLink}>{buttonText}</Button>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>

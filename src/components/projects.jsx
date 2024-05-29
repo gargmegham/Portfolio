@@ -8,7 +8,7 @@ const Projects = forwardRef(({ visible }, ref) => {
   return (
     <section
       id="projects"
-      className="relative bg-grid-white/[0.2] md:pt-24 flex items-center"
+      className="relative bg-grid-white/[0.2] flex items-center justify-center"
     >
       <ProjectSummary
         alternate={false}
