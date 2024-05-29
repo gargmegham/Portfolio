@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import ProjectSummary from "@/ui/three/project-summary";
+import ProjectSummary from "@/ui/project-summary/index";
 
 const Projects = forwardRef(({ visible }, ref) => {
   console.info("Projects component loaded", visible, ref);

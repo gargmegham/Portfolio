@@ -12,7 +12,7 @@ import { Suspense, lazy, useState } from "react";
 import { cssProps, media } from "@/utils/style";
 import { useHydrated } from "@/hooks/useHydrated";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
-import styles from "./project-summary.module.css";
+import styles from "./index.module.css";
 
 const Model = lazy(() =>
   import("@/ui/model").then((module) => ({ default: module.Model }))

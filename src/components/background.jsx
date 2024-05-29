@@ -4,7 +4,7 @@ import React, { lazy, Suspense } from "react";
 import { useHydrated } from "@/hooks/useHydrated";
 
 const DisplacementSphere = lazy(() =>
-  import("@/ui/three/displacement-sphere").then((module) => ({
+  import("@/ui/displacement-sphere/index").then((module) => ({
     default: module.DisplacementSphere,
   }))
 );
