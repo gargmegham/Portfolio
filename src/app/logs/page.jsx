@@ -1,7 +1,19 @@
-"use client";
-
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "@/ui/aceternity/3d-card";
+
+export const metadata = {
+  title: "Logs | Megham Garg",
+  description:
+    "Watch my latest YouTube videos on software development, freelancing, and entrepreneurship.",
+  keywords: [
+    "logs",
+    "videos",
+    "youtube",
+    "software development",
+    "freelancing",
+    "entrepreneurship",
+  ],
+};
 
 const logs = [
   {
