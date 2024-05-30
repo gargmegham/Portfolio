@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Background from "@/components/background";
-import NavBar from "@/components/navbar";
 import Intro from "@/components/intro";
 import ContactMe from "@/components/contact-me";
 import Experience from "@/components/experience";
@@ -58,7 +57,6 @@ export default function Home() {
   return (
     <main className="dark:bg-black bg-slate-50 relative overflow-x-hidden">
       <Background />
-      <NavBar />
       <Intro ref={intro} scrollIndicatorHidden={scrollIndicatorHidden} />
       <Projects
         ref={[servcy]}

@@ -2,7 +2,12 @@
 
 import React from "react";
 import { FloatingNav } from "@/ui/aceternity/floating-navbar";
-import { IconHome, IconTie, IconComponents } from "@tabler/icons-react";
+import {
+  IconHome,
+  IconTie,
+  IconComponents,
+  IconArticle,
+} from "@tabler/icons-react";
 
 export default function FloatingNavBar() {
   const navItems = [
@@ -22,6 +27,13 @@ export default function FloatingNavBar() {
       name: "Experience",
       link: "#experience",
       icon: <IconTie className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    {
+      name: "Logs",
+      link: "/logs",
+      icon: (
+        <IconArticle className="h-4 w-4 text-neutral-500 dark:text-white" />
+      ),
     },
   ];
   return <FloatingNav navItems={navItems} />;

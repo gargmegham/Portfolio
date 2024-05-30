@@ -29,9 +29,12 @@ export const FloatingNav = ({ navItems, className }) => {
           <button
             key={`link=${idx}`}
             onClick={() => {
-              document.querySelector(navItem.link)?.scrollIntoView({
-                behavior: "smooth",
-              });
+              if (navItem.link.startsWith("/")) window.location = navItem.link;
+              else {
+                const el = document.querySelector(navItem.link);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+                else window.location = `/#${navItem.link.slice(1)}`;
+              }
             }}
             className={cn(
               "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
@@ -43,9 +46,12 @@ export const FloatingNav = ({ navItems, className }) => {
         ))}
         <button
           onClick={() => {
-            document.querySelector("#contact")?.scrollIntoView({
-              behavior: "smooth",
-            });
+            const el = document.querySelector("#contact");
+            if (el)
+              el.scrollIntoView({
+                behavior: "smooth",
+              });
+            else window.location = "/#contact";
           }}
           className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
         >
