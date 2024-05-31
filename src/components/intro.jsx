@@ -60,6 +60,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <a
                   href="https://www.linkedin.com/in/megham-garg/"
                   target="_blank"
+                  aria-label="LinkedIn"
                   rel="noreferrer"
                 >
                   <IconBrandLinkedin className="size-4 hover:text-teritiary-700 cursor-pointer" />
@@ -67,6 +68,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <a
                   href="https://x.com/garg_megham"
                   target="_blank"
+                  aria-label="Twitter"
                   rel="noreferrer"
                 >
                   <IconBrandTwitter className="size-4 hover:text-teritiary-700 cursor-pointer" />
@@ -74,6 +76,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <a
                   href="https://github.com/gargmegham"
                   target="_blank"
+                  aria-label="GitHub"
                   rel="noreferrer"
                 >
                   <IconBrandGithub className="size-4 hover:text-teritiary-700 cursor-pointer" />
@@ -81,6 +84,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <a
                   href="https://youtube.com/@megham_"
                   target="_blank"
+                  aria-label="YouTube"
                   rel="noreferrer"
                 >
                   <IconBrandYoutube className="size-4 hover:text-teritiary-700 cursor-pointer" />
@@ -90,6 +94,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <PlaceholdersAndVanishInput
                   placeholders={["Join my newsletter..."]}
                   onChange={(e) => setEmail(e.target.value)}
+                  id="newsletter-form"
                   onSubmit={async () => {
                     if (!validateEmail(email)) {
                       toast.error("Invalid email address!");
@@ -113,6 +118,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
         </div>
         {!scrollIndicatorHidden && (
           <button
+            aria-label="scroll-indicator"
             onClick={() => {
               window.scrollTo({
                 top: window.innerHeight,

@@ -7,6 +7,7 @@ import { cn } from "@/utils/cn";
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
+  id,
   onSubmit,
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
@@ -178,6 +179,7 @@ export function PlaceholdersAndVanishInput({
         }}
         onKeyDown={handleKeyDown}
         ref={inputRef}
+        id={id}
         value={value}
         type="text"
         className={cn(
@@ -185,9 +187,13 @@ export function PlaceholdersAndVanishInput({
           animating && "text-transparent dark:text-transparent"
         )}
       />
+      <label htmlFor={id} className="hidden">
+        {placeholders[currentPlaceholder]}
+      </label>
 
       <button
         disabled={!value}
+        aria-label="submit-email"
         type="submit"
         className="absolute right-2 top-1/2 z-50 -translate-y-1/2 h-8 w-8 rounded-full disabled:bg-gray-100 bg-black dark:bg-zinc-900 dark:disabled:bg-zinc-800 transition duration-200 flex items-center justify-center"
       >
