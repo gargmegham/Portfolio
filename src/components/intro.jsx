@@ -109,7 +109,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               </div>
             </div>
           </div>
-          <div className="text-teritiary-800 text-5xl font-gotham-book">
+          <div className="text-teritiary-800 text-5xl font-gotham-book max-sm:hidden">
             Building software <br className="md:hidden" />
             <Highlight className="text-black dark:text-white">
               one line at a time

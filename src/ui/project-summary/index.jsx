@@ -85,15 +85,15 @@ const ProjectSummary = forwardRef(
             >
               <div className="space-y-4">
                 <div className="flex">
-                  <Highlight className="font-gotham-bold text-teritiary-800 text-4xl mr-2">
+                  <Highlight className="font-gotham-bold text-teritiary-800 text-2xl md:text-4xl mr-2">
                     {title}
                   </Highlight>
-                  <span className="font-gotham-book text-2xl text-teritiary-400 self-end">
+                  <span className="font-gotham-book text-lg md:text-2xl text-teritiary-400 self-end">
                     {caption}
                   </span>
                 </div>
                 <Divider collapsed={!visible} collapseDelay={1000} />
-                <p className="font-sans text-lg text-teritiary-300">
+                <p className="font-sans text-lg text-teritiary-300 max-sm:hidden">
                   {description}
                 </p>
                 {tags && (
