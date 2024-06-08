@@ -2,6 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "author": {
     "name": "Megham Garg",
     "email": "business@meghamgarg.com",
