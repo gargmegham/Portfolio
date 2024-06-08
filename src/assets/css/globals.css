@@ -32,9 +32,6 @@ main {
   scroll-snap-type: y mandatory;
 }
 
-main section {
-  scroll-snap-align: start;
-}
 
 button,
 a {
@@ -44,7 +41,9 @@ a {
 section {
   padding-left: 10%;
   padding-right: 10%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: hidden;
+  scroll-snap-align: start;
 
   @media screen and (max-width: 768px) {
     padding-left: 5%;

@@ -50,10 +50,10 @@ const ProjectSummary = forwardRef(
         <svg
           type="project"
           data-visible={visible}
+          data-alternate={alternate}
           data-light={false}
           style={cssProps({ opacity: 1 })}
           className={styles.svg}
-          data-device={device}
           viewBox="0 0 751 136"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 751 136">
@@ -69,7 +69,7 @@ const ProjectSummary = forwardRef(
         visible && (
           <AnimatePresence mode="wait">
             <motion.div
-              className=" flex items-center"
+              className="flex items-center"
               id="servcy-details"
               initial={{
                 opacity: 0,
@@ -126,93 +126,41 @@ const ProjectSummary = forwardRef(
 
     function renderPreview(visible) {
       return (
-        <div className={styles.preview}>
-          {model.type === "laptop" && (
-            <>
-              {renderKatakana("laptop", visible)}
-              <div className={styles.model} data-device="laptop">
-                {!modelLoaded && (
-                  <Loader
-                    center
-                    className={styles.loader}
-                    data-visible={visible}
-                  />
-                )}
-                {isHydrated && visible && (
-                  <Suspense>
-                    <Model
-                      alt={model.alt}
-                      cameraPosition={{ x: 0, y: 0, z: 8 }}
-                      showDelay={700}
-                      onLoad={handleModelLoad}
-                      show={visible}
-                      models={[
-                        {
-                          ...deviceModels.laptop,
-                          texture: {
-                            ...model.textures[0],
-                            sizes: laptopSizes,
-                          },
-                        },
-                      ]}
-                    />
-                  </Suspense>
-                )}
-              </div>
-            </>
-          )}
-          {model.type === "phone" && (
-            <>
-              {renderKatakana("phone", visible)}
-              <div className={styles.model} data-device="phone">
-                {!modelLoaded && (
-                  <Loader
-                    center
-                    className={styles.loader}
-                    data-visible={visible}
-                  />
-                )}
-                {isHydrated && visible && (
-                  <Suspense>
-                    <Model
-                      alt={model.alt}
-                      cameraPosition={{ x: 0, y: 0, z: 11.5 }}
-                      showDelay={300}
-                      onLoad={handleModelLoad}
-                      show={visible}
-                      models={[
-                        {
-                          ...deviceModels.phone,
-                          position: { x: -0.6, y: 1.1, z: 0 },
-                          texture: {
-                            ...model.textures[0],
-                            sizes: phoneSizes,
-                          },
-                        },
-                        {
-                          ...deviceModels.phone,
-                          position: { x: 0.6, y: -0.5, z: 0.3 },
-                          texture: {
-                            ...model.textures[1],
-                            sizes: phoneSizes,
-                          },
-                        },
-                      ]}
-                    />
-                  </Suspense>
-                )}
-              </div>
-            </>
-          )}
+        <div className="flex justify-center items-center relative justify-self-center h-full w-full">
+          {renderKatakana("laptop", visible)}
+          <div className={styles.model} data-alternate={alternate}>
+            {!modelLoaded && (
+              <Loader center className={styles.loader} data-visible={visible} />
+            )}
+            {isHydrated && visible && (
+              <Suspense>
+                <Model
+                  alt={model.alt}
+                  cameraPosition={{ x: 0, y: 0, z: 8 }}
+                  showDelay={700}
+                  onLoad={handleModelLoad}
+                  show={visible}
+                  models={[
+                    {
+                      ...deviceModels.laptop,
+                      texture: {
+                        ...model.textures[0],
+                        sizes: laptopSizes,
+                      },
+                    },
+                  ]}
+                />
+              </Suspense>
+            )}
+          </div>
         </div>
       );
     }
 
     return (
       <div
-        className={styles.summary}
+        className="flex justify-center items-center relative h-screen"
         data-alternate={alternate}
-        data-first={index === 1}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         ref={sectionRef}
