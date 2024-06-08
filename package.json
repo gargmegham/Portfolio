@@ -2,6 +2,15 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Megham Garg",
+    "email": "business@meghamgarg.com",
+    "url": "https://meghamgarg.com"
+  },
+  "repository": {
+    "url": "https://github.com/gargmegham/Portfolio",
+    "type": "git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
