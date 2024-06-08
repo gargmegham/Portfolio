@@ -4,32 +4,11 @@
   display: grid;
   aspect-ratio: var(--aspectRatio);
   position: relative;
-  min-width: 120%;
+  min-width: 180%;
+  top: -10%;
 
-  &[data-alternate='false'] {
-    min-width: 180%;
-    top: -10%;
-
-    @media (max-width: 1023px) {
-      min-width: 160%;
-    }
-
-    @media (min-width: 1024px) {
-      right: -30%;
-    }
-  }
-
-  &[data-alternate='true'] {
-    min-width: 180%;
-    top: -10%;
-
-    @media (max-width: 1023px) {
-      min-width: 160%;
-    }
-
-    @media (min-width: 1024px) {
-      left: -20%;
-    }
+  @media (max-width: 1023px) {
+    min-width: 160%;
   }
 }
 

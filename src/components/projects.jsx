@@ -28,9 +28,9 @@ const projects = [
     tags: ["Next.js", "Supabase", "Python"],
     alternate: true,
     title: "ShieldPeer",
-    caption: "Optimize selling strategy of your steam assets",
+    caption: "Optimize selling strategy for steam assets",
     description:
-      "Sell your steam assets on marketplaces with user-specified parameters.",
+      "Sell your steam assets on marketplaces with granular parameters.",
     buttonText: "View project",
     buttonLink: "https://www.shieldpeer.in",
     model: {

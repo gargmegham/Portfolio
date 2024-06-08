@@ -13,6 +13,7 @@ import { cssProps, media } from "@/utils/style";
 import { useHydrated } from "@/hooks/useHydrated";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
 import styles from "./index.module.css";
+import { cn } from "@/utils/cn";
 
 const Model = lazy(() =>
   import("@/ui/model").then((module) => ({ default: module.Model }))
@@ -114,7 +115,11 @@ const ProjectSummary = forwardRef(
                     ))}
                   </div>
                 )}
-                <div>
+                <div
+                  className={cn(
+                    alternate ? "flex justify-end" : "flex justify-start"
+                  )}
+                >
                   <Button href={buttonLink}>{buttonText}</Button>
                 </div>
               </div>
@@ -128,7 +133,12 @@ const ProjectSummary = forwardRef(
       return (
         <div className="flex justify-center items-center relative justify-self-center h-full w-full">
           {renderKatakana("laptop", visible)}
-          <div className={styles.model} data-alternate={alternate}>
+          <div
+            className={cn(
+              styles.model,
+              alternate ? "lg:left-[-20%]" : "lg:right-[-30%]"
+            )}
+          >
             {!modelLoaded && (
               <Loader center className={styles.loader} data-visible={visible} />
             )}
