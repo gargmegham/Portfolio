@@ -1,6 +1,5 @@
 "use client";
 
-import { BackgroundBeams } from "@/ui/aceternity/background-beams";
 import React, { forwardRef } from "react";
 
 const ContactMe = forwardRef(({ visible }, ref) => {
@@ -11,7 +10,6 @@ const ContactMe = forwardRef(({ visible }, ref) => {
       id="contact"
       ref={ref}
     >
-      <BackgroundBeams />
       <div className="custom-shadow-50 rounded-[24px] min-w-[70%] z-10">
         <div className="flex overflow-hidden bg-secondary-100 border-1 custom-shadow-b border-secondary-300 relative w-full rounded-t-[24px]">
           <img
