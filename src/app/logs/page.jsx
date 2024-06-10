@@ -17,6 +17,10 @@ export const metadata = {
 
 const logs = [
   {
+    title: "Watch me make and launch a software for steam, and waxpeer users",
+    link: "https://www.youtube.com/embed/9HDPlMolBis?si=ovSAQRHHK3zOA14g",
+  },
+  {
     title: "Google Ads 101 For Complete Beginners | Lessons from My Campaigns",
     link: "https://www.youtube.com/embed/pxNkKQimdCU?si=xVM8FfwBbSNpVEw5",
   },
