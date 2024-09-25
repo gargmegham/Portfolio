@@ -44,6 +44,26 @@ const projects = [
       ],
     },
   },
+  {
+    tags: ["Next.js", "Supabase", "Python"],
+    alternate: true,
+    title: "Jotlify",
+    caption: "Curated research for everyone",
+    description:
+      "Use AI to read or listen to curated research papers in your domain.",
+    buttonText: "View project",
+    buttonLink: "https://www.jotlify.com",
+    model: {
+      type: "laptop",
+      alt: "Jotlify",
+      textures: [
+        {
+          srcSet: "/images/jotlify.png 1280w",
+          placeholder: "/images/placeholder.jpg",
+        },
+      ],
+    },
+  },
 ];
 
 const Projects = forwardRef(({ visible }, ref) => {
