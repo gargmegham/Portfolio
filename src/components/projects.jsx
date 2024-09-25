@@ -5,8 +5,28 @@ import ProjectSummary from "@/ui/project-summary/index";
 
 const projects = [
   {
-    tags: ["Next.js", "Nuxt.js", "Django", "PostgreSQL", "AWS"],
+    tags: ["Next.js", "Supabase", "Python"],
     alternate: false,
+    title: "Jotlify",
+    caption: "Curated research for everyone",
+    description:
+      "Use AI to read or listen to curated research papers in your domain.",
+    buttonText: "View project",
+    buttonLink: "https://www.jotlify.com",
+    model: {
+      type: "laptop",
+      alt: "Jotlify",
+      textures: [
+        {
+          srcSet: "/images/jotlify.png 1280w",
+          placeholder: "/images/placeholder.jpg",
+        },
+      ],
+    },
+  },
+  {
+    tags: ["Next.js", "Nuxt.js", "Django", "PostgreSQL", "AWS"],
+    alternate: true,
     title: "Servcy",
     caption: "Project Tracker For Agencies",
     description:
@@ -26,7 +46,7 @@ const projects = [
   },
   {
     tags: ["Next.js", "Supabase", "Python"],
-    alternate: true,
+    alternate: false,
     title: "ShieldPeer",
     caption: "Optimize selling strategy for steam assets",
     description:
@@ -43,27 +63,7 @@ const projects = [
         },
       ],
     },
-  },
-  {
-    tags: ["Next.js", "Supabase", "Python"],
-    alternate: true,
-    title: "Jotlify",
-    caption: "Curated research for everyone",
-    description:
-      "Use AI to read or listen to curated research papers in your domain.",
-    buttonText: "View project",
-    buttonLink: "https://www.jotlify.com",
-    model: {
-      type: "laptop",
-      alt: "Jotlify",
-      textures: [
-        {
-          srcSet: "/images/jotlify.png 1280w",
-          placeholder: "/images/placeholder.jpg",
-        },
-      ],
-    },
-  },
+  },  
 ];
 
 const Projects = forwardRef(({ visible }, ref) => {
