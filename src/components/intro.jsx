@@ -21,6 +21,18 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
   const validateEmail = (email) => {
     return email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
   };
+  const subscribe = async (email) => {
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) toast.success("Subscribed to newsletter!");
+      else toast.error("Failed to subscribe!");
+    } catch (err) {
+      toast.error("Failed to subscribe!");
+    }
+  };
   return (
     <AnimatePresence mode="wait">
       <motion.section
@@ -98,7 +110,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                       toast.error("Invalid email address!");
                       return;
                     }
-                    toast.success("Subscribed to newsletter!");
+                    subscribe(email);
                   }}
                 />
               </div>
