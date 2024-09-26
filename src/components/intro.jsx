@@ -2,8 +2,6 @@
 
 import { forwardRef, useState } from "react";
 import { DecoderText } from "@/ui/decoder-text";
-import db from "@/utils/firebase";
-import { collection, addDoc } from "firebase/firestore";
 import {
   IconMapPin,
   IconBrandLinkedin,
@@ -100,9 +98,6 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                       toast.error("Invalid email address!");
                       return;
                     }
-                    await addDoc(collection(db, "newsletter-subscriptions"), {
-                      email,
-                    });
                     toast.success("Subscribed to newsletter!");
                   }}
                 />
