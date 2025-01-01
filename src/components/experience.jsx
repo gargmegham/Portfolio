@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const experienceData = [
   {
-    title: "Tech Lead",
-    company: "UpWork",
-    companyUrl: "upwork.com",
-    duration: "2020-2023",
+    title: "Agency Owner",
+    company: "LaunchBit",
+    companyUrl: "launchbit.in",
+    duration: "2023-Present",
     description:
       "Launched multiple MVPs & products from scratch. Hired, and mentored the team, and scaled multiple products to 100k+ users.",
   },
