@@ -52,7 +52,7 @@ const projects = [
     description:
       "Sell your steam assets on marketplaces with granular parameters.",
     buttonText: "View project",
-    buttonLink: "https://www.shieldpeer.in",
+    buttonLink: "https://shieldpeer.meghamgarg.com",
     model: {
       type: "laptop",
       alt: "ShieldPeer",
