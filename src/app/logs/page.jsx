@@ -1,13 +1,13 @@
 import React from "react";
-import { CardBody, CardContainer, CardItem } from "@/ui/aceternity/3d-card";
 
 export const metadata = {
-  title: "Logs | Megham Garg",
+  title: "Content | Megham Garg",
   description:
-    "Watch my latest YouTube videos on software development, freelancing, and entrepreneurship.",
+    "Watch my latest YouTube videos and read my blogs on software development, freelancing, and entrepreneurship.",
   keywords: [
-    "logs",
+    "content",
     "videos",
+    "blogs",
     "youtube",
     "software development",
     "freelancing",
@@ -15,7 +15,7 @@ export const metadata = {
   ],
 };
 
-const logs = [
+const content = [
   {
     title: "Watch me make and launch a software for steam, and waxpeer users",
     link: "https://www.youtube.com/embed/9HDPlMolBis?si=ovSAQRHHK3zOA14g",
@@ -41,34 +41,43 @@ const logs = [
   },
 ];
 
-export default function Logs() {
+export default function Content() {
   return (
-    <main className="bg-grid-small-white/[0.4] px-20 py-36 gap-4 grid md:grid-cols-2 lg:grid-cols-3">
-      {logs.map((log, index) => {
-        return (
-          <CardContainer className="inter-var" key={index}>
-            <CardBody className="bg-gray-50 relative dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[24rem] h-auto rounded-xl p-6 border">
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-              >
-                {log.title}
-              </CardItem>
-              <CardItem translateZ="100" className="w-full mt-4">
+    <main className="bg-grid-small-white/[0.4] px-4 md:px-8 lg:px-20 py-36">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Content & Resources
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Explore my latest videos and insights on software development, freelancing, and entrepreneurship
+          </p>
+        </div>
+        
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {content.map((item, index) => (
+            <div
+              key={index}
+              className="group bg-gray-50/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:bg-gray-50/10 hover:border-white/20 hover:shadow-2xl hover:shadow-emerald-500/10 hover:-translate-y-1"
+            >
+              <p className="text-gray-300 text-sm leading-relaxed mb-6 min-h-[3rem]">
+                {item.title}
+              </p>
+              
+              <div className="relative overflow-hidden rounded-xl">
                 <iframe
-                  className="w-full h-60 rounded-xl"
-                  src={log.link}
-                  title={log.title}
+                  className="w-full h-60 rounded-xl transition-transform duration-300 group-hover:scale-105"
+                  src={item.link}
+                  title={item.title}
                   allow="clipboard-write; encrypted-media; picture-in-picture"
                   referrerPolicy="strict-origin-when-cross-origin"
-                  allowfullscreen
-                ></iframe>
-              </CardItem>
-            </CardBody>
-          </CardContainer>
-        );
-      })}
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
