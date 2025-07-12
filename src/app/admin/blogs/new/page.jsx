@@ -354,7 +354,16 @@ export default function NewBlogPost() {
                   <div
                     key={image.name}
                     onClick={() => insertImageIntoContent(image)}
-                    className="group relative bg-gray-700 rounded-lg overflow-hidden aspect-square cursor-pointer hover:ring-2 hover:ring-emerald-500 transition-all"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        insertImageIntoContent(image);
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Insert image ${image.name}`}
+                    className="group relative bg-gray-700 rounded-lg overflow-hidden aspect-square cursor-pointer hover:ring-2 hover:ring-emerald-500 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   >
                     <img
                       src={image.url}

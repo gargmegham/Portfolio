@@ -49,15 +49,21 @@ export default function EditBlogPost({ params }) {
     const textarea = document.getElementById("content");
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const newContent = formData.content.substring(0, start) + markdown + formData.content.substring(end);
-    
-    setFormData(prev => ({ ...prev, content: newContent }));
+    const newContent =
+      formData.content.substring(0, start) +
+      markdown +
+      formData.content.substring(end);
+
+    setFormData((prev) => ({ ...prev, content: newContent }));
     setShowGalleryModal(false);
-    
+
     // Focus back to textarea
     setTimeout(() => {
       textarea.focus();
-      textarea.setSelectionRange(start + markdown.length, start + markdown.length);
+      textarea.setSelectionRange(
+        start + markdown.length,
+        start + markdown.length
+      );
     }, 100);
   };
 
@@ -121,15 +127,21 @@ export default function EditBlogPost({ params }) {
   };
 
   const uploadThumbnail = async () => {
-    if (!thumbnailFile) return formData.thumbnail; // Keep existing thumbnail if no new file
+    if (!thumbnailFile) {
+      console.log(
+        "No new thumbnail file, returning existing:",
+        formData.thumbnail
+      );
+      return formData.thumbnail; // Keep existing thumbnail if no new file
+    }
 
-    const formData = new FormData();
-    formData.append("file", thumbnailFile);
+    const uploadFormData = new FormData();
+    uploadFormData.append("file", thumbnailFile);
 
     try {
       const response = await fetch("/api/admin/upload", {
         method: "POST",
-        body: formData,
+        body: uploadFormData,
       });
 
       if (response.ok) {
@@ -238,7 +250,10 @@ export default function EditBlogPost({ params }) {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="title"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Title
               </label>
               <input
@@ -254,7 +269,10 @@ export default function EditBlogPost({ params }) {
             </div>
 
             <div>
-              <label htmlFor="slug" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="slug"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Slug (auto-generated)
               </label>
               <input
@@ -270,7 +288,10 @@ export default function EditBlogPost({ params }) {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-2">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
               Description
             </label>
             <textarea
@@ -285,7 +306,10 @@ export default function EditBlogPost({ params }) {
           </div>
 
           <div>
-            <label htmlFor="thumbnail" className="block text-sm font-medium text-gray-300 mb-2">
+            <label
+              htmlFor="thumbnail"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
               Thumbnail Image
             </label>
             <input
@@ -307,7 +331,10 @@ export default function EditBlogPost({ params }) {
           </div>
 
           <div>
-            <label htmlFor="tags" className="block text-sm font-medium text-gray-300 mb-2">
+            <label
+              htmlFor="tags"
+              className="block text-sm font-medium text-gray-300 mb-2"
+            >
               Tags (comma-separated)
             </label>
             <input
@@ -323,7 +350,10 @@ export default function EditBlogPost({ params }) {
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label htmlFor="content" className="block text-sm font-medium text-gray-300">
+              <label
+                htmlFor="content"
+                className="block text-sm font-medium text-gray-300"
+              >
                 Content (Markdown)
               </label>
               <button
@@ -388,23 +418,44 @@ export default function EditBlogPost({ params }) {
           <div className="bg-gray-800 rounded-lg max-w-6xl max-h-full overflow-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">Choose Image from Gallery</h3>
+                <h3 className="text-lg font-semibold text-white">
+                  Choose Image from Gallery
+                </h3>
                 <button
                   onClick={() => setShowGalleryModal(false)}
                   className="text-gray-400 hover:text-white"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
-              
+
               <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-h-96 overflow-y-auto">
                 {galleryImages.map((image) => (
                   <div
                     key={image.name}
                     onClick={() => insertImageIntoContent(image)}
-                    className="group relative bg-gray-700 rounded-lg overflow-hidden aspect-square cursor-pointer hover:ring-2 hover:ring-emerald-500 transition-all"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        insertImageIntoContent(image);
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`Insert image ${image.name}`}
+                    className="group relative bg-gray-700 rounded-lg overflow-hidden aspect-square cursor-pointer hover:ring-2 hover:ring-emerald-500 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   >
                     <img
                       src={image.url}
@@ -419,13 +470,16 @@ export default function EditBlogPost({ params }) {
                   </div>
                 ))}
               </div>
-              
+
               {galleryImages.length === 0 && (
                 <div className="text-center py-8 text-gray-400">
-                  <p>No images in gallery. Upload some images first in the Gallery tab.</p>
+                  <p>
+                    No images in gallery. Upload some images first in the
+                    Gallery tab.
+                  </p>
                 </div>
               )}
-              
+
               <div className="flex justify-end mt-4">
                 <button
                   onClick={() => setShowGalleryModal(false)}
