@@ -43,7 +43,7 @@ const logs = [
 
 export default function Logs() {
   return (
-    <main className="bg-grid-small-white/[0.4] px-20 py-36 gap-8 grid md:grid-cols-2 lg:grid-cols-3">
+    <main className="bg-grid-small-white/[0.4] px-20 py-36 gap-4 grid md:grid-cols-2 lg:grid-cols-3">
       {logs.map((log, index) => {
         return (
           <CardContainer className="inter-var" key={index}>

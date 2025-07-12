@@ -7,7 +7,7 @@ const experienceData = [
   {
     title: "Agency Owner",
     company: "LaunchBit",
-    companyUrl: "",
+    companyUrl: "launchbit.in",
     duration: "2023-Present",
     description:
       "Launched multiple MVPs & products from scratch. Hired, and mentored the team, and scaled multiple products to 100k+ users.",
