@@ -23,7 +23,6 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   scroll-behavior: smooth;
-  cursor: url('../cursor/cursor-scroll.svg') 10 10, auto !important;
 }
 
 main {
@@ -32,27 +31,18 @@ main {
   scroll-snap-type: y mandatory;
 }
 
-
-button,
-a {
-  cursor: url('../cursor/cursor-visit.svg') 10 10, auto !important;
-}
-
 section {
   padding-left: 10%;
   padding-right: 10%;
   height: 100vh;
   overflow-y: hidden;
+  overflow-x: hidden;
   scroll-snap-align: start;
 
   @media screen and (max-width: 768px) {
     padding-left: 5%;
     padding-right: 5%;
   }
-}
-
-canvas {
-  cursor: url('../cursor/cursor-play.svg') 10 10, auto !important;
 }
 
 body::-webkit-scrollbar {

@@ -5,12 +5,12 @@ import ProjectSummary from "@/ui/project-summary/index";
 
 const projects = [
   {
-    tags: ["Next.js", "Supabase", "Python"],
+    tags: ["Next.js", "Supabase", "AI Agents", "RAG", "Azure"],
     alternate: false,
     title: "Jotlify",
     caption: "Curated research for everyone",
     description:
-      "Use AI to read or listen to curated research papers in your domain.",
+      "An AI-powered research companion that transforms dense academic papers into engaging, digestible stories, key insights, and audio narrations—making complex research accessible on the go—ideal for students, professionals, and lifelong learners.",
     buttonText: "View project",
     buttonLink: "https://www.jotlify.com",
     model: {
@@ -30,7 +30,7 @@ const projects = [
     title: "Servcy",
     caption: "Project Tracker For Agencies",
     description:
-      "Gain visibility over your project deliverables, costs and timeline.",
+      "A project‑tracking ecosystem tailored for freelance agencies—offering full visibility into deliverables, time, issues, inboxes, and budgets—to help streamline freelance operations and boost productivity.",
     buttonText: "View project",
     buttonLink: "https://servcy.com",
     model: {
@@ -45,12 +45,12 @@ const projects = [
     },
   },
   {
-    tags: ["Next.js", "Supabase", "Python"],
+    tags: ["Next.js", "GCP", "Firebase"],
     alternate: false,
     title: "ShieldPeer",
     caption: "Optimize selling strategy for steam assets",
     description:
-      "Sell your steam assets on marketplaces with granular parameters.",
+      "A secure, configurable trading bot for selling Steam/CS:GO skins via Waxpeer. Leveraging live pricing data (PriceEmpire), fractional undercutting, and integrations with Steam/Waxpeer APIs, it automates asset sales while protecting user credentials.",
     buttonText: "View project",
     buttonLink: "https://shieldpeer.meghamgarg.com",
     model: {
@@ -63,7 +63,7 @@ const projects = [
         },
       ],
     },
-  },  
+  },
 ];
 
 const Projects = forwardRef(({ visible }, ref) => {

@@ -89,12 +89,12 @@ const ProjectSummary = forwardRef(
                   <Highlight className="font-gotham-bold text-teritiary-800 text-2xl md:text-4xl mr-2">
                     {title}
                   </Highlight>
-                  <span className="font-gotham-book text-lg md:text-2xl text-teritiary-400 self-end">
+                  <span className="font-gotham-book text-lg md:text-2xl text-teritiary-400 self-end font-extrabold">
                     {caption}
                   </span>
                 </div>
                 <Divider collapsed={!visible} collapseDelay={1000} />
-                <p className="font-sans text-lg text-teritiary-300 max-sm:hidden">
+                <p className="font-sans text-lg text-teritiary-400 max-sm:hidden backdrop-blur p-2">
                   {description}
                 </p>
                 {tags && (
@@ -136,7 +136,7 @@ const ProjectSummary = forwardRef(
           <div
             className={cn(
               styles.model,
-              alternate ? "lg:left-[-20%]" : "lg:right-[-30%]"
+              alternate ? "lg:left-[-25%]" : "lg:right-[-25%]"
             )}
           >
             {!modelLoaded && (
