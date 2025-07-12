@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="/public/svgs/logo.svg" width="50" alt="Logo" />
-</p>
 <h1 align="center">Personal portfolio</h1>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0ac14488-7759-4c6a-b5e5-56c2cdce12cf/deploy-status)](https://app.netlify.com/sites/meghamgarg/deploys)

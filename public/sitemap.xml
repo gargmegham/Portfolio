@@ -2,13 +2,13 @@
   <url>
     <loc>https://meghamgarg.com</loc>
     <lastmod>2024-05-18T15:02:24.021Z</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
     <loc>https://meghamgarg.com/logs</loc>
     <lastmod>2024-05-30T15:02:24.021Z</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>2</priority>
   </url>
 </urlset>
