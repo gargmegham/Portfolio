@@ -51,76 +51,111 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
         }}
         className="md:text-4xl text-2xl bg-dot-white/[0.2] relative font-bold flex items-center text-teritiary-300 justify-center"
       >
-        <div className="space-y-4">
-          <div className="flex gap-x-4 font-gotham-bold">
-            <Image
-              src="/svgs/logo.svg"
-              width={150}
-              height={175}
-              alt="Me"
-              className="p-2 bg-secondary-200 rounded-xl custom-shadow-200"
-            />
-            <div className="self-end space-y-1 cursor-pointer p-2 h-full w-full">
-              <DecoderText text="Megham Garg" delay={500} />
-              <div className="font-sans text-base flex gap-x-1 items-center">
-                <IconMapPin className="size-4" />
-                <DecoderText text="India" delay={500} />
-              </div>
-              <div className="font-sans text-base flex gap-x-2 items-center text-teritiary-400">
-                <a
-                  href="https://www.linkedin.com/in/megham-garg/"
-                  target="_blank"
-                  aria-label="LinkedIn"
-                  rel="noreferrer"
-                >
-                  <IconBrandLinkedin className="size-4 hover:text-teritiary-700 cursor-pointer" />
-                </a>
-                <a
-                  href="https://x.com/garg_megham"
-                  target="_blank"
-                  aria-label="Twitter"
-                  rel="noreferrer"
-                >
-                  <IconBrandTwitter className="size-4 hover:text-teritiary-700 cursor-pointer" />
-                </a>
-                <a
-                  href="https://github.com/gargmegham"
-                  target="_blank"
-                  aria-label="GitHub"
-                  rel="noreferrer"
-                >
-                  <IconBrandGithub className="size-4 hover:text-teritiary-700 cursor-pointer" />
-                </a>
-                <a
-                  href="https://youtube.com/@megham_"
-                  target="_blank"
-                  aria-label="YouTube"
-                  rel="noreferrer"
-                >
-                  <IconBrandYoutube className="size-4 hover:text-teritiary-700 cursor-pointer" />
-                </a>
-              </div>
-              <div className="!mt-4 flex max-w-sm">
-                <PlaceholdersAndVanishInput
-                  placeholders={["Join my newsletter..."]}
-                  onChange={(e) => setEmail(e.target.value)}
-                  id="newsletter-form"
-                  onSubmit={async () => {
-                    if (!validateEmail(email)) {
-                      toast.error("Invalid email address!");
-                      return;
-                    }
-                    subscribe(email);
-                  }}
-                />
-              </div>
-            </div>
+        <div className="max-w-4xl mx-auto space-y-8 rounded-2xl p-4">
+          {/* Header */}
+          <div className="space-y-4">
+            <h1 className="text-6xl md:text-7xl font-gotham-bold text-teritiary-300 leading-tight">
+              hi, i'm <span className="text-white">megham</span>.
+            </h1>
+            <p className="text-xl md:text-2xl text-teritiary-400 leading-relaxed max-w-3xl">
+              i build software that solves real problems — and i{" "}
+              <Highlight className="text-white font-semibold">
+                ship fast
+              </Highlight>
+              .
+            </p>
           </div>
-          <div className="text-teritiary-800 text-5xl font-gotham-book max-sm:hidden">
-            Building software <br className="md:hidden" />
-            <Highlight className="text-black dark:text-white">
-              one line at a time
-            </Highlight>
+
+          {/* Story */}
+          <div className="space-y-6 text-lg md:text-xl text-teritiary-300 leading-relaxed">
+            <p>
+              it started back in college, where writing code gave me a way to
+              turn curiosity into real products.
+              <br />i launched my first SaaS before graduating, and i've been
+              building ever since.
+            </p>
+            <p>
+              today, i run a{" "}
+              <Highlight className="text-white font-semibold">
+                dev studio
+              </Highlight>{" "}
+              that helps startups move from idea to MVP, modernize old tech
+              stacks, and bring AI-powered tools to life.
+              <br />
+              along the way, i also launch my own software products — tools born
+              out of personal pain points, experiments, or just plain fun. some
+              stick. some don't. i learn either way.
+            </p>
+            <p>
+              i've shipped tools used by{" "}
+              <Highlight className="text-white font-semibold">
+                thousands
+              </Highlight>
+              , led remote teams, and built platforms that make research,
+              workflows, and knowledge more accessible.
+            </p>
+            <p className="text-teritiary-400 italic">
+              some days i write code. some days i write content.
+              <br />
+              most days, i'm building something worth sharing.
+            </p>
+          </div>
+
+          {/* Social Links & Newsletter */}
+          <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between pt-8 border-t border-white/10">
+            <div className="flex gap-4 items-center">
+              <a
+                href="https://www.linkedin.com/in/megham-garg/"
+                target="_blank"
+                aria-label="LinkedIn"
+                rel="noreferrer"
+                className="text-teritiary-400 hover:text-white transition-colors"
+              >
+                <IconBrandLinkedin className="size-5" />
+              </a>
+              <a
+                href="https://x.com/garg_megham"
+                target="_blank"
+                aria-label="Twitter"
+                rel="noreferrer"
+                className="text-teritiary-400 hover:text-white transition-colors"
+              >
+                <IconBrandTwitter className="size-5" />
+              </a>
+              <a
+                href="https://github.com/gargmegham"
+                target="_blank"
+                aria-label="GitHub"
+                rel="noreferrer"
+                className="text-teritiary-400 hover:text-white transition-colors"
+              >
+                <IconBrandGithub className="size-5" />
+              </a>
+              <a
+                href="https://youtube.com/@megham_"
+                target="_blank"
+                aria-label="YouTube"
+                rel="noreferrer"
+                className="text-teritiary-400 hover:text-white transition-colors"
+              >
+                <IconBrandYoutube className="size-5" />
+              </a>
+            </div>
+
+            <div className="flex max-w-sm w-full sm:w-auto">
+              <PlaceholdersAndVanishInput
+                placeholders={["Join my newsletter..."]}
+                onChange={(e) => setEmail(e.target.value)}
+                id="newsletter-form"
+                onSubmit={async () => {
+                  if (!validateEmail(email)) {
+                    toast.error("Invalid email address!");
+                    return;
+                  }
+                  subscribe(email);
+                }}
+              />
+            </div>
           </div>
         </div>
         {!scrollIndicatorHidden && (
