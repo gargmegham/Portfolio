@@ -42,7 +42,7 @@ const ButtonContent = forwardRef(
       disabled,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const isExternal = isExternalLink(href);
     const defaultComponent = href ? "a" : "button";
@@ -76,5 +76,5 @@ const ButtonContent = forwardRef(
         </Transition>
       </Component>
     );
-  }
+  },
 );

@@ -64,7 +64,7 @@ export const DisplacementSphere = (props) => {
       54,
       innerWidth / innerHeight,
       0.1,
-      100
+      100,
     );
     camera.current.position.z = 52;
 

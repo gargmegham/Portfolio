@@ -11,10 +11,13 @@ export async function GET(request) {
     const featured = searchParams.get("featured") === "true";
 
     const supabase = getSupabaseServiceClient();
-    
+
     let query = supabase
       .from("Blog")
-      .select("id, title, slug, description, thumbnail, tags, featured, created_at", { count: "exact" });
+      .select(
+        "id, title, slug, description, thumbnail, tags, featured, created_at",
+        { count: "exact" },
+      );
 
     // Apply filters
     if (search) {
@@ -33,17 +36,12 @@ export async function GET(request) {
     const from = (page - 1) * limit;
     const to = from + limit - 1;
 
-    query = query
-      .order("created_at", { ascending: false })
-      .range(from, to);
+    query = query.order("created_at", { ascending: false }).range(from, to);
 
     const { data: blogs, error, count } = await query;
 
     if (error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({
@@ -55,7 +53,7 @@ export async function GET(request) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch blogs" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

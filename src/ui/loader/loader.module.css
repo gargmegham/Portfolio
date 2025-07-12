@@ -5,7 +5,7 @@
   height: var(--height);
   background: color-mix(in lab, currentColor 20%, transparent);
 
-  &[data-center='true'] {
+  &[data-center="true"] {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -42,7 +42,7 @@
 .span {
   grid-area: 1 / 1;
   background: currentColor;
-  animation: loaderSpan 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  animation: loaderSpan 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   transform: scaleX(0);
   transform-origin: left;
 }

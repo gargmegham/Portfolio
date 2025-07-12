@@ -61,11 +61,11 @@ export default function AdminDashboard() {
   };
 
   const filteredBlogs = blogs.filter((blog) =>
-    blog.title?.toLowerCase().includes(blogSearch.toLowerCase())
+    blog.title?.toLowerCase().includes(blogSearch.toLowerCase()),
   );
 
   const filteredSubscribers = subscribers.filter((subscriber) =>
-    subscriber.email?.toLowerCase().includes(subscriberSearch.toLowerCase())
+    subscriber.email?.toLowerCase().includes(subscriberSearch.toLowerCase()),
   );
 
   const handleGalleryUpload = async (e) => {
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
     setUploadingImages(true);
     try {
       const formData = new FormData();
-      files.forEach(file => formData.append("files", file));
+      files.forEach((file) => formData.append("files", file));
 
       const response = await fetch("/api/admin/gallery", {
         method: "POST",
@@ -85,7 +85,9 @@ export default function AdminDashboard() {
       if (response.ok) {
         const result = await response.json();
         if (result.uploaded.length > 0) {
-          toast.success(`Uploaded ${result.uploaded.length} image(s) successfully!`);
+          toast.success(
+            `Uploaded ${result.uploaded.length} image(s) successfully!`,
+          );
           // Refresh gallery
           const galleryResponse = await fetch("/api/admin/gallery");
           if (galleryResponse.ok) {
@@ -94,7 +96,7 @@ export default function AdminDashboard() {
           }
         }
         if (result.errors.length > 0) {
-          result.errors.forEach(error => toast.error(error));
+          result.errors.forEach((error) => toast.error(error));
         }
       } else {
         toast.error("Failed to upload images");
@@ -110,8 +112,10 @@ export default function AdminDashboard() {
 
   const handleDrop = async (e) => {
     e.preventDefault();
-    const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith("image/"));
-    
+    const files = Array.from(e.dataTransfer.files).filter((file) =>
+      file.type.startsWith("image/"),
+    );
+
     if (files.length === 0) {
       toast.error("Please drop image files only");
       return;
@@ -120,7 +124,7 @@ export default function AdminDashboard() {
     setUploadingImages(true);
     try {
       const formData = new FormData();
-      files.forEach(file => formData.append("files", file));
+      files.forEach((file) => formData.append("files", file));
 
       const response = await fetch("/api/admin/gallery", {
         method: "POST",
@@ -130,7 +134,9 @@ export default function AdminDashboard() {
       if (response.ok) {
         const result = await response.json();
         if (result.uploaded.length > 0) {
-          toast.success(`Uploaded ${result.uploaded.length} image(s) successfully!`);
+          toast.success(
+            `Uploaded ${result.uploaded.length} image(s) successfully!`,
+          );
           // Refresh gallery
           const galleryResponse = await fetch("/api/admin/gallery");
           if (galleryResponse.ok) {
@@ -139,7 +145,7 @@ export default function AdminDashboard() {
           }
         }
         if (result.errors.length > 0) {
-          result.errors.forEach(error => toast.error(error));
+          result.errors.forEach((error) => toast.error(error));
         }
       } else {
         toast.error("Failed to upload images");
@@ -276,7 +282,11 @@ export default function AdminDashboard() {
               </div>
 
               <div className="mb-4">
+                <label htmlFor="blog-search" className="sr-only">
+                  Search posts by title
+                </label>
                 <input
+                  id="blog-search"
                   type="text"
                   placeholder="Search posts by title..."
                   value={blogSearch}
@@ -370,7 +380,11 @@ export default function AdminDashboard() {
               </h2>
 
               <div className="mb-4">
+                <label htmlFor="subscriber-search" className="sr-only">
+                  Search subscribers by email
+                </label>
                 <input
+                  id="subscriber-search"
                   type="text"
                   placeholder="Search subscribers by email..."
                   value={subscriberSearch}
@@ -410,7 +424,7 @@ export default function AdminDashboard() {
                             </td>
                             <td className="px-6 py-4 text-gray-300">
                               {new Date(
-                                subscriber.created_at
+                                subscriber.created_at,
                               ).toLocaleDateString()}
                             </td>
                           </tr>
@@ -426,10 +440,16 @@ export default function AdminDashboard() {
           {activeTab === "gallery" && (
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-white">Image Gallery</h2>
-                <label className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer">
+                <h2 className="text-xl font-semibold text-white">
+                  Image Gallery
+                </h2>
+                <label
+                  htmlFor="gallery-upload"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                >
                   Upload Images
                   <input
+                    id="gallery-upload"
                     type="file"
                     multiple
                     accept="image/*"
@@ -447,24 +467,41 @@ export default function AdminDashboard() {
                 className="border-2 border-dashed border-gray-600 rounded-lg p-8 mb-6 text-center transition-colors hover:border-emerald-500"
               >
                 <div className="text-gray-400">
-                  <svg className="mx-auto h-12 w-12 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    className="mx-auto h-12 w-12 mb-4"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 48 48"
+                  >
+                    <path
+                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
-                  <p className="text-lg font-medium">Drop images here or click to upload</p>
-                  <p className="text-sm">Support for JPEG, PNG, WebP, GIF up to 5MB each</p>
+                  <p className="text-lg font-medium">
+                    Drop images here or click to upload
+                  </p>
+                  <p className="text-sm">
+                    Support for JPEG, PNG, WebP, GIF up to 5MB each
+                  </p>
                 </div>
               </div>
 
               {/* Gallery Grid */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                 {galleryImages.map((image) => (
-                  <div key={image.name} className="group relative bg-gray-800 rounded-lg overflow-hidden aspect-square">
+                  <div
+                    key={image.name}
+                    className="group relative bg-gray-800 rounded-lg overflow-hidden aspect-square"
+                  >
                     <img
                       src={image.url}
                       alt={image.name}
                       className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                     />
-                    
+
                     {/* Overlay with actions */}
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-75 transition-all duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <div className="flex space-x-2">
@@ -473,9 +510,24 @@ export default function AdminDashboard() {
                           className="p-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
                           title="Preview & Copy URL"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            />
                           </svg>
                         </button>
                         <button
@@ -483,8 +535,18 @@ export default function AdminDashboard() {
                           className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                           title="Delete Image"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
                           </svg>
                         </button>
                       </div>
@@ -492,8 +554,12 @@ export default function AdminDashboard() {
 
                     {/* Image info */}
                     <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200">
-                      <p className="text-xs truncate" title={image.name}>{image.name}</p>
-                      <p className="text-xs text-gray-300">{(image.size / 1024).toFixed(1)} KB</p>
+                      <p className="text-xs truncate" title={image.name}>
+                        {image.name}
+                      </p>
+                      <p className="text-xs text-gray-300">
+                        {(image.size / 1024).toFixed(1)} KB
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -501,8 +567,18 @@ export default function AdminDashboard() {
 
               {galleryImages.length === 0 && (
                 <div className="text-center py-12 text-gray-400">
-                  <svg className="mx-auto h-16 w-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <svg
+                    className="mx-auto h-16 w-16 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
                   </svg>
                   <p className="text-lg font-medium">No images in gallery</p>
                   <p className="text-sm">Upload some images to get started</p>
@@ -519,17 +595,29 @@ export default function AdminDashboard() {
           <div className="bg-gray-800 rounded-lg max-w-4xl max-h-full overflow-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">Image Preview</h3>
+                <h3 className="text-lg font-semibold text-white">
+                  Image Preview
+                </h3>
                 <button
                   onClick={() => setShowImageModal(false)}
                   className="text-gray-400 hover:text-white"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
-              
+
               <div className="mb-4">
                 <img
                   src={selectedImage.url}
@@ -537,17 +625,33 @@ export default function AdminDashboard() {
                   className="max-w-full max-h-96 object-contain mx-auto rounded-lg"
                 />
               </div>
-              
+
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Filename</label>
-                  <p className="text-white bg-gray-700 px-3 py-2 rounded">{selectedImage.name}</p>
+                  <label
+                    htmlFor="filename-display"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Filename
+                  </label>
+                  <p
+                    id="filename-display"
+                    className="text-white bg-gray-700 px-3 py-2 rounded"
+                  >
+                    {selectedImage.name}
+                  </p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Image URL</label>
+                  <label
+                    htmlFor="image-url"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Image URL
+                  </label>
                   <div className="flex space-x-2">
                     <input
+                      id="image-url"
                       type="text"
                       value={selectedImage.url}
                       readOnly
@@ -561,11 +665,17 @@ export default function AdminDashboard() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Markdown Syntax</label>
+                  <label
+                    htmlFor="markdown-syntax"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
+                    Markdown Syntax
+                  </label>
                   <div className="flex space-x-2">
                     <input
+                      id="markdown-syntax"
                       type="text"
                       value={`![${selectedImage.name}](${selectedImage.url})`}
                       readOnly
@@ -579,17 +689,19 @@ export default function AdminDashboard() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4 text-sm text-gray-300">
                   <div>
-                    <span className="font-medium">Size:</span> {(selectedImage.size / 1024).toFixed(1)} KB
+                    <span className="font-medium">Size:</span>{" "}
+                    {(selectedImage.size / 1024).toFixed(1)} KB
                   </div>
                   <div>
-                    <span className="font-medium">Uploaded:</span> {new Date(selectedImage.createdAt).toLocaleDateString()}
+                    <span className="font-medium">Uploaded:</span>{" "}
+                    {new Date(selectedImage.createdAt).toLocaleDateString()}
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex justify-end mt-6 space-x-3">
                 <button
                   onClick={() => setShowImageModal(false)}

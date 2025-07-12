@@ -15,7 +15,7 @@ export const Loader = forwardRef(
       center,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const reduceMotion = useReducedMotion();
 
@@ -42,5 +42,5 @@ export const Loader = forwardRef(
         <div className={styles.span} />
       </div>
     );
-  }
+  },
 );

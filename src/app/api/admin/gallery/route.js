@@ -8,28 +8,30 @@ export async function GET(request) {
     const limit = parseInt(searchParams.get("limit")) || 20;
 
     const supabase = getSupabaseServiceClient();
-    
+
     // List files from gallery folder
     const { data: files, error } = await supabase.storage
-      .from('blog-images')
-      .list('gallery', {
+      .from("blog-images")
+      .list("gallery", {
         limit: limit,
         offset: (page - 1) * limit,
-        sortBy: { column: 'created_at', order: 'desc' }
+        sortBy: { column: "created_at", order: "desc" },
       });
 
     if (error) {
       console.error("Gallery fetch error:", error);
       return NextResponse.json(
         { error: "Failed to fetch gallery images" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     // Generate public URLs for each image
-    const images = files.map(file => {
-      const { data: { publicUrl } } = supabase.storage
-        .from('blog-images')
+    const images = files.map((file) => {
+      const {
+        data: { publicUrl },
+      } = supabase.storage
+        .from("blog-images")
         .getPublicUrl(`gallery/${file.name}`);
 
       return {
@@ -38,20 +40,20 @@ export async function GET(request) {
         url: publicUrl,
         size: file.metadata?.size || 0,
         createdAt: file.created_at,
-        updatedAt: file.updated_at
+        updatedAt: file.updated_at,
       };
     });
 
     return NextResponse.json({
       images,
       page,
-      hasMore: files.length === limit
+      hasMore: files.length === limit,
     });
   } catch (error) {
     console.error("Gallery API error:", error);
     return NextResponse.json(
       { error: "Failed to fetch gallery" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -62,34 +64,41 @@ export async function POST(request) {
     const files = data.getAll("files");
 
     if (!files || files.length === 0) {
-      return NextResponse.json(
-        { error: "No files uploaded" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
     }
 
     const supabase = getSupabaseServiceClient();
-    
+
     // Try to create bucket if it doesn't exist
     const { data: buckets } = await supabase.storage.listBuckets();
-    const bucketExists = buckets?.some(bucket => bucket.name === 'blog-images');
-    
+    const bucketExists = buckets?.some(
+      (bucket) => bucket.name === "blog-images",
+    );
+
     if (!bucketExists) {
-      const { error: bucketError } = await supabase.storage.createBucket('blog-images', {
-        public: true,
-        fileSizeLimit: 52428800, // 50MB
-        allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
-      });
-      
+      const { error: bucketError } = await supabase.storage.createBucket(
+        "blog-images",
+        {
+          public: true,
+          fileSizeLimit: 52428800, // 50MB
+          allowedMimeTypes: [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif",
+          ],
+        },
+      );
+
       if (bucketError) {
         console.error("Failed to create bucket:", bucketError);
         return NextResponse.json(
           { error: "Failed to create storage bucket" },
-          { status: 500 }
+          { status: 500 },
         );
       }
     }
-    
+
     const uploadedImages = [];
     const errors = [];
 
@@ -113,17 +122,17 @@ export async function POST(request) {
 
         // Generate unique filename
         const timestamp = Date.now();
-        const fileExtension = file.name.split('.').pop();
+        const fileExtension = file.name.split(".").pop();
         const randomString = Math.random().toString(36).substring(2);
         const filename = `${timestamp}-${randomString}.${fileExtension}`;
         const fullPath = `gallery/${filename}`;
 
         // Upload to Supabase Storage
         const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('blog-images')
+          .from("blog-images")
           .upload(fullPath, buffer, {
             contentType: file.type,
-            upsert: false
+            upsert: false,
           });
 
         if (uploadError) {
@@ -132,16 +141,16 @@ export async function POST(request) {
         }
 
         // Get public URL
-        const { data: { publicUrl } } = supabase.storage
-          .from('blog-images')
-          .getPublicUrl(fullPath);
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from("blog-images").getPublicUrl(fullPath);
 
         uploadedImages.push({
           originalName: file.name,
           filename,
           url: publicUrl,
           size: file.size,
-          type: file.type
+          type: file.type,
         });
       } catch (fileError) {
         errors.push(`${file.name}: ${fileError.message}`);
@@ -151,13 +160,13 @@ export async function POST(request) {
     return NextResponse.json({
       success: uploadedImages.length > 0,
       uploaded: uploadedImages,
-      errors: errors
+      errors: errors,
     });
   } catch (error) {
     console.error("Gallery upload error:", error);
     return NextResponse.json(
       { error: "Failed to upload images" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

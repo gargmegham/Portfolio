@@ -5,7 +5,7 @@ export async function GET(request, { params }) {
   try {
     const { slug } = params;
     const supabase = getSupabaseServiceClient();
-    
+
     const { data: blog, error } = await supabase
       .from("Blog")
       .select("*")
@@ -13,16 +13,13 @@ export async function GET(request, { params }) {
       .single();
 
     if (error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     if (!blog) {
       return NextResponse.json(
         { error: "Blog post not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -30,7 +27,7 @@ export async function GET(request, { params }) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch blog post" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

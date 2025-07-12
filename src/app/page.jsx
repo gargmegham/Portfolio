@@ -18,7 +18,14 @@ export default function Home() {
   const contactMe = useRef(null);
 
   useEffect(() => {
-    const sections = [intro, project_1, project_2, project_3, experience, contactMe];
+    const sections = [
+      intro,
+      project_1,
+      project_2,
+      project_3,
+      experience,
+      contactMe,
+    ];
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
@@ -32,13 +39,13 @@ export default function Home() {
           }
         });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {
         setScrollIndicatorHidden(!entry.isIntersecting);
       },
-      { rootMargin: "-100% 0px 0px 0px" }
+      { rootMargin: "-100% 0px 0px 0px" },
     );
     sections.forEach((section) => {
       // if section is visible, add it to the visibleSections

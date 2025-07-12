@@ -4,24 +4,15 @@ import { getSupabaseServiceClient } from "@/utils/supabase";
 export async function GET(request) {
   try {
     const supabase = getSupabaseServiceClient();
-    
-    const { data: blogs, error } = await supabase
-      .from("Blog")
-      .select("tags");
-
+    const { data: blogs, error } = await supabase.from("Blog").select("tags");
     if (error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
-
     // Aggregate all tags and count their frequency
     const tagCounts = {};
-    
-    blogs.forEach(blog => {
+    blogs.forEach((blog) => {
       if (blog.tags && Array.isArray(blog.tags)) {
-        blog.tags.forEach(tag => {
+        blog.tags.forEach((tag) => {
           tagCounts[tag] = (tagCounts[tag] || 0) + 1;
         });
       }
@@ -29,7 +20,7 @@ export async function GET(request) {
 
     // Sort tags by frequency and return top 10
     const topTags = Object.entries(tagCounts)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 10)
       .map(([tag, count]) => ({ tag, count }));
 
@@ -37,7 +28,7 @@ export async function GET(request) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch tags" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

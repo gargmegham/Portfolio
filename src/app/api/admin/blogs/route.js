@@ -4,41 +4,39 @@ import { getSupabaseServiceClient } from "@/utils/supabase";
 export async function GET(request) {
   try {
     const supabase = getSupabaseServiceClient();
-    
+
     const { data: blogs, error } = await supabase
       .from("Blog")
       .select("*")
       .order("created_at", { ascending: false });
 
     if (error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json(blogs);
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch blogs" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function POST(request) {
   try {
-    const { title, slug, description, content, thumbnail, tags, featured } = await request.json();
-    
+    const { title, slug, description, content, thumbnail, tags, featured } =
+      await request.json();
+
     if (!title || !slug || !content) {
       return NextResponse.json(
         { error: "Title, slug, and content are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const supabase = getSupabaseServiceClient();
-    
+
     const { data: blog, error } = await supabase
       .from("Blog")
       .insert({
@@ -56,13 +54,13 @@ export async function POST(request) {
     if (error) {
       console.error("Supabase blog creation error:", error);
       return NextResponse.json(
-        { 
+        {
           error: error.message,
           details: error.details,
           hint: error.hint,
-          code: error.code
+          code: error.code,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -70,7 +68,7 @@ export async function POST(request) {
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to create blog post" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

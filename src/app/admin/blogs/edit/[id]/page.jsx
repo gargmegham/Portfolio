@@ -62,7 +62,7 @@ export default function EditBlogPost({ params }) {
       textarea.focus();
       textarea.setSelectionRange(
         start + markdown.length,
-        start + markdown.length
+        start + markdown.length,
       );
     }, 100);
   };
@@ -130,7 +130,7 @@ export default function EditBlogPost({ params }) {
     if (!thumbnailFile) {
       console.log(
         "No new thumbnail file, returning existing:",
-        formData.thumbnail
+        formData.thumbnail,
       );
       return formData.thumbnail; // Keep existing thumbnail if no new file
     }

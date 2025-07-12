@@ -16,7 +16,7 @@ import styles from "./index.module.css";
 import { cn } from "@/utils/cn";
 
 const Model = lazy(() =>
-  import("@/ui/model").then((module) => ({ default: module.Model }))
+  import("@/ui/model").then((module) => ({ default: module.Model })),
 );
 
 const ProjectSummary = forwardRef(
@@ -117,7 +117,7 @@ const ProjectSummary = forwardRef(
                 )}
                 <div
                   className={cn(
-                    alternate ? "flex justify-end" : "flex justify-start"
+                    alternate ? "flex justify-end" : "flex justify-start",
                   )}
                 >
                   <Button href={buttonLink}>{buttonText}</Button>
@@ -136,7 +136,7 @@ const ProjectSummary = forwardRef(
           <div
             className={cn(
               styles.model,
-              alternate ? "lg:left-[-25%]" : "lg:right-[-25%]"
+              alternate ? "lg:left-[-25%]" : "lg:right-[-25%]",
             )}
           >
             {!modelLoaded && (
@@ -199,7 +199,7 @@ const ProjectSummary = forwardRef(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default ProjectSummary;

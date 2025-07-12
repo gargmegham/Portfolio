@@ -13,7 +13,7 @@ export function middleware(request) {
 
     // Check for admin session cookie
     const adminSession = request.cookies.get("admin-session");
-    
+
     if (!adminSession || adminSession.value !== "authenticated") {
       // Redirect to admin login page
       return NextResponse.redirect(new URL("/admin", request.url));
