@@ -55,7 +55,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
           {/* Header */}
           <div className="space-y-4">
             <h1 className="text-6xl md:text-7xl font-gotham-bold text-teritiary-300 leading-tight">
-              hi, i'm <span className="text-white">megham</span>.
+              hi, i&apos;m <span className="text-white">megham</span>.
             </h1>
             <p className="text-xl md:text-2xl text-teritiary-400 leading-relaxed max-w-3xl">
               i build software that solves real problems — and i{" "}
@@ -71,7 +71,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
             <p>
               it started back in college, where writing code gave me a way to
               turn curiosity into real products.
-              <br />i launched my first SaaS before graduating, and i've been
+              <br />i launched my first SaaS before graduating, and i&apos;ve been
               building ever since.
             </p>
             <p>
@@ -84,10 +84,10 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               <br />
               along the way, i also launch my own software products — tools born
               out of personal pain points, experiments, or just plain fun. some
-              stick. some don't. i learn either way.
+              stick. some don&apos;t. i learn either way.
             </p>
             <p>
-              i've shipped tools used by{" "}
+              i&apos;ve shipped tools used by{" "}
               <Highlight className="text-white font-semibold">
                 thousands
               </Highlight>
@@ -97,7 +97,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
             <p className="text-teritiary-400 italic">
               some days i write code. some days i write content.
               <br />
-              most days, i'm building something worth sharing.
+              most days, i&apos;m building something worth sharing.
             </p>
           </div>
 
