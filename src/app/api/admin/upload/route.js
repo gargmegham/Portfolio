@@ -41,6 +41,26 @@ export async function POST(request) {
     // Upload to Supabase Storage
     const supabase = getSupabaseServiceClient();
     
+    // Try to create bucket if it doesn't exist
+    const { data: buckets } = await supabase.storage.listBuckets();
+    const bucketExists = buckets?.some(bucket => bucket.name === 'blog-images');
+    
+    if (!bucketExists) {
+      const { error: bucketError } = await supabase.storage.createBucket('blog-images', {
+        public: true,
+        fileSizeLimit: 52428800, // 50MB
+        allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+      });
+      
+      if (bucketError) {
+        console.error("Failed to create bucket:", bucketError);
+        return NextResponse.json(
+          { error: "Failed to create storage bucket" },
+          { status: 500 }
+        );
+      }
+    }
+    
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from('blog-images')
       .upload(filename, buffer, {
@@ -51,7 +71,7 @@ export async function POST(request) {
     if (uploadError) {
       console.error("Supabase upload error:", uploadError);
       return NextResponse.json(
-        { error: "Failed to upload to storage" },
+        { error: `Failed to upload to storage: ${uploadError.message}` },
         { status: 500 }
       );
     }

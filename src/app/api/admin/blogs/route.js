@@ -54,8 +54,14 @@ export async function POST(request) {
       .single();
 
     if (error) {
+      console.error("Supabase blog creation error:", error);
       return NextResponse.json(
-        { error: error.message },
+        { 
+          error: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        },
         { status: 500 }
       );
     }

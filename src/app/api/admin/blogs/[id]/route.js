@@ -66,8 +66,14 @@ export async function PUT(request, { params }) {
       .single();
 
     if (error) {
+      console.error("Supabase blog update error:", error);
       return NextResponse.json(
-        { error: error.message },
+        { 
+          error: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code
+        },
         { status: 500 }
       );
     }

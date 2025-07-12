@@ -19,10 +19,47 @@ export default function EditBlogPost({ params }) {
   });
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState("");
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   useEffect(() => {
     fetchBlogPost();
   }, []);
+
+  useEffect(() => {
+    if (showGalleryModal) {
+      fetchGalleryImages();
+    }
+  }, [showGalleryModal]);
+
+  const fetchGalleryImages = async () => {
+    try {
+      const response = await fetch("/api/admin/gallery");
+      if (response.ok) {
+        const data = await response.json();
+        setGalleryImages(data.images);
+      }
+    } catch (error) {
+      console.error("Failed to fetch gallery images:", error);
+    }
+  };
+
+  const insertImageIntoContent = (image) => {
+    const markdown = `![${image.name}](${image.url})`;
+    const textarea = document.getElementById("content");
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const newContent = formData.content.substring(0, start) + markdown + formData.content.substring(end);
+    
+    setFormData(prev => ({ ...prev, content: newContent }));
+    setShowGalleryModal(false);
+    
+    // Focus back to textarea
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(start + markdown.length, start + markdown.length);
+    }, 100);
+  };
 
   const fetchBlogPost = async () => {
     try {
@@ -285,9 +322,18 @@ export default function EditBlogPost({ params }) {
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-300 mb-2">
-              Content (Markdown)
-            </label>
+            <div className="flex items-center justify-between mb-2">
+              <label htmlFor="content" className="block text-sm font-medium text-gray-300">
+                Content (Markdown)
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowGalleryModal(true)}
+                className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded transition-colors"
+              >
+                📷 Browse Images
+              </button>
+            </div>
             <textarea
               id="content"
               name="content"
@@ -335,6 +381,63 @@ export default function EditBlogPost({ params }) {
           </div>
         </form>
       </div>
+
+      {/* Gallery Modal */}
+      {showGalleryModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800 rounded-lg max-w-6xl max-h-full overflow-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Choose Image from Gallery</h3>
+                <button
+                  onClick={() => setShowGalleryModal(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-h-96 overflow-y-auto">
+                {galleryImages.map((image) => (
+                  <div
+                    key={image.name}
+                    onClick={() => insertImageIntoContent(image)}
+                    className="group relative bg-gray-700 rounded-lg overflow-hidden aspect-square cursor-pointer hover:ring-2 hover:ring-emerald-500 transition-all"
+                  >
+                    <img
+                      src={image.url}
+                      alt={image.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
+                      <span className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                        Click to Insert
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {galleryImages.length === 0 && (
+                <div className="text-center py-8 text-gray-400">
+                  <p>No images in gallery. Upload some images first in the Gallery tab.</p>
+                </div>
+              )}
+              
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={() => setShowGalleryModal(false)}
+                  className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
