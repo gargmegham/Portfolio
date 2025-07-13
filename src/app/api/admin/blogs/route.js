@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
+export const revalidate = 0;
+
 export async function GET(request) {
   try {
     const supabase = getSupabaseServiceClient();
@@ -13,7 +15,7 @@ export async function GET(request) {
     if (error) {
       const response = NextResponse.json(
         { error: error.message },
-        { status: 500 },
+        { status: 500 }
       );
       return response;
     }
@@ -22,7 +24,7 @@ export async function GET(request) {
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to fetch blogs" },
-      { status: 500 },
+      { status: 500 }
     );
     return response;
   }
@@ -44,7 +46,7 @@ export async function POST(request) {
     if (!title || !slug || !content) {
       const response = NextResponse.json(
         { error: "Title, slug, and content are required" },
-        { status: 400 },
+        { status: 400 }
       );
       return response;
     }
@@ -75,7 +77,7 @@ export async function POST(request) {
           hint: error.hint,
           code: error.code,
         },
-        { status: 500 },
+        { status: 500 }
       );
       return response;
     }
@@ -84,7 +86,7 @@ export async function POST(request) {
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to create blog post" },
-      { status: 500 },
+      { status: 500 }
     );
     return response;
   }

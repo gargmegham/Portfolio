@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
+export const revalidate = 0;
 export async function GET(request, { params }) {
   try {
     const { id } = params;
@@ -15,62 +16,26 @@ export async function GET(request, { params }) {
     if (error) {
       const response = NextResponse.json(
         { error: error.message },
-        { status: 500 },
+        { status: 500 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
     if (!blog) {
       const response = NextResponse.json(
         { error: "Blog post not found" },
-        { status: 404 },
+        { status: 404 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
     const response = NextResponse.json(blog);
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to fetch blog post" },
-      { status: 500 },
+      { status: 500 }
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }
@@ -84,17 +49,8 @@ export async function PUT(request, { params }) {
     if (!title || !slug || !content) {
       const response = NextResponse.json(
         { error: "Title, slug, and content are required" },
-        { status: 400 },
+        { status: 400 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -125,44 +81,19 @@ export async function PUT(request, { params }) {
           hint: error.hint,
           code: error.code,
         },
-        { status: 500 },
+        { status: 500 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
     const response = NextResponse.json(blog);
 
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to update blog post" },
-      { status: 500 },
+      { status: 500 }
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
 
     return response;
   }
@@ -183,17 +114,8 @@ export async function DELETE(request, { params }) {
     if (fetchError) {
       const response = NextResponse.json(
         { error: fetchError.message },
-        { status: 500 },
+        { status: 500 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -206,17 +128,8 @@ export async function DELETE(request, { params }) {
     if (deleteError) {
       const response = NextResponse.json(
         { error: deleteError.message },
-        { status: 500 },
+        { status: 500 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -238,7 +151,7 @@ export async function DELETE(request, { params }) {
           if (storageError) {
             console.error(
               "Failed to delete thumbnail from storage:",
-              storageError,
+              storageError
             );
             // Don't fail the entire operation if thumbnail deletion fails
           }
@@ -253,28 +166,12 @@ export async function DELETE(request, { params }) {
       message: "Blog post deleted successfully",
     });
 
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to delete blog post" },
-      { status: 500 },
+      { status: 500 }
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
 
     return response;
   }

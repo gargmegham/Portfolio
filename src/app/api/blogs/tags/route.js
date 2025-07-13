@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
+export const revalidate = 0;
 export async function GET(request) {
   try {
     const supabase = getSupabaseServiceClient();
@@ -8,7 +9,7 @@ export async function GET(request) {
     if (error) {
       const response = NextResponse.json(
         { error: error.message },
-        { status: 500 },
+        { status: 500 }
       );
       return response;
     }
@@ -31,7 +32,7 @@ export async function GET(request) {
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to fetch tags" },
-      { status: 500 },
+      { status: 500 }
     );
     return response;
   }

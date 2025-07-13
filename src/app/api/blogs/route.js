@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
+export const revalidate = 0;
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -16,7 +17,7 @@ export async function GET(request) {
       .from("Blog")
       .select(
         "id, title, slug, description, thumbnail, tags, featured, created_at",
-        { count: "exact" },
+        { count: "exact" }
       )
       .eq("draft", false);
 
@@ -44,16 +45,8 @@ export async function GET(request) {
     if (error) {
       const response = NextResponse.json(
         { error: error.message },
-        { status: 500 },
+        { status: 500 }
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
 
       return response;
     }
@@ -65,28 +58,12 @@ export async function GET(request) {
       totalPages: Math.ceil(count / limit),
     });
 
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to fetch blogs" },
-      { status: 500 },
+      { status: 500 }
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
 
     return response;
   }
