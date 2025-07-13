@@ -69,14 +69,14 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
 
           {/* Story */}
           <div className="space-y-6 text-lg md:text-xl text-teritiary-300 leading-relaxed">
-            <p>
+            <p className="hidden md:block">
               it started back in college, where writing code gave me a way to
               turn curiosity into real products.
               <br />i launched my first SaaS before graduating, and i&apos;ve
               been building ever since.
             </p>
             <p>
-              today, i run a{" "}
+              <span className="hidden md:block">today, </span>i run a{" "}
               <Highlight className="text-white font-semibold">
                 dev studio
               </Highlight>{" "}
@@ -95,7 +95,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               , led remote teams, and built platforms that make research,
               workflows, and knowledge more accessible.
             </p>
-            <p className="text-teritiary-400 italic">
+            <p className="hidden md:block text-teritiary-400 italic">
               some days i write code. some days i write content.
               <br />
               most days, i&apos;m building something worth sharing.
