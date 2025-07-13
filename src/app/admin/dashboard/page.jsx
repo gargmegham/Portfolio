@@ -68,6 +68,33 @@ export default function AdminDashboard() {
     subscriber.email?.toLowerCase().includes(subscriberSearch.toLowerCase()),
   );
 
+  const handleDeleteBlog = async (blogId) => {
+    if (!confirm("Are you sure you want to delete this blog post?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/admin/blogs/${blogId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        toast.success("Blog post deleted successfully!");
+        // Refresh the blogs list
+        const blogsResponse = await fetch("/api/admin/blogs");
+        if (blogsResponse.ok) {
+          const blogsData = await blogsResponse.json();
+          setBlogs(blogsData);
+        }
+      } else {
+        const data = await response.json();
+        toast.error(data.error || "Failed to delete blog post");
+      }
+    } catch (error) {
+      toast.error("Failed to delete blog post");
+    }
+  };
+
   const handleGalleryUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
@@ -358,7 +385,10 @@ export default function AdminDashboard() {
                                 >
                                   Edit
                                 </button>
-                                <button className="text-red-400 hover:text-red-300">
+                                <button 
+                                  onClick={() => handleDeleteBlog(blog.id)}
+                                  className="text-red-400 hover:text-red-300"
+                                >
                                   Delete
                                 </button>
                               </div>

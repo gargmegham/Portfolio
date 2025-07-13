@@ -31,7 +31,7 @@ const config: ConfigProps = {
   author: {
     name: "Megham Garg",
     twitter: "@meghamgarg",
-    image: "/images/megham-garg.jpg", // You can update this path
+    image: "/images/me.png",
   },
 };
 

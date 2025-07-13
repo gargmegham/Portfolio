@@ -58,7 +58,7 @@ export const getSEOTags = ({
     metadataBase: new URL(
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/"
-        : `https://${config.domainName}/`,
+        : `https://${config.domainName}/`
     ),
     alternates: {
       canonical: canonicalUrl,
@@ -103,10 +103,16 @@ export const getSEOTags = ({
     },
     ...(article && {
       other: {
-        "article:published_time": article.publishedTime,
-        "article:modified_time": article.modifiedTime,
-        "article:author": article.authors?.join(", "),
-        "article:tag": article.tags?.join(", "),
+        ...(article.publishedTime && {
+          "article:published_time": article.publishedTime,
+        }),
+        ...(article.modifiedTime && {
+          "article:modified_time": article.modifiedTime,
+        }),
+        ...(article.authors?.length && {
+          "article:author": article.authors.join(", "),
+        }),
+        ...(article.tags?.length && { "article:tag": article.tags.join(", ") }),
       },
     }),
     ...extraTags,

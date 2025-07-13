@@ -90,10 +90,48 @@ export async function DELETE(request, { params }) {
     const { id } = params;
     const supabase = getSupabaseServiceClient();
 
-    const { error } = await supabase.from("Blog").delete().eq("id", id);
+    // First, fetch the blog post to get thumbnail URL
+    const { data: blog, error: fetchError } = await supabase
+      .from("Blog")
+      .select("thumbnail")
+      .eq("id", id)
+      .single();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (fetchError) {
+      return NextResponse.json({ error: fetchError.message }, { status: 500 });
+    }
+
+    // Delete the blog post from database
+    const { error: deleteError } = await supabase.from("Blog").delete().eq("id", id);
+
+    if (deleteError) {
+      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+    }
+
+    // If there's a thumbnail, delete it from storage
+    if (blog?.thumbnail) {
+      try {
+        // Extract filename from URL
+        // Thumbnail URLs are typically: https://[project-id].supabase.co/storage/v1/object/public/blog-images/gallery/[filename]
+        const url = new URL(blog.thumbnail);
+        const pathParts = url.pathname.split('/');
+        const filename = pathParts[pathParts.length - 1];
+        
+        // Only delete if it looks like it's from our gallery (has timestamp format)
+        if (filename && filename.includes('-') && filename.includes('.')) {
+          const { error: storageError } = await supabase.storage
+            .from("blog-images")
+            .remove([`gallery/${filename}`]);
+
+          if (storageError) {
+            console.error("Failed to delete thumbnail from storage:", storageError);
+            // Don't fail the entire operation if thumbnail deletion fails
+          }
+        }
+      } catch (thumbnailError) {
+        console.error("Error processing thumbnail deletion:", thumbnailError);
+        // Don't fail the entire operation if thumbnail deletion fails
+      }
     }
 
     return NextResponse.json({ message: "Blog post deleted successfully" });
