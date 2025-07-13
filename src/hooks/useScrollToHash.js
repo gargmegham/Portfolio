@@ -29,7 +29,7 @@ export function useScrollToHash() {
         clearTimeout(scrollTimeout.current);
       };
     },
-    [reduceMotion]
+    [reduceMotion],
   );
 
   return scrollToHash;

@@ -12,7 +12,7 @@ export const VisuallyHidden = forwardRef(
       visible,
       ...rest
     },
-    ref
+    ref,
   ) => {
     return (
       <Component
@@ -25,5 +25,5 @@ export const VisuallyHidden = forwardRef(
         {children}
       </Component>
     );
-  }
+  },
 );

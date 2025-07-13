@@ -1,1 +1,1 @@
-export { DecoderText } from './decoder-text';
+export { DecoderText } from "./decoder-text";

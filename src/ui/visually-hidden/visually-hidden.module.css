@@ -1,8 +1,8 @@
 .hidden {
   position: absolute;
 
-  &[data-hidden='true'],
-  &[data-show-on-focus='true']:not(:focus) {
+  &[data-hidden="true"],
+  &[data-show-on-focus="true"]:not(:focus) {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;

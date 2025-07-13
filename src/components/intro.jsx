@@ -71,8 +71,8 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
             <p>
               it started back in college, where writing code gave me a way to
               turn curiosity into real products.
-              <br />i launched my first SaaS before graduating, and i&apos;ve been
-              building ever since.
+              <br />i launched my first SaaS before graduating, and i&apos;ve
+              been building ever since.
             </p>
             <p>
               today, i run a{" "}

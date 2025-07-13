@@ -97,5 +97,5 @@ export const DecoderText = memo(
         <span aria-hidden ref={container} />
       </span>
     );
-  }
+  },
 );

@@ -7,7 +7,9 @@ export async function POST(request) {
     if (!email)
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     const supabase = getSupabaseServiceClient();
-    const { error } = await supabase.from("Subscriber").insert({ email });
+    const { error } = await supabase
+      .from("Newsletter Subscriber")
+      .insert({ email });
     if (error)
       return new Response(error.message ?? "Failed to subscribe", {
         status: 500,

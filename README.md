@@ -12,6 +12,7 @@ https://github.com/gargmegham/Portfolio/assets/95271253/bb564d0c-1f0c-4a02-b863-
 ![Contact Info](https://github.com/gargmegham/Portfolio/assets/95271253/2d8b4806-1c0c-4a55-9728-44f2b905b52a)
 
 Portfolio showcasing professional past, present & future. Built with:
+
 - [Remix](https://remix.run/)
 - [Three.js](https://threejs.org/)
 - [Framer Motion](https://www.framer.com/motion/)

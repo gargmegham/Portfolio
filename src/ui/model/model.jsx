@@ -107,12 +107,12 @@ export const Model = ({
       36,
       clientWidth / clientHeight,
       0.1,
-      100
+      100,
     );
     camera.current.position.set(
       cameraPosition.x,
       cameraPosition.y,
-      cameraPosition.z
+      cameraPosition.z,
     );
     scene.current = new Scene();
 
@@ -145,20 +145,20 @@ export const Model = ({
     // The render target that will show the shadows in the plane texture
     renderTarget.current = new WebGLRenderTarget(
       renderTargetSize,
-      renderTargetSize
+      renderTargetSize,
     );
     renderTarget.current.texture.generateMipmaps = false;
 
     // The render target that we will use to blur the first render target
     renderTargetBlur.current = new WebGLRenderTarget(
       renderTargetSize,
-      renderTargetSize
+      renderTargetSize,
     );
     renderTargetBlur.current.texture.generateMipmaps = false;
 
     // Make a plane and make it face up
     const planeGeometry = new PlaneGeometry(planeWidth, planeHeight).rotateX(
-      Math.PI / 2
+      Math.PI / 2,
     );
 
     const planeMaterial = new MeshBasicMaterial({
@@ -196,7 +196,7 @@ export const Model = ({
       planeHeight / 2,
       -planeHeight / 2,
       0,
-      cameraHeight
+      cameraHeight,
     );
     // Get the camera to look up
     shadowCamera.current.rotation.x = Math.PI / 2;
@@ -211,7 +211,7 @@ export const Model = ({
         uniform float darkness;
         ${shader.fragmentShader.replace(
           "gl_FragColor = vec4( vec3( 1.0 - fragCoordZ ), opacity );",
-          "gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );"
+          "gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );",
         )}
       `;
     };
@@ -458,7 +458,7 @@ const Device = ({
           const startPosition = new Vector3(
             targetPosition.x,
             targetPosition.y - 1,
-            targetPosition.z
+            targetPosition.z,
           );
 
           gltf.scene.position.set(...startPosition.toArray());
@@ -483,7 +483,7 @@ const Device = ({
       if (model.animation === ModelAnimationType.LaptopOpen) {
         playAnimation = () => {
           const frameNode = gltf.scene.children.find(
-            (node) => node.name === MeshType.Frame
+            (node) => node.name === MeshType.Frame,
           );
           const startRotation = new Vector3(MathUtils.degToRad(90), 0, 0);
           const endRotation = new Vector3(0, 0, 0);

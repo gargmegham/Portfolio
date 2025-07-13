@@ -16,7 +16,7 @@
   opacity: 0;
   transition: opacity 400ms ease 1000ms;
 
-  &[data-visible='true'] {
+  &[data-visible="true"] {
     opacity: 1;
   }
 }
@@ -28,11 +28,11 @@
   position: absolute;
   transform: translateY(50%);
 
-  &[data-visible='true'] {
+  &[data-visible="true"] {
     opacity: 1;
   }
 
-  &[data-alternate='true'] {
+  &[data-alternate="true"] {
     width: 90%;
     left: -10%;
     bottom: 25%;
@@ -49,7 +49,7 @@
     }
   }
 
-  &[data-alternate='false'] {
+  &[data-alternate="false"] {
     width: 100%;
     bottom: 25%;
     right: -30%;
