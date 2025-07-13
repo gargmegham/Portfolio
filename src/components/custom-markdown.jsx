@@ -288,7 +288,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
         </span>
         <svg
-          className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="w-3 h-3 opacity-40 group-hover:opacity-100 transition-opacity"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -726,9 +726,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       <ReactMarkdown
         components={customComponents}
         remarkPlugins={[
-          remarkGfm, 
-          [remarkMath, { singleDollarTextMath: false }], 
-          remarkHeadingId
+          remarkGfm,
+          [remarkMath, { singleDollarTextMath: false }],
+          remarkHeadingId,
         ]}
         rehypePlugins={[rehypeRaw, rehypeKatex]}
       >
