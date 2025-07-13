@@ -10,15 +10,6 @@ export async function GET(request) {
         { error: error.message },
         { status: 500 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
     // Aggregate all tags and count their frequency
@@ -30,38 +21,18 @@ export async function GET(request) {
         });
       }
     });
-
     // Sort tags by frequency and return top 10
     const topTags = Object.entries(tagCounts)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 10)
       .map(([tag, count]) => ({ tag, count }));
-
     const response = NextResponse.json(topTags);
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Failed to fetch tags" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }

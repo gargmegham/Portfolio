@@ -11,15 +11,6 @@ export async function POST(request) {
         { error: "No file uploaded" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -29,15 +20,6 @@ export async function POST(request) {
         { error: "Only image files are allowed" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -47,15 +29,6 @@ export async function POST(request) {
         { error: "File size must be less than 5MB" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -93,20 +66,10 @@ export async function POST(request) {
       );
 
       if (bucketError) {
-        console.error("Failed to create bucket:", bucketError);
         const response = NextResponse.json(
           { error: "Failed to create storage bucket" },
           { status: 500 },
         );
-
-        response.headers.set(
-          "Cache-Control",
-          "no-store, no-cache, must-revalidate, proxy-revalidate",
-        );
-        response.headers.set("Pragma", "no-cache");
-        response.headers.set("Expires", "0");
-        response.headers.set("Surrogate-Control", "no-store");
-
         return response;
       }
     }
@@ -119,20 +82,10 @@ export async function POST(request) {
       });
 
     if (uploadError) {
-      console.error("Supabase upload error:", uploadError);
       const response = NextResponse.json(
         { error: `Failed to upload to storage: ${uploadError.message}` },
         { status: 500 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -142,31 +95,12 @@ export async function POST(request) {
     } = supabase.storage.from("blog-images").getPublicUrl(filename);
 
     const response = NextResponse.json({ url: publicUrl }, { status: 200 });
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
-    console.error("Upload error:", error);
     const response = NextResponse.json(
       { error: "Failed to upload file" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }

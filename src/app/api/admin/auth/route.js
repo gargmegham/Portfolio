@@ -10,15 +10,6 @@ export async function POST(request) {
         { error: "Password is required" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -29,15 +20,6 @@ export async function POST(request) {
         { error: "Admin password not configured" },
         { status: 500 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -49,15 +31,6 @@ export async function POST(request) {
         { error: "Invalid password" },
         { status: 401 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -74,30 +47,12 @@ export async function POST(request) {
       maxAge: 60 * 60 * 24, // 24 hours
       path: "/",
     });
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     const response = NextResponse.json(
       { error: "Authentication failed" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }
@@ -107,16 +62,6 @@ export async function DELETE(request) {
     { message: "Logout successful" },
     { status: 200 },
   );
-
   response.cookies.delete("admin-session");
-
-  response.headers.set(
-    "Cache-Control",
-    "no-store, no-cache, must-revalidate, proxy-revalidate",
-  );
-  response.headers.set("Pragma", "no-cache");
-  response.headers.set("Expires", "0");
-  response.headers.set("Surrogate-Control", "no-store");
-
   return response;
 }

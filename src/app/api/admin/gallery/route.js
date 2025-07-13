@@ -24,15 +24,6 @@ export async function GET(request) {
         { error: "Failed to fetch gallery images" },
         { status: 500 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -59,15 +50,6 @@ export async function GET(request) {
       page,
       hasMore: files.length === limit,
     });
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     console.error("Gallery API error:", error);
@@ -75,15 +57,6 @@ export async function GET(request) {
       { error: "Failed to fetch gallery" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }
@@ -98,15 +71,6 @@ export async function POST(request) {
         { error: "No files uploaded" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -139,15 +103,6 @@ export async function POST(request) {
           { error: "Failed to create storage bucket" },
           { status: 500 },
         );
-
-        response.headers.set(
-          "Cache-Control",
-          "no-store, no-cache, must-revalidate, proxy-revalidate",
-        );
-        response.headers.set("Pragma", "no-cache");
-        response.headers.set("Expires", "0");
-        response.headers.set("Surrogate-Control", "no-store");
-
         return response;
       }
     }
@@ -215,15 +170,6 @@ export async function POST(request) {
       uploaded: uploadedImages,
       errors: errors,
     });
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     console.error("Gallery upload error:", error);
@@ -231,15 +177,6 @@ export async function POST(request) {
       { error: "Failed to upload images" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }

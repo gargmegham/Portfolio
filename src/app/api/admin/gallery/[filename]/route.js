@@ -10,15 +10,6 @@ export async function DELETE(request, { params }) {
         { error: "Filename is required" },
         { status: 400 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -35,15 +26,6 @@ export async function DELETE(request, { params }) {
         { error: "Failed to delete image" },
         { status: 500 },
       );
-
-      response.headers.set(
-        "Cache-Control",
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      );
-      response.headers.set("Pragma", "no-cache");
-      response.headers.set("Expires", "0");
-      response.headers.set("Surrogate-Control", "no-store");
-
       return response;
     }
 
@@ -51,15 +33,6 @@ export async function DELETE(request, { params }) {
       message: "Image deleted successfully",
       filename,
     });
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   } catch (error) {
     console.error("Gallery delete API error:", error);
@@ -67,15 +40,6 @@ export async function DELETE(request, { params }) {
       { error: "Failed to delete image" },
       { status: 500 },
     );
-
-    response.headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    response.headers.set("Pragma", "no-cache");
-    response.headers.set("Expires", "0");
-    response.headers.set("Surrogate-Control", "no-store");
-
     return response;
   }
 }
