@@ -76,7 +76,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               been building ever since.
             </p>
             <p>
-              <span className="hidden md:block">today, </span>i run a{" "}
+              today, i run a{" "}
               <Highlight className="text-white font-semibold">
                 dev studio
               </Highlight>{" "}
