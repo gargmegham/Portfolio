@@ -304,7 +304,7 @@ export default function BlogPost({ params }) {
                   </Link>
 
                   {blog.thumbnail && (
-                    <div className="relative h-64 md:h-80 mb-6 rounded-lg overflow-hidden">
+                    <div className="object-cover relative h-64 md:h-80 mb-6 rounded-lg overflow-hidden">
                       <Image src={blog.thumbnail} alt={blog.title} fill />
                     </div>
                   )}
