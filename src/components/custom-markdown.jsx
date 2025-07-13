@@ -171,14 +171,14 @@ const CustomMarkdown = ({ content, className = "" }) => {
 
     // Lists
     ul: ({ children, ...props }) => (
-      <ul className="list-none space-y-2 mb-4 ml-4" {...props}>
+      <ul className="relative list-none space-y-2 mb-4 ml-4" {...props}>
         {children}
       </ul>
     ),
 
     ol: ({ children, ...props }) => (
       <ol
-        className="list-none space-y-2 mb-4 ml-4 counter-reset-list"
+        className="relative list-none space-y-2 mb-4 ml-4 counter-reset-list"
         {...props}
       >
         {children}
@@ -187,10 +187,12 @@ const CustomMarkdown = ({ content, className = "" }) => {
 
     li: ({ children, ordered, ...props }) => {
       // Check if this is a task list item (contains checkbox)
-      const hasCheckbox = typeof children === 'object' && 
-        Array.isArray(children) && 
-        children.some(child => 
-          child?.type === 'input' && child?.props?.type === 'checkbox'
+      const hasCheckbox =
+        typeof children === "object" &&
+        Array.isArray(children) &&
+        children.some(
+          (child) =>
+            child?.type === "input" && child?.props?.type === "checkbox"
         );
 
       if (hasCheckbox) {
@@ -208,7 +210,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
         <li
           className={cn(
             "text-gray-300 relative pl-6 mb-2",
-            ordered ? "counter-increment-list" : "",
+            ordered ? "counter-increment-list" : ""
           )}
           {...props}
         >
@@ -224,7 +226,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
 
     // GitHub-style task list checkboxes
     input: ({ type, checked, disabled, ...props }) => {
-      if (type === 'checkbox') {
+      if (type === "checkbox") {
         return (
           <input
             type="checkbox"
@@ -232,8 +234,8 @@ const CustomMarkdown = ({ content, className = "" }) => {
             disabled={disabled}
             className={cn(
               "w-4 h-4 mt-1 rounded border-2 transition-all duration-200 cursor-pointer",
-              checked 
-                ? "bg-amber-400 border-amber-400 text-black" 
+              checked
+                ? "bg-amber-400 border-amber-400 text-black"
                 : "bg-transparent border-gray-400 hover:border-amber-400",
               disabled && "cursor-not-allowed opacity-50"
             )}
