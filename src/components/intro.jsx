@@ -1,9 +1,7 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { DecoderText } from "@/ui/decoder-text";
 import {
-  IconMapPin,
   IconBrandLinkedin,
   IconBrandYoutube,
   IconBrandTwitter,
@@ -14,7 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
 import { PlaceholdersAndVanishInput } from "@/ui/aceternity/placeholders-and-vanish-input";
-import Image from "next/image";
+import { fetchWithNoCache } from "@/utils/api";
 
 const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
   const [email, setEmail] = useState("");
@@ -23,8 +21,11 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
   };
   const subscribe = async (email) => {
     try {
-      const res = await fetch("/api/subscribe", {
+      const res = await fetchWithNoCache("/api/subscribe", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ email }),
       });
       if (res.ok) toast.success("Subscribed to newsletter!");

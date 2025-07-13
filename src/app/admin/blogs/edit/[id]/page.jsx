@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function EditBlogPost({ params }) {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function EditBlogPost({ params }) {
 
   const fetchGalleryImages = async () => {
     try {
-      const response = await fetch("/api/admin/gallery");
+      const response = await fetchWithNoCache("/api/admin/gallery");
       if (response.ok) {
         const data = await response.json();
         setGalleryImages(data.images);
@@ -70,7 +71,7 @@ export default function EditBlogPost({ params }) {
 
   const fetchBlogPost = async () => {
     try {
-      const response = await fetch(`/api/admin/blogs/${params.id}`);
+      const response = await fetchWithNoCache(`/api/admin/blogs/${params.id}`);
       if (response.ok) {
         const blog = await response.json();
         setFormData({
@@ -141,7 +142,7 @@ export default function EditBlogPost({ params }) {
     uploadFormData.append("file", thumbnailFile);
 
     try {
-      const response = await fetch("/api/admin/upload", {
+      const response = await fetchWithNoCache("/api/admin/upload", {
         method: "POST",
         body: uploadFormData,
       });
@@ -169,7 +170,7 @@ export default function EditBlogPost({ params }) {
       // Upload thumbnail if new file provided
       const thumbnailUrl = await uploadThumbnail();
 
-      const response = await fetch(`/api/admin/blogs/${params.id}`, {
+      const response = await fetchWithNoCache(`/api/admin/blogs/${params.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +202,7 @@ export default function EditBlogPost({ params }) {
     }
 
     try {
-      const response = await fetch(`/api/admin/blogs/${params.id}`, {
+      const response = await fetchWithNoCache(`/api/admin/blogs/${params.id}`, {
         method: "DELETE",
       });
 
@@ -395,7 +396,7 @@ export default function EditBlogPost({ params }) {
                 Mark as featured post
               </label>
             </div>
-            
+
             <div className="flex items-center space-x-3">
               <input
                 type="checkbox"

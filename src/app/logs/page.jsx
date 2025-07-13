@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function BlogListing() {
   const [blogs, setBlogs] = useState([]);
@@ -49,7 +50,7 @@ export default function BlogListing() {
         ...(selectedTag && { tag: selectedTag }),
       });
 
-      const response = await fetch(`/api/blogs?${params}`);
+      const response = await fetchWithNoCache(`/api/blogs?${params}`);
       if (response.ok) {
         const data = await response.json();
         setBlogs(data.blogs);
@@ -64,7 +65,7 @@ export default function BlogListing() {
 
   const fetchTags = async () => {
     try {
-      const response = await fetch("/api/blogs/tags");
+      const response = await fetchWithNoCache("/api/blogs/tags");
       if (response.ok) {
         const data = await response.json();
         setTags(data);
@@ -76,7 +77,7 @@ export default function BlogListing() {
 
   const fetchRecentPosts = async () => {
     try {
-      const response = await fetch("/api/blogs?limit=5");
+      const response = await fetchWithNoCache("/api/blogs?limit=5");
       if (response.ok) {
         const data = await response.json();
         setRecentPosts(data.blogs);
@@ -88,7 +89,9 @@ export default function BlogListing() {
 
   const fetchFeaturedPosts = async () => {
     try {
-      const response = await fetch("/api/blogs?featured=true&limit=5");
+      const response = await fetchWithNoCache(
+        "/api/blogs?featured=true&limit=5",
+      );
       if (response.ok) {
         const data = await response.json();
         setFeaturedPosts(data.blogs);
@@ -112,7 +115,7 @@ export default function BlogListing() {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetchWithNoCache("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: subscriberEmail }),
@@ -270,7 +273,7 @@ export default function BlogListing() {
                 </div>
               ) : (
                 <>
-                  <div className="grid gap-6 md:grid-cols-2 max-w-5xl">
+                  <div className="grid gap-6 md:grid-cols-3 max-w-5xl">
                     {blogs.map((blog) => (
                       <Link href={`/blog/${blog.slug}`} key={blog.id}>
                         <article className="group bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:bg-black/60 hover:border-amber-400/30 hover:shadow-2xl hover:shadow-amber-500/10 hover:-translate-y-2 hover:scale-[1.02] cursor-pointer">
@@ -280,7 +283,7 @@ export default function BlogListing() {
                                 src={blog.thumbnail}
                                 alt={blog.title}
                                 fill
-                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                className="transition-transform duration-300 group-hover:scale-105"
                               />
                             </div>
                           )}

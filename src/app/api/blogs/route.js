@@ -42,19 +42,52 @@ export async function GET(request) {
     const { data: blogs, error, count } = await query;
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const response = NextResponse.json(
+        { error: error.message },
+        { status: 500 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       blogs,
       total: count,
       page,
       totalPages: Math.ceil(count / limit),
     });
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to fetch blogs" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }

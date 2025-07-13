@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("blogs");
@@ -24,21 +25,23 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       // Fetch blogs
-      const blogsResponse = await fetch("/api/admin/blogs");
+      const blogsResponse = await fetchWithNoCache("/api/admin/blogs");
       if (blogsResponse.ok) {
         const blogsData = await blogsResponse.json();
         setBlogs(blogsData);
       }
 
       // Fetch subscribers
-      const subscribersResponse = await fetch("/api/admin/subscribers");
+      const subscribersResponse = await fetchWithNoCache(
+        "/api/admin/subscribers",
+      );
       if (subscribersResponse.ok) {
         const subscribersData = await subscribersResponse.json();
         setSubscribers(subscribersData);
       }
 
       // Fetch gallery images
-      const galleryResponse = await fetch("/api/admin/gallery");
+      const galleryResponse = await fetchWithNoCache("/api/admin/gallery");
       if (galleryResponse.ok) {
         const galleryData = await galleryResponse.json();
         setGalleryImages(galleryData.images);
@@ -52,7 +55,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/admin/auth", { method: "DELETE" });
+      await fetchWithNoCache("/api/admin/auth", { method: "DELETE" });
       toast.success("Logged out successfully");
       router.push("/admin");
     } catch (error) {
@@ -74,14 +77,14 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`/api/admin/blogs/${blogId}`, {
+      const response = await fetchWithNoCache(`/api/admin/blogs/${blogId}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
         toast.success("Blog post deleted successfully!");
         // Refresh the blogs list
-        const blogsResponse = await fetch("/api/admin/blogs");
+        const blogsResponse = await fetchWithNoCache("/api/admin/blogs");
         if (blogsResponse.ok) {
           const blogsData = await blogsResponse.json();
           setBlogs(blogsData);
@@ -104,7 +107,7 @@ export default function AdminDashboard() {
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
 
-      const response = await fetch("/api/admin/gallery", {
+      const response = await fetchWithNoCache("/api/admin/gallery", {
         method: "POST",
         body: formData,
       });
@@ -116,7 +119,7 @@ export default function AdminDashboard() {
             `Uploaded ${result.uploaded.length} image(s) successfully!`,
           );
           // Refresh gallery
-          const galleryResponse = await fetch("/api/admin/gallery");
+          const galleryResponse = await fetchWithNoCache("/api/admin/gallery");
           if (galleryResponse.ok) {
             const galleryData = await galleryResponse.json();
             setGalleryImages(galleryData.images);
@@ -153,7 +156,7 @@ export default function AdminDashboard() {
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
 
-      const response = await fetch("/api/admin/gallery", {
+      const response = await fetchWithNoCache("/api/admin/gallery", {
         method: "POST",
         body: formData,
       });
@@ -165,7 +168,7 @@ export default function AdminDashboard() {
             `Uploaded ${result.uploaded.length} image(s) successfully!`,
           );
           // Refresh gallery
-          const galleryResponse = await fetch("/api/admin/gallery");
+          const galleryResponse = await fetchWithNoCache("/api/admin/gallery");
           if (galleryResponse.ok) {
             const galleryData = await galleryResponse.json();
             setGalleryImages(galleryData.images);
@@ -203,14 +206,17 @@ export default function AdminDashboard() {
     }
 
     try {
-      const response = await fetch(`/api/admin/gallery/${filename}`, {
-        method: "DELETE",
-      });
+      const response = await fetchWithNoCache(
+        `/api/admin/gallery/${filename}`,
+        {
+          method: "DELETE",
+        },
+      );
 
       if (response.ok) {
         toast.success("Image deleted successfully");
         // Refresh gallery
-        const galleryResponse = await fetch("/api/admin/gallery");
+        const galleryResponse = await fetchWithNoCache("/api/admin/gallery");
         if (galleryResponse.ok) {
           const galleryData = await galleryResponse.json();
           setGalleryImages(galleryData.images);

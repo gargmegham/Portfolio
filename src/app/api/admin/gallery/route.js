@@ -20,10 +20,20 @@ export async function GET(request) {
 
     if (error) {
       console.error("Gallery fetch error:", error);
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Failed to fetch gallery images" },
         { status: 500 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     // Generate public URLs for each image
@@ -44,17 +54,37 @@ export async function GET(request) {
       };
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       images,
       page,
       hasMore: files.length === limit,
     });
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
     console.error("Gallery API error:", error);
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to fetch gallery" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }
 
@@ -64,7 +94,20 @@ export async function POST(request) {
     const files = data.getAll("files");
 
     if (!files || files.length === 0) {
-      return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
+      const response = NextResponse.json(
+        { error: "No files uploaded" },
+        { status: 400 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     const supabase = getSupabaseServiceClient();
@@ -92,10 +135,20 @@ export async function POST(request) {
 
       if (bucketError) {
         console.error("Failed to create bucket:", bucketError);
-        return NextResponse.json(
+        const response = NextResponse.json(
           { error: "Failed to create storage bucket" },
           { status: 500 },
         );
+
+        response.headers.set(
+          "Cache-Control",
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        );
+        response.headers.set("Pragma", "no-cache");
+        response.headers.set("Expires", "0");
+        response.headers.set("Surrogate-Control", "no-store");
+
+        return response;
       }
     }
 
@@ -157,16 +210,36 @@ export async function POST(request) {
       }
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: uploadedImages.length > 0,
       uploaded: uploadedImages,
       errors: errors,
     });
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
     console.error("Gallery upload error:", error);
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to upload images" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }

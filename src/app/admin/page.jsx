@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function AdminLogin() {
   const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/admin/auth", {
+      const response = await fetchWithNoCache("/api/admin/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

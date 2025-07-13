@@ -14,6 +14,7 @@ import {
   FaWhatsapp,
   FaCopy,
 } from "react-icons/fa";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function BlogPost({ params }) {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function BlogPost({ params }) {
   const fetchBlog = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/blogs/${params.slug}`);
+      const response = await fetchWithNoCache(`/api/blogs/${params.slug}`);
       if (response.ok) {
         const data = await response.json();
         setBlog(data);
@@ -55,7 +56,7 @@ export default function BlogPost({ params }) {
 
   const fetchRecentPosts = async () => {
     try {
-      const response = await fetch("/api/blogs?limit=5");
+      const response = await fetchWithNoCache("/api/blogs?limit=5");
       if (response.ok) {
         const data = await response.json();
         setRecentPosts(data.blogs);
@@ -69,7 +70,9 @@ export default function BlogPost({ params }) {
     if (!blog?.tags?.length) return;
 
     try {
-      const response = await fetch(`/api/blogs?tag=${blog.tags[0]}&limit=5`);
+      const response = await fetchWithNoCache(
+        `/api/blogs?tag=${blog.tags[0]}&limit=5`,
+      );
       if (response.ok) {
         const data = await response.json();
         // Filter out current post
@@ -91,7 +94,7 @@ export default function BlogPost({ params }) {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetchWithNoCache("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: subscriberEmail }),
@@ -280,7 +283,7 @@ export default function BlogPost({ params }) {
         <div className="absolute inset-0 bg-dot-white/[0.2]" />
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-500/10" />
 
-        <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36">
+        <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-8 max-w-[100rem] mx-auto">
               {/* Main Content */}
@@ -302,12 +305,7 @@ export default function BlogPost({ params }) {
 
                   {blog.thumbnail && (
                     <div className="relative h-64 md:h-80 mb-6 rounded-lg overflow-hidden">
-                      <Image
-                        src={blog.thumbnail}
-                        alt={blog.title}
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={blog.thumbnail} alt={blog.title} fill />
                     </div>
                   )}
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { fetchWithNoCache } from "@/utils/api";
 
 export default function NewBlogPost() {
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function NewBlogPost() {
 
   const fetchGalleryImages = async () => {
     try {
-      const response = await fetch("/api/admin/gallery");
+      const response = await fetchWithNoCache("/api/admin/gallery");
       if (response.ok) {
         const data = await response.json();
         setGalleryImages(data.images);
@@ -58,7 +59,7 @@ export default function NewBlogPost() {
       textarea.focus();
       textarea.setSelectionRange(
         start + markdown.length,
-        start + markdown.length
+        start + markdown.length,
       );
     }, 100);
   };
@@ -99,7 +100,7 @@ export default function NewBlogPost() {
     formData.append("file", thumbnailFile);
 
     try {
-      const response = await fetch("/api/admin/upload", {
+      const response = await fetchWithNoCache("/api/admin/upload", {
         method: "POST",
         body: formData,
       });
@@ -130,7 +131,7 @@ export default function NewBlogPost() {
         thumbnailUrl = await uploadThumbnail();
       }
 
-      const response = await fetch("/api/admin/blogs", {
+      const response = await fetchWithNoCache("/api/admin/blogs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

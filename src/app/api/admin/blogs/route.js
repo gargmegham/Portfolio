@@ -11,28 +11,79 @@ export async function GET(request) {
       .order("created_at", { ascending: false });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const response = NextResponse.json(
+        { error: error.message },
+        { status: 500 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
-    return NextResponse.json(blogs);
+    const response = NextResponse.json(blogs);
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to fetch blogs" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }
 
 export async function POST(request) {
   try {
-    const { title, slug, description, content, thumbnail, tags, featured, draft } =
-      await request.json();
+    const {
+      title,
+      slug,
+      description,
+      content,
+      thumbnail,
+      tags,
+      featured,
+      draft,
+    } = await request.json();
 
     if (!title || !slug || !content) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Title, slug, and content are required" },
         { status: 400 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     const supabase = getSupabaseServiceClient();
@@ -54,7 +105,7 @@ export async function POST(request) {
 
     if (error) {
       console.error("Supabase blog creation error:", error);
-      return NextResponse.json(
+      const response = NextResponse.json(
         {
           error: error.message,
           details: error.details,
@@ -63,13 +114,43 @@ export async function POST(request) {
         },
         { status: 500 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
-    return NextResponse.json(blog, { status: 201 });
+    const response = NextResponse.json(blog, { status: 201 });
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to create blog post" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }

@@ -13,22 +13,65 @@ export async function GET(request, { params }) {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      const response = NextResponse.json(
+        { error: error.message },
+        { status: 500 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     if (!blog) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Blog post not found" },
         { status: 404 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
-    return NextResponse.json(blog);
+    const response = NextResponse.json(blog);
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to fetch blog post" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }
 
@@ -39,10 +82,20 @@ export async function PUT(request, { params }) {
       await request.json();
 
     if (!title || !slug || !content) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Title, slug, and content are required" },
         { status: 400 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     const supabase = getSupabaseServiceClient();
@@ -65,7 +118,7 @@ export async function PUT(request, { params }) {
 
     if (error) {
       console.error("Supabase blog update error:", error);
-      return NextResponse.json(
+      const response = NextResponse.json(
         {
           error: error.message,
           details: error.details,
@@ -74,14 +127,44 @@ export async function PUT(request, { params }) {
         },
         { status: 500 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
-    return NextResponse.json(blog);
+    const response = NextResponse.json(blog);
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to update blog post" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }
 
@@ -98,7 +181,20 @@ export async function DELETE(request, { params }) {
       .single();
 
     if (fetchError) {
-      return NextResponse.json({ error: fetchError.message }, { status: 500 });
+      const response = NextResponse.json(
+        { error: fetchError.message },
+        { status: 500 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     // Delete the blog post from database
@@ -108,7 +204,20 @@ export async function DELETE(request, { params }) {
       .eq("id", id);
 
     if (deleteError) {
-      return NextResponse.json({ error: deleteError.message }, { status: 500 });
+      const response = NextResponse.json(
+        { error: deleteError.message },
+        { status: 500 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     // If there's a thumbnail, delete it from storage
@@ -140,11 +249,33 @@ export async function DELETE(request, { params }) {
       }
     }
 
-    return NextResponse.json({ message: "Blog post deleted successfully" });
+    const response = NextResponse.json({
+      message: "Blog post deleted successfully",
+    });
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Failed to delete blog post" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }

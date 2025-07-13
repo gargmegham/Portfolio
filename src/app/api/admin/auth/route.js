@@ -6,26 +6,59 @@ export async function POST(request) {
     const { password } = await request.json();
 
     if (!password) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Password is required" },
         { status: 400 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     const adminPassword = process.env.ADMIN_PASSWORD;
 
     if (!adminPassword) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { error: "Admin password not configured" },
         { status: 500 },
       );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     // For simple password comparison (you can enhance this with bcrypt)
     const isValid = password === adminPassword;
 
     if (!isValid) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+      const response = NextResponse.json(
+        { error: "Invalid password" },
+        { status: 401 },
+      );
+
+      response.headers.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      );
+      response.headers.set("Pragma", "no-cache");
+      response.headers.set("Expires", "0");
+      response.headers.set("Surrogate-Control", "no-store");
+
+      return response;
     }
 
     // Create a simple session token (in production, use JWT or proper session management)
@@ -42,12 +75,30 @@ export async function POST(request) {
       path: "/",
     });
 
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
     return response;
   } catch (error) {
-    return NextResponse.json(
+    const response = NextResponse.json(
       { error: "Authentication failed" },
       { status: 500 },
     );
+
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    return response;
   }
 }
 
@@ -58,5 +109,14 @@ export async function DELETE(request) {
   );
 
   response.cookies.delete("admin-session");
+
+  response.headers.set(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, proxy-revalidate",
+  );
+  response.headers.set("Pragma", "no-cache");
+  response.headers.set("Expires", "0");
+  response.headers.set("Surrogate-Control", "no-store");
+
   return response;
 }
