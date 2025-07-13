@@ -16,21 +16,22 @@ import "katex/dist/katex.min.css";
 // Helper function to generate ID from React children
 const generateIdFromChildren = (children) => {
   const text = React.Children.toArray(children)
-    .map(child => {
-      if (typeof child === 'string') return child;
-      if (child?.props?.children) return generateIdFromChildren(child.props.children);
-      return '';
+    .map((child) => {
+      if (typeof child === "string") return child;
+      if (child?.props?.children)
+        return generateIdFromChildren(child.props.children);
+      return "";
     })
-    .join('')
+    .join("")
     .trim();
-    
+
   return text
     .toLowerCase()
-    .replace(/[""''`]/g, '') // Remove quotes
-    .replace(/[^\w\s-]/g, '') // Remove special characters except spaces and hyphens
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+    .replace(/[""''`]/g, "") // Remove quotes
+    .replace(/[^\w\s-]/g, "") // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
 };
 
 // Mermaid Diagram Component
@@ -38,7 +39,9 @@ const MermaidDiagram = ({ children, className = "" }) => {
   const elementRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
   const [error, setError] = useState(null);
-  const [diagramId] = useState(() => `mermaid-${Math.random().toString(36).substr(2, 9)}`);
+  const [diagramId] = useState(
+    () => `mermaid-${Math.random().toString(36).substr(2, 9)}`
+  );
 
   useEffect(() => {
     setIsClient(true);
@@ -50,27 +53,27 @@ const MermaidDiagram = ({ children, className = "" }) => {
     const renderDiagram = async () => {
       try {
         // Dynamic import to avoid SSR issues
-        const mermaid = (await import('mermaid')).default;
-        
+        const mermaid = (await import("mermaid")).default;
+
         // Configure mermaid with dark theme
         mermaid.initialize({
           startOnLoad: false,
-          theme: 'dark',
+          theme: "dark",
           themeVariables: {
-            primaryColor: '#fbbf24', // amber-400
-            primaryTextColor: '#ffffff',
-            primaryBorderColor: '#f59e0b', // amber-500
-            lineColor: '#d1d5db', // gray-300
-            secondaryColor: '#1f2937', // gray-800
-            tertiaryColor: '#374151', // gray-700
-            background: '#000000',
-            mainBkg: '#1f2937',
-            secondBkg: '#374151',
-            tertiaryBkg: '#4b5563',
+            primaryColor: "#fbbf24", // amber-400
+            primaryTextColor: "#ffffff",
+            primaryBorderColor: "#f59e0b", // amber-500
+            lineColor: "#d1d5db", // gray-300
+            secondaryColor: "#1f2937", // gray-800
+            tertiaryColor: "#374151", // gray-700
+            background: "#000000",
+            mainBkg: "#1f2937",
+            secondBkg: "#374151",
+            tertiaryBkg: "#4b5563",
           },
           flowchart: {
             htmlLabels: true,
-            curve: 'basis',
+            curve: "basis",
           },
           sequence: {
             actorMargin: 50,
@@ -89,23 +92,26 @@ const MermaidDiagram = ({ children, className = "" }) => {
         });
 
         // Clear any existing content
-        elementRef.current.innerHTML = '';
-        
+        elementRef.current.innerHTML = "";
+
         // Render the diagram
-        const { svg } = await mermaid.render(diagramId, String(children).trim());
+        const { svg } = await mermaid.render(
+          diagramId,
+          String(children).trim()
+        );
         elementRef.current.innerHTML = svg;
-        
+
         // Add click handlers for interactive elements
-        const svgElement = elementRef.current.querySelector('svg');
+        const svgElement = elementRef.current.querySelector("svg");
         if (svgElement) {
-          svgElement.style.maxWidth = '100%';
-          svgElement.style.height = 'auto';
+          svgElement.style.maxWidth = "100%";
+          svgElement.style.height = "auto";
         }
-        
+
         setError(null);
       } catch (err) {
-        console.error('Mermaid rendering error:', err);
-        setError(err.message || 'Failed to render diagram');
+        console.error("Mermaid rendering error:", err);
+        setError(err.message || "Failed to render diagram");
       }
     };
 
@@ -114,7 +120,12 @@ const MermaidDiagram = ({ children, className = "" }) => {
 
   if (!isClient) {
     return (
-      <div className={cn("mermaid-container my-6 p-6 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl", className)}>
+      <div
+        className={cn(
+          "mermaid-container my-6 p-6 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl",
+          className
+        )}
+      >
         <div className="flex items-center justify-center h-32">
           <div className="text-amber-300 text-sm">Loading diagram...</div>
         </div>
@@ -124,12 +135,19 @@ const MermaidDiagram = ({ children, className = "" }) => {
 
   if (error) {
     return (
-      <div className={cn("mermaid-container my-6 p-6 bg-red-900/20 backdrop-blur-xl border border-red-500/30 rounded-2xl", className)}>
+      <div
+        className={cn(
+          "mermaid-container my-6 p-6 bg-red-900/20 backdrop-blur-xl border border-red-500/30 rounded-2xl",
+          className
+        )}
+      >
         <div className="text-red-300 text-sm">
           <div className="font-semibold mb-2">Mermaid Diagram Error:</div>
           <div className="font-mono text-xs">{error}</div>
           <details className="mt-4">
-            <summary className="cursor-pointer text-red-400 hover:text-red-300">Show diagram source</summary>
+            <summary className="cursor-pointer text-red-400 hover:text-red-300">
+              Show diagram source
+            </summary>
             <pre className="mt-2 p-3 bg-black/40 rounded-lg text-xs overflow-x-auto">
               {String(children).trim()}
             </pre>
@@ -145,14 +163,14 @@ const MermaidDiagram = ({ children, className = "" }) => {
         <div className="absolute top-0 right-0 px-3 py-1 bg-amber-400/20 text-amber-300 text-xs font-medium rounded-bl-lg border-l border-b border-amber-400/30">
           mermaid
         </div>
-        <div 
+        <div
           ref={elementRef}
           className="mermaid-content flex justify-center items-center min-h-[200px]"
           style={{
             // Custom CSS variables for Mermaid styling
-            '--mermaid-primary-color': '#fbbf24',
-            '--mermaid-primary-text-color': '#ffffff',
-            '--mermaid-primary-border-color': '#f59e0b',
+            "--mermaid-primary-color": "#fbbf24",
+            "--mermaid-primary-text-color": "#ffffff",
+            "--mermaid-primary-border-color": "#f59e0b",
           }}
         />
       </div>
@@ -289,7 +307,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
 
       if (!inline && match) {
         // Handle Mermaid diagrams
-        if (match[1] === 'mermaid') {
+        if (match[1] === "mermaid") {
           return <MermaidDiagram>{children}</MermaidDiagram>;
         }
 
@@ -707,122 +725,12 @@ const CustomMarkdown = ({ content, className = "" }) => {
       `}</style>
       <ReactMarkdown
         components={customComponents}
-        remarkPlugins={[remarkGfm, remarkMath, remarkHeadingId]}
-        rehypePlugins={[
-          rehypeKatex,
-          rehypeRaw,
-          [
-            rehypeSanitize,
-            {
-              tagNames: [
-                "div",
-                "span",
-                "p",
-                "br",
-                "strong",
-                "em",
-                "u",
-                "s",
-                "del",
-                "strike",
-                "h1",
-                "h2",
-                "h3",
-                "h4",
-                "h5",
-                "h6",
-                "ul",
-                "ol",
-                "li",
-                "dl",
-                "dt",
-                "dd",
-                "table",
-                "thead",
-                "tbody",
-                "tr",
-                "th",
-                "td",
-                "blockquote",
-                "pre",
-                "code",
-                "a",
-                "img",
-                "iframe",
-                "details",
-                "summary",
-                "kbd",
-                "sup",
-                "sub",
-                "hr",
-                "input",
-                // SVG elements for Mermaid diagrams
-                "svg",
-                "g",
-                "path",
-                "rect",
-                "circle",
-                "ellipse",
-                "line",
-                "polyline",
-                "polygon",
-                "text",
-                "tspan",
-                "defs",
-                "marker",
-                "use",
-                "foreignObject",
-              ],
-              attributes: {
-                "*": ["className", "style", "id"],
-                a: ["href", "title", "target", "rel"],
-                img: ["src", "alt", "title", "width", "height", "style"],
-                iframe: [
-                  "src",
-                  "title",
-                  "width",
-                  "height",
-                  "frameBorder",
-                  "allowFullScreen",
-                  "allow",
-                  "style",
-                ],
-                details: ["open"],
-                pre: ["className"],
-                code: ["className"],
-                th: ["align"],
-                td: ["align"],
-                input: ["type", "checked", "disabled"],
-                // SVG attributes for Mermaid diagrams
-                svg: ["width", "height", "viewBox", "xmlns", "version"],
-                g: ["transform", "class"],
-                path: ["d", "fill", "stroke", "strokeWidth", "strokeDasharray", "class"],
-                rect: ["x", "y", "width", "height", "fill", "stroke", "strokeWidth", "rx", "ry", "class"],
-                circle: ["cx", "cy", "r", "fill", "stroke", "strokeWidth", "class"],
-                ellipse: ["cx", "cy", "rx", "ry", "fill", "stroke", "strokeWidth", "class"],
-                line: ["x1", "y1", "x2", "y2", "stroke", "strokeWidth", "strokeDasharray", "class"],
-                polyline: ["points", "fill", "stroke", "strokeWidth", "class"],
-                polygon: ["points", "fill", "stroke", "strokeWidth", "class"],
-                text: ["x", "y", "fill", "fontSize", "fontFamily", "textAnchor", "class"],
-                tspan: ["x", "y", "dx", "dy", "class"],
-                defs: [],
-                marker: ["id", "markerWidth", "markerHeight", "refX", "refY", "orient", "class"],
-                use: ["href", "xlinkHref", "x", "y", "width", "height", "class"],
-                foreignObject: ["x", "y", "width", "height", "class"],
-              },
-              protocols: {
-                href: ["http", "https", "mailto", "tel"],
-                src: ["http", "https", "data"],
-                cite: ["http", "https"],
-              },
-              allowProtocolRelative: true,
-              strip: ["script"],
-              stripIgnoreTag: false,
-              stripIgnoreTagBody: ["script"],
-              allowVulnerableTags: false,
-            },
-          ],
+        remarkPlugins={[
+          remarkGfm, 
+          [remarkMath, { singleDollarTextMath: false }], 
+          remarkHeadingId
         ]}
+        rehypePlugins={[rehypeRaw, rehypeKatex]}
       >
         {content}
       </ReactMarkdown>

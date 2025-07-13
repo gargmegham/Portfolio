@@ -72,7 +72,7 @@ export default function BlogPost({ params }) {
 
     try {
       const response = await fetchWithNoCache(
-        `/api/blogs?tag=${blog.tags[0]}&limit=5`,
+        `/api/blogs?tag=${blog.tags[0]}&limit=5`
       );
       if (response.ok) {
         const data = await response.json();
@@ -120,7 +120,7 @@ export default function BlogPost({ params }) {
       name: "Facebook",
       icon: FaFacebook,
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        shareUrl,
+        shareUrl
       )}`,
       color: "text-blue-600",
     },
@@ -128,7 +128,7 @@ export default function BlogPost({ params }) {
       name: "Twitter",
       icon: FaTwitter,
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        shareText,
+        shareText
       )}&url=${encodeURIComponent(shareUrl)}`,
       color: "text-blue-400",
     },
@@ -136,7 +136,7 @@ export default function BlogPost({ params }) {
       name: "LinkedIn",
       icon: FaLinkedin,
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        shareUrl,
+        shareUrl
       )}`,
       color: "text-blue-700",
     },
@@ -144,7 +144,7 @@ export default function BlogPost({ params }) {
       name: "Reddit",
       icon: FaReddit,
       url: `https://reddit.com/submit?url=${encodeURIComponent(
-        shareUrl,
+        shareUrl
       )}&title=${encodeURIComponent(blog?.title || "")}`,
       color: "text-orange-600",
     },
@@ -152,7 +152,7 @@ export default function BlogPost({ params }) {
       name: "WhatsApp",
       icon: FaWhatsapp,
       url: `https://wa.me/?text=${encodeURIComponent(
-        `${shareText} ${shareUrl}`,
+        `${shareText} ${shareUrl}`
       )}`,
       color: "text-green-500",
     },
@@ -289,11 +289,11 @@ export default function BlogPost({ params }) {
             <div className="flex flex-col xl:flex-row gap-8 max-w-[100rem] mx-auto">
               {/* Table of Contents - Desktop */}
               <div className="hidden xl:block xl:w-1/5">
-                <TableOfContents 
+                <TableOfContents
                   content={blog.content}
                   sticky={true}
                   minLevel={2}
-                  maxLevel={4}
+                  maxLevel={2}
                   className="w-full"
                 />
               </div>
@@ -317,7 +317,12 @@ export default function BlogPost({ params }) {
 
                   {blog.thumbnail && (
                     <div className="relative h-64 md:h-80 mb-6 rounded-lg overflow-hidden">
-                      <Image src={blog.thumbnail} alt={blog.title} fill className="object-cover" />
+                      <Image
+                        src={blog.thumbnail}
+                        alt={blog.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   )}
 
