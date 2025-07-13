@@ -15,8 +15,9 @@ import "katex/dist/katex.min.css";
 const CustomMarkdown = ({ content, className = "" }) => {
   const customComponents = {
     // Headings with amber gradient accents
-    h1: ({ children, ...props }) => (
+    h1: ({ children, id, ...props }) => (
       <h1
+        id={id}
         className="text-3xl md:text-4xl font-bold mb-6 mt-8 first:mt-0 bg-gradient-to-r from-amber-400 via-amber-300 to-white bg-clip-text text-transparent leading-tight"
         {...props}
       >
@@ -24,8 +25,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       </h1>
     ),
 
-    h2: ({ children, ...props }) => (
+    h2: ({ children, id, ...props }) => (
       <h2
+        id={id}
         className="text-2xl md:text-3xl font-bold mb-5 mt-8 text-white relative"
         {...props}
       >
@@ -36,8 +38,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       </h2>
     ),
 
-    h3: ({ children, ...props }) => (
+    h3: ({ children, id, ...props }) => (
       <h3
+        id={id}
         className="text-xl md:text-2xl font-semibold mb-4 mt-6 text-white relative"
         {...props}
       >
@@ -48,8 +51,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       </h3>
     ),
 
-    h4: ({ children, ...props }) => (
+    h4: ({ children, id, ...props }) => (
       <h4
+        id={id}
         className="text-lg md:text-xl font-semibold mb-3 mt-5 text-amber-300"
         {...props}
       >
@@ -57,8 +61,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       </h4>
     ),
 
-    h5: ({ children, ...props }) => (
+    h5: ({ children, id, ...props }) => (
       <h5
+        id={id}
         className="text-base md:text-lg font-semibold mb-3 mt-4 text-amber-400"
         {...props}
       >
@@ -66,8 +71,9 @@ const CustomMarkdown = ({ content, className = "" }) => {
       </h5>
     ),
 
-    h6: ({ children, ...props }) => (
+    h6: ({ children, id, ...props }) => (
       <h6
+        id={id}
         className="text-sm md:text-base font-semibold mb-2 mt-4 text-amber-500 uppercase tracking-wide"
         {...props}
       >
