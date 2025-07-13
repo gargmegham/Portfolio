@@ -90,7 +90,7 @@ export default function BlogListing() {
   const fetchFeaturedPosts = async () => {
     try {
       const response = await fetchWithNoCache(
-        "/api/blogs?featured=true&limit=5",
+        "/api/blogs?featured=true&limit=5"
       );
       if (response.ok) {
         const data = await response.json();
@@ -140,7 +140,7 @@ export default function BlogListing() {
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-500/10" />
 
         <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-[96rem] mx-auto">
             <div className="text-center mb-20">
               <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-t from-amber-500 via-amber-300 to-white bg-clip-text text-transparent mb-6">
                 Blog Posts
@@ -347,7 +347,7 @@ export default function BlogListing() {
                       <div className="flex space-x-2">
                         {Array.from(
                           { length: totalPages },
-                          (_, i) => i + 1,
+                          (_, i) => i + 1
                         ).map((page) => (
                           <button
                             key={page}

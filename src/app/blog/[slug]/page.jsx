@@ -285,7 +285,7 @@ export default function BlogPost({ params }) {
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-500/10" />
 
         <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-[96rem] mx-auto">
             <div className="flex flex-col xl:flex-row gap-8 max-w-[100rem] mx-auto">
               {/* Table of Contents - Desktop */}
               <div className="hidden xl:block xl:w-1/5">
