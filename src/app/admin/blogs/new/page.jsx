@@ -15,6 +15,7 @@ export default function NewBlogPost() {
     thumbnail: "",
     tags: "",
     featured: false,
+    draft: false,
   });
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [thumbnailPreview, setThumbnailPreview] = useState("");
@@ -57,7 +58,7 @@ export default function NewBlogPost() {
       textarea.focus();
       textarea.setSelectionRange(
         start + markdown.length,
-        start + markdown.length,
+        start + markdown.length
       );
     }, 100);
   };
@@ -302,21 +303,40 @@ export default function NewBlogPost() {
             />
           </div>
 
-          <div className="flex items-center space-x-3">
-            <input
-              type="checkbox"
-              id="featured"
-              name="featured"
-              checked={formData.featured}
-              onChange={handleChange}
-              className="w-4 h-4 text-emerald-600 bg-gray-700 border-gray-600 rounded focus:ring-emerald-500"
-            />
-            <label
-              htmlFor="featured"
-              className="text-sm font-medium text-gray-300"
-            >
-              Mark as featured post
-            </label>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3">
+              <input
+                type="checkbox"
+                id="featured"
+                name="featured"
+                checked={formData.featured}
+                onChange={handleChange}
+                className="w-4 h-4 text-emerald-600 bg-gray-700 border-gray-600 rounded focus:ring-emerald-500"
+              />
+              <label
+                htmlFor="featured"
+                className="text-sm font-medium text-gray-300"
+              >
+                Mark as featured post
+              </label>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <input
+                type="checkbox"
+                id="draft"
+                name="draft"
+                checked={formData.draft}
+                onChange={handleChange}
+                className="w-4 h-4 text-amber-600 bg-gray-700 border-gray-600 rounded focus:ring-amber-500"
+              />
+              <label
+                htmlFor="draft"
+                className="text-sm font-medium text-gray-300"
+              >
+                Save as draft
+              </label>
+            </div>
           </div>
 
           <div className="flex justify-end space-x-4">

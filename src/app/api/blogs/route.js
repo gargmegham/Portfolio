@@ -17,7 +17,8 @@ export async function GET(request) {
       .select(
         "id, title, slug, description, thumbnail, tags, featured, created_at",
         { count: "exact" },
-      );
+      )
+      .eq("draft", false);
 
     // Apply filters
     if (search) {

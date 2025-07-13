@@ -25,7 +25,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    const { title, slug, description, content, thumbnail, tags, featured } =
+    const { title, slug, description, content, thumbnail, tags, featured, draft } =
       await request.json();
 
     if (!title || !slug || !content) {
@@ -47,6 +47,7 @@ export async function POST(request) {
         thumbnail: thumbnail || "",
         tags: tags || [],
         featured: featured || false,
+        draft: draft || false,
       })
       .select()
       .single();
