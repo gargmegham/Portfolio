@@ -385,7 +385,7 @@ export default function AdminDashboard() {
                                 >
                                   Edit
                                 </button>
-                                <button 
+                                <button
                                   onClick={() => handleDeleteBlog(blog.id)}
                                   className="text-red-400 hover:text-red-300"
                                 >

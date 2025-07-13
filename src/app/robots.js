@@ -1,7 +1,6 @@
-import { MetadataRoute } from "next";
 import config from "@/constants/config";
 
-export default function robots(): MetadataRoute.Robots {
+export default function robots() {
   return {
     rules: {
       userAgent: "*",

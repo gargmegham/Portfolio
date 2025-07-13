@@ -1,16 +1,8 @@
-import type { Metadata, ResolvingMetadata } from "next";
 import config from "@/constants/config";
 import { generateBlogSEO } from "@/utils/seo";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
-type Props = {
-  params: { slug: string };
-};
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }, parent) {
   const { slug } = params;
 
   try {
@@ -61,10 +53,6 @@ export async function generateMetadata(
   }
 }
 
-export default function BlogPostLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BlogPostLayout({ children }) {
   return children;
 }

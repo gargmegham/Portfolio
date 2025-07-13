@@ -102,7 +102,10 @@ export async function DELETE(request, { params }) {
     }
 
     // Delete the blog post from database
-    const { error: deleteError } = await supabase.from("Blog").delete().eq("id", id);
+    const { error: deleteError } = await supabase
+      .from("Blog")
+      .delete()
+      .eq("id", id);
 
     if (deleteError) {
       return NextResponse.json({ error: deleteError.message }, { status: 500 });
@@ -114,17 +117,20 @@ export async function DELETE(request, { params }) {
         // Extract filename from URL
         // Thumbnail URLs are typically: https://[project-id].supabase.co/storage/v1/object/public/blog-images/gallery/[filename]
         const url = new URL(blog.thumbnail);
-        const pathParts = url.pathname.split('/');
+        const pathParts = url.pathname.split("/");
         const filename = pathParts[pathParts.length - 1];
-        
+
         // Only delete if it looks like it's from our gallery (has timestamp format)
-        if (filename && filename.includes('-') && filename.includes('.')) {
+        if (filename && filename.includes("-") && filename.includes(".")) {
           const { error: storageError } = await supabase.storage
             .from("blog-images")
             .remove([`gallery/${filename}`]);
 
           if (storageError) {
-            console.error("Failed to delete thumbnail from storage:", storageError);
+            console.error(
+              "Failed to delete thumbnail from storage:",
+              storageError,
+            );
             // Don't fail the entire operation if thumbnail deletion fails
           }
         }

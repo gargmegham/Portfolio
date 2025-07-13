@@ -1,22 +1,4 @@
-export interface ConfigProps {
-  appName: string;
-  appDescription: string;
-  domainName: string;
-  keywords: string;
-  socials: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-    instagram?: string;
-  };
-  author: {
-    name: string;
-    twitter: string;
-    image?: string;
-  };
-}
-
-const config: ConfigProps = {
+const config = {
   appName: "Megham Garg",
   appDescription:
     "Software engineer, freelancer, and entrepreneur sharing insights on development, business, and building digital products. Explore tutorials, case studies, and practical advice.",

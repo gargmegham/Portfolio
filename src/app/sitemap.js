@@ -1,7 +1,6 @@
-import { MetadataRoute } from "next";
 import config from "@/constants/config";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default function sitemap() {
   return [
     {
       url: `https://${config.domainName}`,

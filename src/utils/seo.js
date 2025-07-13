@@ -1,34 +1,4 @@
-import type { Metadata } from "next";
 import config from "@/constants/config";
-
-export interface SEOTagsProps {
-  title?: string;
-  description?: string;
-  keywords?: string[];
-  canonicalUrlRelative?: string;
-  extraTags?: Record<string, any>;
-  openGraph?: {
-    title?: string;
-    description?: string;
-    type?: "website" | "article";
-    images?: string | string[];
-    publishedTime?: string;
-    modifiedTime?: string;
-    authors?: string[];
-    tags?: string[];
-  };
-  twitter?: {
-    title?: string;
-    description?: string;
-    images?: string | string[];
-  };
-  article?: {
-    publishedTime?: string;
-    modifiedTime?: string;
-    authors?: string[];
-    tags?: string[];
-  };
-}
 
 export const getSEOTags = ({
   title,
@@ -39,7 +9,7 @@ export const getSEOTags = ({
   openGraph,
   twitter,
   article,
-}: SEOTagsProps = {}): Metadata => {
+}) => {
   const seoTitle = title ? `${title} | ${config.appName}` : config.appName;
   const seoDescription = description || config.appDescription;
   const seoKeywords = keywords || config.keywords.split(", ");
@@ -58,7 +28,7 @@ export const getSEOTags = ({
     metadataBase: new URL(
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000/"
-        : `https://${config.domainName}/`
+        : `https://${config.domainName}/`,
     ),
     alternates: {
       canonical: canonicalUrl,
@@ -127,15 +97,7 @@ export const generateBlogSEO = ({
   publishedAt,
   updatedAt,
   thumbnail,
-}: {
-  title: string;
-  description: string;
-  slug: string;
-  tags?: string[];
-  publishedAt: string;
-  updatedAt?: string;
-  thumbnail?: string;
-}): Metadata => {
+}) => {
   const seoDescription = description.replace(/[#*`]/g, "").slice(0, 160);
 
   const seoTitle = title.slice(0, 60);
@@ -171,7 +133,7 @@ export const generateBlogSEO = ({
   });
 };
 
-export const generateBlogListingSEO = (): Metadata => {
+export const generateBlogListingSEO = () => {
   return getSEOTags({
     title: "Blog",
     description:

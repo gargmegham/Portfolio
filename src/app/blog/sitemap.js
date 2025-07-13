@@ -1,8 +1,7 @@
-import { MetadataRoute } from "next";
 import config from "@/constants/config";
 import { getSupabaseServiceClient } from "@/utils/supabase";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap() {
   try {
     const supabase = getSupabaseServiceClient();
 
@@ -19,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return blogs.map((blog) => ({
       url: `https://${config.domainName}/blog/${blog.slug}`,
       lastModified: new Date(blog.updated_at || blog.created_at),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: 0.6,
     }));
   } catch (error) {

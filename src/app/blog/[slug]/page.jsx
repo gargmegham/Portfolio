@@ -116,7 +116,7 @@ export default function BlogPost({ params }) {
       name: "Facebook",
       icon: FaFacebook,
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}`,
       color: "text-blue-600",
     },
@@ -124,7 +124,7 @@ export default function BlogPost({ params }) {
       name: "Twitter",
       icon: FaTwitter,
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        shareText
+        shareText,
       )}&url=${encodeURIComponent(shareUrl)}`,
       color: "text-blue-400",
     },
@@ -132,7 +132,7 @@ export default function BlogPost({ params }) {
       name: "LinkedIn",
       icon: FaLinkedin,
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}`,
       color: "text-blue-700",
     },
@@ -140,7 +140,7 @@ export default function BlogPost({ params }) {
       name: "Reddit",
       icon: FaReddit,
       url: `https://reddit.com/submit?url=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}&title=${encodeURIComponent(blog?.title || "")}`,
       color: "text-orange-600",
     },
@@ -148,7 +148,7 @@ export default function BlogPost({ params }) {
       name: "WhatsApp",
       icon: FaWhatsapp,
       url: `https://wa.me/?text=${encodeURIComponent(
-        `${shareText} ${shareUrl}`
+        `${shareText} ${shareUrl}`,
       )}`,
       color: "text-green-500",
     },
