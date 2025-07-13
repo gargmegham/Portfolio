@@ -55,7 +55,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
         <div className="max-w-4xl mx-auto space-y-8 rounded-2xl p-4">
           {/* Header */}
           <div className="space-y-4">
-            <h1 className="text-6xl md:text-7xl font-gotham-bold text-teritiary-300 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-gotham-bold text-teritiary-300 leading-tight">
               hi, i&apos;m <span className="text-white">megham</span>.
             </h1>
             <p className="text-xl md:text-2xl text-teritiary-400 leading-relaxed max-w-3xl">
