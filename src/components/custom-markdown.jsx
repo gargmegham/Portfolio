@@ -4,6 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import remarkHeadingId from "remark-heading-id";
 import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
@@ -12,74 +13,113 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/utils/cn";
 import "katex/dist/katex.min.css";
 
+// Helper function to generate ID from React children
+const generateIdFromChildren = (children) => {
+  const text = React.Children.toArray(children)
+    .map(child => {
+      if (typeof child === 'string') return child;
+      if (child?.props?.children) return generateIdFromChildren(child.props.children);
+      return '';
+    })
+    .join('')
+    .trim();
+    
+  return text
+    .toLowerCase()
+    .replace(/[""''`]/g, '') // Remove quotes
+    .replace(/[^\w\s-]/g, '') // Remove special characters except spaces and hyphens
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+};
+
 const CustomMarkdown = ({ content, className = "" }) => {
   const customComponents = {
     // Headings with amber gradient accents
-    h1: ({ children, id, ...props }) => (
-      <h1
-        id={id}
-        className="text-3xl md:text-4xl font-bold mb-6 mt-8 first:mt-0 bg-gradient-to-r from-amber-400 via-amber-300 to-white bg-clip-text text-transparent leading-tight"
-        {...props}
-      >
-        {children}
-      </h1>
-    ),
-
-    h2: ({ children, id, ...props }) => (
-      <h2
-        id={id}
-        className="text-2xl md:text-3xl font-bold mb-5 mt-8 text-white relative"
-        {...props}
-      >
-        <span className="relative">
+    h1: ({ children, id, ...props }) => {
+      // Generate ID from children text if not provided
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h1
+          id={headingId}
+          className="text-3xl md:text-4xl font-bold mb-6 mt-8 first:mt-0 bg-gradient-to-r from-amber-400 via-amber-300 to-white bg-clip-text text-transparent leading-tight"
+          {...props}
+        >
           {children}
-          <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></span>
-        </span>
-      </h2>
-    ),
+        </h1>
+      );
+    },
 
-    h3: ({ children, id, ...props }) => (
-      <h3
-        id={id}
-        className="text-xl md:text-2xl font-semibold mb-4 mt-6 text-white relative"
-        {...props}
-      >
-        <span className="relative">
+    h2: ({ children, id, ...props }) => {
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h2
+          id={headingId}
+          className="text-2xl md:text-3xl font-bold mb-5 mt-8 text-white relative"
+          {...props}
+        >
+          <span className="relative">
+            {children}
+            <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></span>
+          </span>
+        </h2>
+      );
+    },
+
+    h3: ({ children, id, ...props }) => {
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h3
+          id={headingId}
+          className="text-xl md:text-2xl font-semibold mb-4 mt-6 text-white relative"
+          {...props}
+        >
+          <span className="relative">
+            {children}
+            <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></span>
+          </span>
+        </h3>
+      );
+    },
+
+    h4: ({ children, id, ...props }) => {
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h4
+          id={headingId}
+          className="text-lg md:text-xl font-semibold mb-3 mt-5 text-amber-300"
+          {...props}
+        >
           {children}
-          <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-amber-400 to-transparent"></span>
-        </span>
-      </h3>
-    ),
+        </h4>
+      );
+    },
 
-    h4: ({ children, id, ...props }) => (
-      <h4
-        id={id}
-        className="text-lg md:text-xl font-semibold mb-3 mt-5 text-amber-300"
-        {...props}
-      >
-        {children}
-      </h4>
-    ),
+    h5: ({ children, id, ...props }) => {
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h5
+          id={headingId}
+          className="text-base md:text-lg font-semibold mb-3 mt-4 text-amber-400"
+          {...props}
+        >
+          {children}
+        </h5>
+      );
+    },
 
-    h5: ({ children, id, ...props }) => (
-      <h5
-        id={id}
-        className="text-base md:text-lg font-semibold mb-3 mt-4 text-amber-400"
-        {...props}
-      >
-        {children}
-      </h5>
-    ),
-
-    h6: ({ children, id, ...props }) => (
-      <h6
-        id={id}
-        className="text-sm md:text-base font-semibold mb-2 mt-4 text-amber-500 uppercase tracking-wide"
-        {...props}
-      >
-        {children}
-      </h6>
-    ),
+    h6: ({ children, id, ...props }) => {
+      const headingId = id || generateIdFromChildren(children);
+      return (
+        <h6
+          id={headingId}
+          className="text-sm md:text-base font-semibold mb-2 mt-4 text-amber-500 uppercase tracking-wide"
+          {...props}
+        >
+          {children}
+        </h6>
+      );
+    },
 
     // Paragraphs with proper spacing
     p: ({ children, ...props }) => (
@@ -458,7 +498,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
   };
 
   return (
-    <div className={cn("prose-custom max-w-none", className)}>
+    <div className={cn("prose-custom max-w-none mg-markdown", className)}>
       <style>{`
         .counter-reset-list {
           counter-reset: list-counter;
@@ -534,7 +574,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
       `}</style>
       <ReactMarkdown
         components={customComponents}
-        remarkPlugins={[remarkGfm, remarkMath]}
+        remarkPlugins={[remarkGfm, remarkMath, remarkHeadingId]}
         rehypePlugins={[
           rehypeKatex,
           rehypeRaw,

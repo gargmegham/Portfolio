@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import CustomMarkdown from "@/components/custom-markdown";
+import TableOfContents, { CompactTOC } from "@/components/table-of-contents";
 import config from "@/constants/config";
 import {
   FaFacebook,
@@ -285,9 +286,20 @@ export default function BlogPost({ params }) {
 
         <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col lg:flex-row gap-8 max-w-[100rem] mx-auto">
+            <div className="flex flex-col xl:flex-row gap-8 max-w-[100rem] mx-auto">
+              {/* Table of Contents - Desktop */}
+              <div className="hidden xl:block xl:w-1/5">
+                <TableOfContents 
+                  content={blog.content}
+                  sticky={true}
+                  minLevel={2}
+                  maxLevel={4}
+                  className="w-full"
+                />
+              </div>
+
               {/* Main Content */}
-              <article className="lg:w-3/4">
+              <article className="xl:w-3/5 lg:w-3/4">
                 {/* Blog Header */}
                 <header className="mb-8">
                   <Link
@@ -348,6 +360,11 @@ export default function BlogPost({ params }) {
                   )}
                 </header>
 
+                {/* Compact TOC for Mobile/Tablet */}
+                <div className="xl:hidden mb-8">
+                  <CompactTOC content={blog.content} maxItems={6} />
+                </div>
+
                 {/* Blog Content */}
                 <CustomMarkdown content={blog.content} className="mb-8" />
 
@@ -383,7 +400,7 @@ export default function BlogPost({ params }) {
               </article>
 
               {/* Sidebar */}
-              <aside className="lg:w-1/4 space-y-8">
+              <aside className="xl:w-1/5 lg:w-1/4 space-y-8">
                 {/* Search */}
                 <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                   <h3 className="text-lg font-semibold text-white mb-4">
