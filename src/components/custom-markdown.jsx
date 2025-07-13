@@ -186,6 +186,24 @@ const CustomMarkdown = ({ content, className = "" }) => {
     ),
 
     li: ({ children, ordered, ...props }) => {
+      // Check if this is a task list item (contains checkbox)
+      const hasCheckbox = typeof children === 'object' && 
+        Array.isArray(children) && 
+        children.some(child => 
+          child?.type === 'input' && child?.props?.type === 'checkbox'
+        );
+
+      if (hasCheckbox) {
+        return (
+          <li
+            className="text-gray-300 relative mb-2 flex items-start gap-3"
+            {...props}
+          >
+            {children}
+          </li>
+        );
+      }
+
       return (
         <li
           className={cn(
@@ -202,6 +220,29 @@ const CustomMarkdown = ({ content, className = "" }) => {
           {children}
         </li>
       );
+    },
+
+    // GitHub-style task list checkboxes
+    input: ({ type, checked, disabled, ...props }) => {
+      if (type === 'checkbox') {
+        return (
+          <input
+            type="checkbox"
+            checked={checked}
+            disabled={disabled}
+            className={cn(
+              "w-4 h-4 mt-1 rounded border-2 transition-all duration-200 cursor-pointer",
+              checked 
+                ? "bg-amber-400 border-amber-400 text-black" 
+                : "bg-transparent border-gray-400 hover:border-amber-400",
+              disabled && "cursor-not-allowed opacity-50"
+            )}
+            readOnly={disabled}
+            {...props}
+          />
+        );
+      }
+      return <input type={type} {...props} />;
     },
 
     // Tables
@@ -425,13 +466,52 @@ const CustomMarkdown = ({ content, className = "" }) => {
         input[type="checkbox"] {
           appearance: none;
           -webkit-appearance: none;
+          background-color: transparent;
+          border: 2px solid #9ca3af;
+          border-radius: 0.25rem;
+          width: 1rem;
+          height: 1rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          position: relative;
+          flex-shrink: 0;
+        }
+
+        input[type="checkbox"]:hover {
+          border-color: #fbbf24;
         }
 
         input[type="checkbox"]:checked {
+          background-color: #fbbf24;
+          border-color: #fbbf24;
           background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='black' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
-          background-size: 100% 100%;
+          background-size: 80% 80%;
           background-position: center;
           background-repeat: no-repeat;
+        }
+
+        input[type="checkbox"]:checked:hover {
+          background-color: #f59e0b;
+          border-color: #f59e0b;
+        }
+
+        input[type="checkbox"]:disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+
+        /* Task list specific styling */
+        .prose-custom ul li:has(input[type="checkbox"]) {
+          list-style: none;
+          padding-left: 0;
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .prose-custom ul li:has(input[type="checkbox"]) p {
+          margin: 0;
+          flex: 1;
         }
 
         /* Math rendering improvements */
@@ -494,6 +574,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
                 "sup",
                 "sub",
                 "hr",
+                "input",
               ],
               attributes: {
                 "*": ["className", "style", "id"],
@@ -514,6 +595,7 @@ const CustomMarkdown = ({ content, className = "" }) => {
                 code: ["className"],
                 th: ["align"],
                 td: ["align"],
+                input: ["type", "checked", "disabled"],
               },
               protocols: {
                 href: ["http", "https", "mailto", "tel"],
