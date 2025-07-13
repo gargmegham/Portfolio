@@ -12,6 +12,7 @@ export const fetchWithNoCache = async (url, options = {}) => {
       ...noCacheHeaders,
       ...options.headers,
     },
+    cache: 'no-store'
   };
 
   return fetch(url, { ...options, ...defaultOptions });
