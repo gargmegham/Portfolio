@@ -164,7 +164,7 @@ export default function BlogListing() {
                 </span>
                 <span className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
-                  Career Growth
+                  AI & Automation
                 </span>
               </div>
             </div>
