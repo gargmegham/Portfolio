@@ -13,7 +13,7 @@ const experienceData = [
       "Launched multiple MVPs & products from scratch. Hired, and mentored the team, and scaled multiple products to 100k+ users.",
   },
   {
-    title: "SDE-II",
+    title: "Full Stack Developer",
     company: "TranZact",
     companyUrl: "letstranzact.com",
     duration: "2021-2023",
@@ -21,7 +21,7 @@ const experienceData = [
       "Worked on building a scalable and efficient microservices architecture for a B2B ERP system. Built internal tools for higher team productivity and efficiency.",
   },
   {
-    title: "AI/ML Engineer",
+    title: "AI Engineer",
     company: "Paxcom",
     companyUrl: "paxcom.ai",
     duration: "2020-2021",
