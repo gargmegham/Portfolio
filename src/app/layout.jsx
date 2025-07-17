@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "@/assets/css/globals.css";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
-import NavBar from "@/components/navbar";
 import ConditionalNavBar from "@/components/conditional-navbar";
 
 const inter = Inter({ subsets: ["latin"] });
