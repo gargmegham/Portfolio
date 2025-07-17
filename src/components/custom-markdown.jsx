@@ -277,29 +277,38 @@ const CustomMarkdown = ({ content, className = "" }) => {
     ),
 
     // Links with amber styling
-    a: ({ children, href, ...props }) => (
-      <a
-        href={href}
-        className="text-amber-400 hover:text-amber-300 transition-colors duration-300 relative inline-flex items-center gap-1 group no-underline"
-        {...props}
-      >
-        <span className="relative">
-          {children}
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
-        </span>
-        <svg
-          className="w-3 h-3 opacity-40 group-hover:opacity-100 transition-opacity"
-          fill="currentColor"
-          viewBox="0 0 20 20"
+    a: ({ children, href, ...props }) => {
+      // Check if it's an external link
+      const isExternal =
+        href &&
+        (href.startsWith("http") || href.startsWith("https")) &&
+        !href.includes("meghamgarg.com");
+
+      return (
+        <a
+          href={href}
+          className="text-amber-400 hover:text-amber-300 transition-colors duration-300 relative inline-flex items-center gap-1 group no-underline"
+          {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+          {...props}
         >
-          <path
-            fillRule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </a>
-    ),
+          <span className="relative">
+            {children}
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
+          </span>
+          <svg
+            className="w-3 h-3 opacity-40 group-hover:opacity-100 transition-opacity"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+      );
+    },
 
     // Code blocks and inline code
     code: ({ node, inline, className, children, ...props }) => {
