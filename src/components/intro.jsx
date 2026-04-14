@@ -115,15 +115,6 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
                 <IconBrandLinkedin className="size-5" />
               </a>
               <a
-                href="https://x.com/garg_megham"
-                target="_blank"
-                aria-label="Twitter"
-                rel="noreferrer"
-                className="text-teritiary-400 hover:text-white transition-colors"
-              >
-                <IconBrandTwitter className="size-5" />
-              </a>
-              <a
                 href="https://github.com/gargmegham"
                 target="_blank"
                 aria-label="GitHub"
