@@ -24,11 +24,6 @@ export default function FloatingNavBar() {
       ),
     },
     {
-      name: "Experience",
-      link: "#experience",
-      icon: <IconTie className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
       name: "Blogs",
       link: "/logs",
       icon: (

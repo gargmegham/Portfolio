@@ -3,32 +3,7 @@
 import React, { forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const experienceData = [
-  {
-    title: "Agency Owner",
-    company: "LaunchBit",
-    companyUrl: "launchbit.in",
-    duration: "2023-Present",
-    description:
-      "Launched multiple MVPs & products from scratch. Hired, and mentored the team, and scaled multiple products to 100k+ users.",
-  },
-  {
-    title: "Full Stack Developer",
-    company: "TranZact",
-    companyUrl: "letstranzact.com",
-    duration: "2021-2023",
-    description:
-      "Worked on building a scalable and efficient microservices architecture for a B2B ERP system. Built internal tools for higher team productivity and efficiency.",
-  },
-  {
-    title: "AI Engineer",
-    company: "Paxcom",
-    companyUrl: "paxcom.ai",
-    duration: "2020-2021",
-    description:
-      "Trained Ad campaign optimization model for prediction of views, impressions, and clicks. And a AI image data extraction model for extracting taglines, logos, and other information from brand campaigns.",
-  },
-];
+const experienceData = [];
 
 const Experience = forwardRef(({ visible }, ref) => {
   console.info("Experience component loaded", visible, ref);

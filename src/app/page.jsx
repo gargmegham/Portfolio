@@ -4,7 +4,6 @@ import React, { useRef, useState, useEffect } from "react";
 import Background from "@/components/background";
 import Intro from "@/components/intro";
 import ContactMe from "@/components/contact-me";
-import Experience from "@/components/experience";
 import Projects from "@/components/projects";
 
 export default function Home() {
@@ -14,18 +13,10 @@ export default function Home() {
   const project_1 = useRef(null);
   const project_2 = useRef(null);
   const project_3 = useRef(null);
-  const experience = useRef(null);
   const contactMe = useRef(null);
 
   useEffect(() => {
-    const sections = [
-      intro,
-      project_1,
-      project_2,
-      project_3,
-      experience,
-      contactMe,
-    ];
+    const sections = [intro, project_1, project_2, project_3, contactMe];
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
@@ -74,10 +65,6 @@ export default function Home() {
           visibleSections.includes(project_2.current),
           visibleSections.includes(project_3.current),
         ]}
-      />
-      <Experience
-        ref={experience}
-        visible={visibleSections.includes(experience.current)}
       />
       <ContactMe
         ref={contactMe}
