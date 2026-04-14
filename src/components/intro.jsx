@@ -69,36 +69,15 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
 
           {/* Story */}
           <div className="space-y-6 text-lg md:text-xl text-teritiary-300 leading-relaxed">
-            <p className="hidden md:block">
-              it started back in college, where writing code gave me a way to
-              turn curiosity into real products.
-              <br />i launched my first SaaS before graduating, and i&apos;ve
-              been building ever since.
-            </p>
             <p>
-              today, i run a{" "}
+              senior full-stack engineer. i run a{" "}
               <Highlight className="text-white font-semibold">
                 dev studio
               </Highlight>{" "}
-              that helps startups move from idea to MVP, modernize old tech
-              stacks, and bring AI-powered tools to life.
-              <br />
-              along the way, i also launch my own software products — tools born
-              out of personal pain points, experiments, or just plain fun. some
-              stick. some don&apos;t. i learn either way.
+              helping startups go from idea to MVP, and ship my own products on the side.
             </p>
-            <p>
-              i&apos;ve shipped tools used by{" "}
-              <Highlight className="text-white font-semibold">
-                thousands
-              </Highlight>
-              , led remote teams, and built platforms that make research,
-              workflows, and knowledge more accessible.
-            </p>
-            <p className="hidden md:block text-teritiary-400 italic">
-              some days i write code. some days i write content.
-              <br />
-              most days, i&apos;m building something worth sharing.
+            <p className="text-teritiary-400">
+              i write about what i build — shipping fast, AI products, and the occasional mistake worth documenting.
             </p>
           </div>
 
