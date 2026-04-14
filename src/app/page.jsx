@@ -12,11 +12,10 @@ export default function Home() {
   const intro = useRef(null);
   const project_1 = useRef(null);
   const project_2 = useRef(null);
-  const project_3 = useRef(null);
   const contactMe = useRef(null);
 
   useEffect(() => {
-    const sections = [intro, project_1, project_2, project_3, contactMe];
+    const sections = [intro, project_1, project_2, contactMe];
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
@@ -59,11 +58,10 @@ export default function Home() {
       <Background />
       <Intro ref={intro} scrollIndicatorHidden={scrollIndicatorHidden} />
       <Projects
-        ref={[project_1, project_2, project_3]}
+        ref={[project_1, project_2]}
         visible={[
           visibleSections.includes(project_1.current),
           visibleSections.includes(project_2.current),
-          visibleSections.includes(project_3.current),
         ]}
       />
       <ContactMe

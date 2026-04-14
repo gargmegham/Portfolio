@@ -44,26 +44,6 @@ const projects = [
       ],
     },
   },
-  {
-    tags: ["Next.js", "GCP", "Firebase"],
-    alternate: false,
-    title: "ShieldPeer",
-    caption: "Optimize selling strategy for steam assets",
-    description:
-      "A secure, configurable trading bot for selling Steam/CS:GO skins via Waxpeer. Leveraging live pricing data (PriceEmpire), fractional undercutting, and integrations with Steam/Waxpeer APIs, it automates asset sales while protecting user credentials.",
-    buttonText: "View project",
-    buttonLink: "https://shieldpeer.meghamgarg.com",
-    model: {
-      type: "laptop",
-      alt: "ShieldPeer",
-      textures: [
-        {
-          srcSet: "/images/shield-peer.png 1280w",
-          placeholder: "/images/placeholder.jpg",
-        },
-      ],
-    },
-  },
 ];
 
 const Projects = forwardRef(({ visible }, ref) => {
