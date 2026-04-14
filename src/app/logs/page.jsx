@@ -90,7 +90,7 @@ export default function BlogListing() {
   const fetchFeaturedPosts = async () => {
     try {
       const response = await fetchWithNoCache(
-        "/api/blogs?featured=true&limit=5"
+        "/api/blogs?featured=true&limit=5",
       );
       if (response.ok) {
         const data = await response.json();
@@ -224,26 +224,6 @@ export default function BlogListing() {
               {/* Blog Posts */}
               {loading ? (
                 <div className="text-center py-16">
-                  <div className="relative mb-8">
-                    <div className="flex justify-center items-center gap-3 mb-6">
-                      <div className="w-3 h-3 bg-gradient-to-t from-amber-500 to-amber-300 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-3 h-3 bg-gradient-to-t from-amber-400 to-amber-200 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-3 h-3 bg-gradient-to-t from-amber-500 to-amber-300 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                    </div>
-                    <h3 className="text-xl font-semibold bg-gradient-to-t from-amber-400 via-amber-300 to-white bg-clip-text text-transparent mb-3">
-                      Loading Posts
-                    </h3>
-                    <p className="text-gray-400 text-sm">
-                      Fetching the latest insights for you...
-                    </p>
-                  </div>
-
                   {/* Loading skeleton cards */}
                   <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
                     {[1, 2, 3, 4].map((index) => (
@@ -347,7 +327,7 @@ export default function BlogListing() {
                       <div className="flex space-x-2">
                         {Array.from(
                           { length: totalPages },
-                          (_, i) => i + 1
+                          (_, i) => i + 1,
                         ).map((page) => (
                           <button
                             key={page}
