@@ -223,7 +223,7 @@ export default function BlogListing() {
 
               {/* Blog Posts */}
               {loading ? (
-                <div className="text-center py-16">
+                <div className="text-center">
                   {/* Loading skeleton cards */}
                   <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
                     {[1, 2, 3, 4].map((index) => (
@@ -231,20 +231,20 @@ export default function BlogListing() {
                         key={index}
                         className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden animate-pulse"
                       >
-                        <div className="h-40 bg-gradient-to-r from-white/5 via-amber-400/10 to-white/5"></div>
+                        <div className="h-40 bg-gradient-to-r from-white/50 via-amber-400/50 to-white/50"></div>
                         <div className="p-6">
                           <div className="flex gap-2 mb-4">
-                            <div className="w-12 h-4 bg-amber-400/20 rounded-full"></div>
-                            <div className="w-16 h-4 bg-amber-400/20 rounded-full"></div>
+                            <div className="w-12 h-4 bg-amber-400/50 rounded-full"></div>
+                            <div className="w-16 h-4 bg-amber-400/50 rounded-full"></div>
                           </div>
-                          <div className="w-4/5 h-6 bg-white/10 rounded mb-4"></div>
+                          <div className="w-4/5 h-6 bg-white/50 rounded mb-4"></div>
                           <div className="space-y-2 mb-4">
-                            <div className="w-full h-3 bg-white/5 rounded"></div>
-                            <div className="w-3/4 h-3 bg-white/5 rounded"></div>
+                            <div className="w-full h-3 bg-white/50 rounded"></div>
+                            <div className="w-3/4 h-3 bg-white/50 rounded"></div>
                           </div>
                           <div className="flex justify-between items-center">
                             <div className="w-20 h-3 bg-white/5 rounded"></div>
-                            <div className="w-16 h-4 bg-amber-400/20 rounded"></div>
+                            <div className="w-16 h-4 bg-amber-400/50 rounded"></div>
                           </div>
                         </div>
                       </div>
