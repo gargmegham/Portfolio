@@ -6,7 +6,7 @@ import {
   IconHome,
   IconTie,
   IconComponents,
-  IconArticle,
+  IconMail,
 } from "@tabler/icons-react";
 
 export default function FloatingNavBar() {
@@ -24,10 +24,10 @@ export default function FloatingNavBar() {
       ),
     },
     {
-      name: "Blogs",
-      link: "/logs",
+      name: "Contact",
+      link: "#contact",
       icon: (
-        <IconArticle className="h-4 w-4 text-neutral-500 dark:text-white" />
+        <IconMail className="h-4 w-4 text-neutral-500 dark:text-white" />
       ),
     },
   ];
