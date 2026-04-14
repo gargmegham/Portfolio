@@ -140,35 +140,6 @@ export default function BlogListing() {
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-500/10" />
 
         <main className="relative z-10 px-6 md:px-12 lg:px-24 py-36">
-          <div className="max-w-[96rem] mx-auto">
-            <div className="text-center mb-20">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-t from-amber-500 via-amber-300 to-white bg-clip-text text-transparent mb-6">
-                Blog Posts
-              </h1>
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-4">
-                Discover actionable insights, proven strategies, and real-world
-                experiences
-                <span className="text-amber-400 font-medium">
-                  {" "}
-                  from the trenches of tech
-                </span>
-              </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
-                  Software Development
-                </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
-                  Freelancing & Business
-                </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
-                  AI & Automation
-                </span>
-              </div>
-            </div>
-          </div>
           <div className="flex flex-col lg:flex-row gap-8 max-w-[100rem] mx-auto">
             {/* Main Content */}
             <div className="lg:w-3/4">
