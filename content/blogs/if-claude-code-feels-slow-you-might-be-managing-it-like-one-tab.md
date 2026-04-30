@@ -2,7 +2,7 @@
 title: "If Claude Code Feels Slow, You Might Be Managing It Like One Tab"
 slug: "if-claude-code-feels-slow-you-might-be-managing-it-like-one-tab"
 description: "Claude Code starts feeling much faster when you stop treating it like a single tab. Notifications, parallel worktrees, and Unix-style prompt usage can turn it into a more scalable daily development workflow."
-thumbnail: "/images/blog-default.png"
+thumbnail: "/blog-thumbnails/claude-code-parallel-workflows.png"
 tags:
   - "AI"
   - "Claude Code"
