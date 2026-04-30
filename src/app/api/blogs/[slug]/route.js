@@ -1,25 +1,11 @@
 import { NextResponse } from "next/server";
-import { getSupabaseServiceClient } from "@/utils/supabase";
+import { getBlogBySlug } from "@/utils/blogs";
 
 export const revalidate = 0;
 export async function GET(request, { params }) {
   try {
     const { slug } = params;
-    const supabase = getSupabaseServiceClient();
-
-    const { data: blog, error } = await supabase
-      .from("Blog")
-      .select("*")
-      .eq("slug", slug)
-      .single();
-
-    if (error) {
-      const response = NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
-      return response;
-    }
+    const blog = getBlogBySlug(slug);
 
     if (!blog) {
       const response = NextResponse.json(

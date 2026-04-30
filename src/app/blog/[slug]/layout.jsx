@@ -1,20 +1,13 @@
 import config from "@/constants/config";
 import { generateBlogSEO } from "@/utils/seo";
-import { getSupabaseServiceClient } from "@/utils/supabase";
+import { getBlogBySlug } from "@/utils/blogs";
 
 export async function generateMetadata({ params }, parent) {
   const { slug } = params;
 
   try {
-    const supabase = getSupabaseServiceClient();
-
-    const { data: blog, error } = await supabase
-      .from("Blog")
-      .select("*")
-      .eq("slug", slug)
-      .single();
-
-    if (error || !blog) {
+    const blog = getBlogBySlug(slug);
+    if (!blog) {
       throw new Error("Blog post not found");
     }
 

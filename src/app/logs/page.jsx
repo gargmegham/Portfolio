@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchWithNoCache } from "@/utils/api";
 
 export default function BlogListing() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [tagsLoading, setTagsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [tags, setTags] = useState([]);
@@ -15,7 +15,6 @@ export default function BlogListing() {
   const [totalPages, setTotalPages] = useState(1);
   const [recentPosts, setRecentPosts] = useState([]);
   const [featuredPosts, setFeaturedPosts] = useState([]);
-  const [subscriberEmail, setSubscriberEmail] = useState("");
 
   const POSTS_PER_PAGE = 6;
 
@@ -50,7 +49,7 @@ export default function BlogListing() {
         ...(selectedTag && { tag: selectedTag }),
       });
 
-      const response = await fetchWithNoCache(`/api/blogs?${params}`);
+      const response = await fetch(`/api/blogs?${params}`);
       if (response.ok) {
         const data = await response.json();
         setBlogs(data.blogs);
@@ -65,19 +64,21 @@ export default function BlogListing() {
 
   const fetchTags = async () => {
     try {
-      const response = await fetchWithNoCache("/api/blogs/tags");
+      const response = await fetch("/api/blogs/tags");
       if (response.ok) {
         const data = await response.json();
         setTags(data);
       }
     } catch (error) {
       console.error("Failed to fetch tags:", error);
+    } finally {
+      setTagsLoading(false);
     }
   };
 
   const fetchRecentPosts = async () => {
     try {
-      const response = await fetchWithNoCache("/api/blogs?limit=5");
+      const response = await fetch("/api/blogs?limit=5");
       if (response.ok) {
         const data = await response.json();
         setRecentPosts(data.blogs);
@@ -89,9 +90,7 @@ export default function BlogListing() {
 
   const fetchFeaturedPosts = async () => {
     try {
-      const response = await fetchWithNoCache(
-        "/api/blogs?featured=true&limit=5",
-      );
+      const response = await fetch("/api/blogs?featured=true&limit=5");
       if (response.ok) {
         const data = await response.json();
         setFeaturedPosts(data.blogs);
@@ -110,26 +109,6 @@ export default function BlogListing() {
   const handleTagFilter = (tag) => {
     setSelectedTag(tag === selectedTag ? "" : tag);
     setCurrentPage(1);
-  };
-
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetchWithNoCache("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: subscriberEmail }),
-      });
-
-      if (response.ok) {
-        setSubscriberEmail("");
-        alert("Successfully subscribed to newsletter!");
-      } else {
-        alert("Failed to subscribe. Please try again.");
-      }
-    } catch (error) {
-      alert("Failed to subscribe. Please try again.");
-    }
   };
 
   return (
@@ -175,20 +154,30 @@ export default function BlogListing() {
                   Popular Tags
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {tags.map(({ tag, count }) => (
-                    <button
-                      key={tag}
-                      onClick={() => handleTagFilter(tag)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
-                        selectedTag === tag
-                          ? "bg-gradient-to-r from-amber-400 to-amber-500 text-black shadow-lg"
-                          : "bg-white/10 text-gray-300 hover:bg-gradient-to-r hover:from-amber-400/20 hover:to-amber-500/20 hover:text-amber-400 hover:border-amber-400/30 backdrop-blur-sm border border-white/10"
-                      }`}
-                    >
-                      {tag}{" "}
-                      <span className="text-xs opacity-70">({count})</span>
-                    </button>
-                  ))}
+                  {tagsLoading ? (
+                    [1, 2, 3, 4, 5].map((index) => (
+                      <div
+                        key={index}
+                        className="h-8 rounded-full bg-white/10 border border-white/10 animate-pulse"
+                        style={{ width: `${72 + index * 12}px` }}
+                      />
+                    ))
+                  ) : (
+                    tags.map(({ tag, count }) => (
+                      <button
+                        key={tag}
+                        onClick={() => handleTagFilter(tag)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 ${
+                          selectedTag === tag
+                            ? "bg-gradient-to-r from-amber-400 to-amber-500 text-black shadow-lg"
+                            : "bg-white/10 text-gray-300 hover:bg-gradient-to-r hover:from-amber-400/20 hover:to-amber-500/20 hover:text-amber-400 hover:border-amber-400/30 backdrop-blur-sm border border-white/10"
+                        }`}
+                      >
+                        {tag}{" "}
+                        <span className="text-xs opacity-70">({count})</span>
+                      </button>
+                    ))
+                  )}
                 </div>
               </div>
 
@@ -370,33 +359,6 @@ export default function BlogListing() {
                   </div>
                 </div>
               )}
-
-              {/* Newsletter Subscription */}
-              <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">
-                  Subscribe to Newsletter
-                </h3>
-                <p className="text-sm text-gray-400 mb-4">
-                  Get the latest posts delivered right to your inbox.
-                </p>
-                <form onSubmit={handleSubscribe}>
-                  <input
-                    type="email"
-                    value={subscriberEmail}
-                    onChange={(e) => setSubscriberEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full px-4 py-3 bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/20 transition-all duration-300"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm relative overflow-hidden group"
-                  >
-                    <span className="relative z-10">Subscribe</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-amber-300 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                  </button>
-                </form>
-              </div>
             </aside>
           </div>
         </main>

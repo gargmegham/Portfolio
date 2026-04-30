@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "@/assets/css/globals.css";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
-import ConditionalNavBar from "@/components/conditional-navbar";
+import NavBar from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4}`}
       ></Script>
       <body className={inter.className}>
-        <ConditionalNavBar />
+        <NavBar />
         {children}
         <Toaster
           toastOptions={{
