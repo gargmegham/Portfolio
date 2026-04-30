@@ -1,39 +1,16 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import {
   IconBrandLinkedin,
   IconBrandYoutube,
-  IconBrandTwitter,
   IconBrandGithub,
 } from "@tabler/icons-react";
 import { RiScrollToBottomLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
-import toast from "react-hot-toast";
 import { Highlight } from "@/ui/aceternity/hero-highlight";
-import { PlaceholdersAndVanishInput } from "@/ui/aceternity/placeholders-and-vanish-input";
-import { fetchWithNoCache } from "@/utils/api";
 
 const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
-  const [email, setEmail] = useState("");
-  const validateEmail = (email) => {
-    return email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
-  };
-  const subscribe = async (email) => {
-    try {
-      const res = await fetchWithNoCache("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-      if (res.ok) toast.success("Subscribed to newsletter!");
-      else toast.error("Failed to subscribe!");
-    } catch (err) {
-      toast.error("Failed to subscribe!");
-    }
-  };
   return (
     <AnimatePresence mode="wait">
       <motion.section
@@ -81,7 +58,7 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
             </p>
           </div>
 
-          {/* Social Links & Newsletter */}
+          {/* Social Links */}
           <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between pt-8 border-t border-white/10">
             <div className="flex gap-4 items-center">
               <a
@@ -111,21 +88,6 @@ const Intro = forwardRef(({ scrollIndicatorHidden }, ref) => {
               >
                 <IconBrandYoutube className="size-5" />
               </a>
-            </div>
-
-            <div className="flex max-w-sm w-full sm:w-auto">
-              <PlaceholdersAndVanishInput
-                placeholders={["Join my newsletter..."]}
-                onChange={(e) => setEmail(e.target.value)}
-                id="newsletter-form"
-                onSubmit={async () => {
-                  if (!validateEmail(email)) {
-                    toast.error("Invalid email address!");
-                    return;
-                  }
-                  subscribe(email);
-                }}
-              />
             </div>
           </div>
         </div>

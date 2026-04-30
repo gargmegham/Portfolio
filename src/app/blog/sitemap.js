@@ -1,19 +1,9 @@
 import config from "@/constants/config";
-import { getSupabaseServiceClient } from "@/utils/supabase";
+import { getAllBlogs } from "@/utils/blogs";
 
 export default async function sitemap() {
   try {
-    const supabase = getSupabaseServiceClient();
-
-    const { data: blogs, error } = await supabase
-      .from("Blog")
-      .select("slug, created_at, updated_at")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.error("Error fetching blogs for sitemap:", error);
-      return [];
-    }
+    const blogs = getAllBlogs();
 
     return blogs.map((blog) => ({
       url: `https://${config.domainName}/blog/${blog.slug}`,

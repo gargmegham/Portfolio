@@ -15,7 +15,6 @@ import {
   FaWhatsapp,
   FaCopy,
 } from "react-icons/fa";
-import { fetchWithNoCache } from "@/utils/api";
 
 export default function BlogPost({ params }) {
   const router = useRouter();
@@ -23,7 +22,6 @@ export default function BlogPost({ params }) {
   const [loading, setLoading] = useState(true);
   const [recentPosts, setRecentPosts] = useState([]);
   const [relatedPosts, setRelatedPosts] = useState([]);
-  const [subscriberEmail, setSubscriberEmail] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -40,7 +38,7 @@ export default function BlogPost({ params }) {
   const fetchBlog = async () => {
     setLoading(true);
     try {
-      const response = await fetchWithNoCache(`/api/blogs/${params.slug}`);
+      const response = await fetch(`/api/blogs/${params.slug}`);
       if (response.ok) {
         const data = await response.json();
         setBlog(data);
@@ -57,7 +55,7 @@ export default function BlogPost({ params }) {
 
   const fetchRecentPosts = async () => {
     try {
-      const response = await fetchWithNoCache("/api/blogs?limit=5");
+      const response = await fetch("/api/blogs?limit=5");
       if (response.ok) {
         const data = await response.json();
         setRecentPosts(data.blogs);
@@ -71,9 +69,7 @@ export default function BlogPost({ params }) {
     if (!blog?.tags?.length) return;
 
     try {
-      const response = await fetchWithNoCache(
-        `/api/blogs?tag=${blog.tags[0]}&limit=5`
-      );
+      const response = await fetch(`/api/blogs?tag=${blog.tags[0]}&limit=5`);
       if (response.ok) {
         const data = await response.json();
         // Filter out current post
@@ -92,26 +88,6 @@ export default function BlogPost({ params }) {
     }
   };
 
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetchWithNoCache("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: subscriberEmail }),
-      });
-
-      if (response.ok) {
-        setSubscriberEmail("");
-        alert("Successfully subscribed to newsletter!");
-      } else {
-        alert("Failed to subscribe. Please try again.");
-      }
-    } catch (error) {
-      alert("Failed to subscribe. Please try again.");
-    }
-  };
-
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareText = blog ? `Check out this blog post: ${blog.title}` : "";
 
@@ -120,7 +96,7 @@ export default function BlogPost({ params }) {
       name: "Facebook",
       icon: FaFacebook,
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}`,
       color: "text-blue-600",
     },
@@ -128,7 +104,7 @@ export default function BlogPost({ params }) {
       name: "Twitter",
       icon: FaTwitter,
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        shareText
+        shareText,
       )}&url=${encodeURIComponent(shareUrl)}`,
       color: "text-blue-400",
     },
@@ -136,7 +112,7 @@ export default function BlogPost({ params }) {
       name: "LinkedIn",
       icon: FaLinkedin,
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}`,
       color: "text-blue-700",
     },
@@ -144,7 +120,7 @@ export default function BlogPost({ params }) {
       name: "Reddit",
       icon: FaReddit,
       url: `https://reddit.com/submit?url=${encodeURIComponent(
-        shareUrl
+        shareUrl,
       )}&title=${encodeURIComponent(blog?.title || "")}`,
       color: "text-orange-600",
     },
@@ -152,7 +128,7 @@ export default function BlogPost({ params }) {
       name: "WhatsApp",
       icon: FaWhatsapp,
       url: `https://wa.me/?text=${encodeURIComponent(
-        `${shareText} ${shareUrl}`
+        `${shareText} ${shareUrl}`,
       )}`,
       color: "text-green-500",
     },
@@ -486,33 +462,6 @@ export default function BlogPost({ params }) {
                     </div>
                   </div>
                 )}
-
-                {/* Newsletter Subscription */}
-                <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Subscribe to Newsletter
-                  </h3>
-                  <p className="text-sm text-gray-300 mb-4">
-                    Get the latest posts delivered right to your inbox.
-                  </p>
-                  <form onSubmit={handleSubscribe}>
-                    <input
-                      type="email"
-                      value={subscriberEmail}
-                      onChange={(e) => setSubscriberEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      className="w-full px-4 py-3 bg-black/40 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-gray-500 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400/30 transition-all duration-300"
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black py-3 px-4 rounded-xl text-sm font-medium transition-all duration-300 backdrop-blur-sm relative overflow-hidden group"
-                    >
-                      <span className="relative z-10">Subscribe</span>
-                      <span className="absolute inset-0 bg-gradient-to-r from-amber-300 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    </button>
-                  </form>
-                </div>
               </aside>
             </div>
           </div>
