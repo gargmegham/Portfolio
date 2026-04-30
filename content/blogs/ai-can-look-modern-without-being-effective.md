@@ -10,8 +10,8 @@ tags:
   - "Productivity"
 featured: false
 draft: false
-created_at: "2026-04-25T00:00:00+05:30"
-updated_at: "2026-04-25T00:00:00+05:30"
+created_at: "2026-04-26T00:00:00+05:30"
+updated_at: "2026-04-26T00:00:00+05:30"
 ---
 
 AI can make a business look modern without making it more effective.
